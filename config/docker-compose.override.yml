@@ -1,0 +1,35 @@
+version: '3.6'
+services:
+  postgres:
+    volumes:
+      - /var/lib/postgresql/data
+    restart: unless-stopped
+
+  graphql-engine:
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      HASURA_GRAPHQL_CORS_DOMAIN: "*"
+      HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: "/srv/console-assets"
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "${HASURA_GRAPHQL_ENABLE_CONSOLE:-true}"
+      HASURA_GRAPHQL_ADMIN_SECRET: "${HASURA_GRAPHQL_ADMIN_SECRET:-0}"
+      HASURA_GRAPHQL_JWT_SECRET: "{\"type\":\"HS256\", \"key\": \"Mock_JsonWebTokenHMACSHA256KeyDevelopment00\"}"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@localhost"
+      PGADMIN_DEFAULT_PASSWORD: "0"
+    networks:
+      - wan
+      - lan
+
+networks:
+  wan:
+    external: false
