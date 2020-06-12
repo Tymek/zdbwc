@@ -14,7 +14,7 @@ services:
       HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: "/srv/console-assets"
       HASURA_GRAPHQL_ENABLE_CONSOLE: "${HASURA_GRAPHQL_ENABLE_CONSOLE:-true}"
       HASURA_GRAPHQL_ADMIN_SECRET: "${HASURA_GRAPHQL_ADMIN_SECRET:-0}"
-      HASURA_GRAPHQL_JWT_SECRET: "{\"type\":\"HS256\", \"key\": \"Mock_JsonWebTokenHMACSHA256KeyDevelopment00\"}"
+      HASURA_GRAPHQL_AUTH_HOOK: "https://localhost:3000/api/login"
 
   pgadmin:
     image: dpage/pgadmin4

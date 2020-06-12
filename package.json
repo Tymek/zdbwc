@@ -6,16 +6,36 @@
     "start": "cross-env NEXT_TELEMETRY_DISABLED=1 next start",
     "backend": "(cd config && docker-compose up)",
     "console": "hasura console",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest . --watch --config=./config/jest.config.js",
+    "test:ci": "jest . --ci --config=./config/jest.config.js --collectCoverage",
+    "test:update": "jest . --config=./config/jest.config.js -u"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
+    "graphql": "^15.1.0",
+    "helmet": "^3.22.1",
+    "morgan": "^1.10.0",
     "next": "^9.4.4",
+    "ramda": "^0.27.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "urql": "^1.9.8"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.10.0",
+    "@testing-library/react": "^10.2.1",
+    "babel-jest": "^26.0.1",
     "cross-env": "^7.0.2",
-    "hasura-cli": "^1.2.2"
+    "hasura-cli": "^1.2.2",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.1.0",
+    "typescript": "^3.9.5"
+  },
+  "optionalDependencies": {
+    "@types/jest": "^26.0.0",
+    "@types/node": "^14.0.13",
+    "@types/react": "^16.9.36"
   },
   "private": true,
   "version": "1.0.0",
