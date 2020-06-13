@@ -3,6 +3,8 @@ services:
   postgres:
     volumes:
       - /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     restart: unless-stopped
 
   graphql-engine:
@@ -14,7 +16,7 @@ services:
       HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: "/srv/console-assets"
       HASURA_GRAPHQL_ENABLE_CONSOLE: "${HASURA_GRAPHQL_ENABLE_CONSOLE:-true}"
       HASURA_GRAPHQL_ADMIN_SECRET: "${HASURA_GRAPHQL_ADMIN_SECRET:-0}"
-      HASURA_GRAPHQL_AUTH_HOOK: "https://localhost:3000/api/login"
+      HASURA_GRAPHQL_AUTH_HOOK: "http://172.17.0.1:3000/api/webhook"
 
   pgadmin:
     image: dpage/pgadmin4

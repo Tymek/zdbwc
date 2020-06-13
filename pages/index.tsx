@@ -1,11 +1,32 @@
 import * as React from 'react'
 import Head from 'next/head'
+import { useQuery } from '@apollo/react-hooks'
+import { gql } from 'apollo-boost'
+import Session from '../components/Session'
 
-export default function Home() {
+const SESSIONS = gql`
+  {
+    session {
+      id
+      name
+      start
+      end
+    }
+  }
+`
+
+const Home = () => {
+  const { loading, error, data } = useQuery(SESSIONS)
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error :(</p>
+  const { session } = data
+  console.log(data)
+
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title key="title">App</title>
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
 
@@ -13,6 +34,9 @@ export default function Home() {
         <h1 className="title" role="heading">
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        {session.map(({ id, name, start, end }) => (
+          <Session key={id} name={name} start={start} end={end} />
+        ))}
       </main>
 
       <style jsx>{`
@@ -51,3 +75,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Home

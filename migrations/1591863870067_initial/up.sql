@@ -24,7 +24,7 @@ CREATE TABLE public."user" (
     id uuid DEFAULT public.gen_random_uuid() NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    login text NOT NULL,
+    username text NOT NULL,
     password text NOT NULL
 );
 ALTER TABLE ONLY public.session

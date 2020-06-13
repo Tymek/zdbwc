@@ -16,13 +16,12 @@ services:
       - postgres
     restart: always
     environment:
-      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
       HASURA_GRAPHQL_CORS_DOMAIN: "https://${DOMAIN:-localhost}, https://*.${DOMAIN:-localhost}"
       HASURA_GRAPHQL_DATABASE_URL: "${HASURA_GRAPHQL_DATABASE_URL:-postgres://postgres:postgres@postgres:5432/postgres}"
       HASURA_GRAPHQL_ENABLE_CONSOLE: "${HASURA_GRAPHQL_ENABLE_CONSOLE:-false}"
       HASURA_GRAPHQL_ENABLE_TELEMETRY: "${HASURA_GRAPHQL_ENABLE_TELEMETRY:-false}"
       HASURA_GRAPHQL_ADMIN_SECRET: "${HASURA_GRAPHQL_ADMIN_SECRET}"
-      HASURA_GRAPHQL_AUTH_HOOK_MODE: POST
+      # HASURA_GRAPHQL_AUTH_HOOK_MODE: POST
       HASURA_GRAPHQL_AUTH_HOOK: "${HASURA_GRAPHQL_AUTH_HOOK}"
     networks:
       - wan
