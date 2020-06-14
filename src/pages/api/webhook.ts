@@ -1,13 +1,8 @@
-import passport from "../../utils/api/passport"
-import { Middleware, runMiddleware } from '../../utils/api/middleware'
+import passport from '../../utils/api/passport'
+import { Handler, runMiddleware } from '../../utils/api/middleware'
+import handleResponse from '../../utils/api/handleResponse'
 
-const handleResponse = (res, statusMsg, code:number = 200) => {
-  res.setHeader('Content-Type', 'application/json')
-  res.status(code)
-  return res.end(JSON.stringify(statusMsg))
-}
-
-const route:Middleware = async (req, res) => {
+const route:Handler = async (req, res) => {
   const passportBearerToken = passport.authenticate('bearer', (error, user, info) => {
     if (error) {
       return handleResponse(res, { error }, 401)

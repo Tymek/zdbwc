@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 // import bcrypt from 'bcrypt'
-import middleware, { Middleware } from '../../utils/api/middleware'
+import middleware, { Handler } from '../../utils/api/middleware'
 // import handler from '../../utils/api/handler'
 
-const route: Middleware = async (req, res) => {
+const route: Handler = async (req, res) => {
   await middleware(req, res)
 
   res.end(JSON.stringify({ status: 'OK' }))

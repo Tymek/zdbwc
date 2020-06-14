@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "react",
+    "unicorn"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:unicorn/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:security/recommended",
+    "airbnb"
+  ],
+  "rules": {
+    "semi": ["warn", "never"],
+    "arrow-parens": ["warn", "as-needed"],
+    "unicorn/filename-case": "off",
+    "unicorn/prevent-abbreviations": "off",
+    "react/jsx-props-no-spreading": "off"
+  }
+}

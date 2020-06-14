@@ -2,9 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import helmet from 'helmet'
 import morgan from 'morgan'
 
-export type Middleware = (req?: NextApiRequest, res?: NextApiResponse, next?: Middleware) => any | Promise<any>
+export type Handler = (req?: NextApiRequest, res?: NextApiResponse, next?: Handler) => any | Promise<any>
 
-export const runMiddleware: Middleware = (req, res, fn) =>
+export const runMiddleware: Handler = (req, res, fn) =>
   new Promise((resolve, reject) => {
     fn(req, res, (result) => {
       if (result instanceof Error) {

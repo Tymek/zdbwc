@@ -1,9 +1,3 @@
-
-console.log('it works!!!!!!!!!!!!!!!!!')
-console.log('it works!!!!!!!!!!!!!!!!!')
-console.log('it works!!!!!!!!!!!!!!!!!')
-console.log('it works!!!!!!!!!!!!!!!!!')
-
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type NextApiRequest = any
 export type NextApiResponse = any

@@ -1,9 +1,10 @@
-
-//   // https://github.com/zeit/next.js/issues/8663#issue-490553899
-
-
 module.exports = {
-  rootDir: '../',
+  globals: {
+    'ts-jest': {
+      // https://github.com/zeit/next.js/issues/8663#issue-490553899
+      tsConfig: 'tsconfig.jest.json',
+    },
+  },
   collectCoverageFrom: [
     '**/*.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
