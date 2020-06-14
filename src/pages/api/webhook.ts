@@ -3,23 +3,23 @@ import { Handler, runMiddleware } from '../../utils/api/middleware'
 import handleResponse from '../../utils/api/handleResponse'
 
 const route:Handler = async (req, res) => {
-  const passportBearerToken = passport.authenticate('bearer', (error, user, info) => {
+  const passportAuthentication = passport.authenticate('local', (error, user) => {
     if (error) {
       return handleResponse(res, { error }, 401)
     }
 
     if (user) {
-      handleResponse(res, {
+      return handleResponse(res, {
         'X-Hasura-Role': 'user',
-        'X-Hasura-User-Id': `${user.id}`
+        'X-Hasura-User-Id': `${user.id}`,
       })
-    } else {
-      handleResponse(res, {'X-Hasura-Role': 'anonymous'})
     }
+
+    return handleResponse(res, { 'X-Hasura-Role': 'anonymous' })
   })
 
   try {
-    return await runMiddleware(req, res, passportBearerToken)
+    return await runMiddleware(req, res, passportAuthentication)
   } catch (error) {
     return handleResponse(res, { error }, 500)
   }

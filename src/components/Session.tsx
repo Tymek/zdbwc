@@ -14,7 +14,10 @@ const Session:FunctionComponent<SessionProps> = ({
   <div>
     <h2>{name}</h2>
     <p>
-      {start} &ndash; {end}
+      {start}
+      {' '}
+      &ndash;
+      {end}
     </p>
   </div>
 )

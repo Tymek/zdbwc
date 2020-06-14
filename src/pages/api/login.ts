@@ -1,10 +1,11 @@
+import { isEmpty } from 'ramda'
 import middleware, { Handler, runMiddleware } from '../../utils/api/middleware'
-import handleResponse from '../../utils/api/handleResponse';
-import passport from '../../utils/api/passport';
+import handleResponse from '../../utils/api/handleResponse'
+import passport from '../../utils/api/passport'
 
 type Authorization = {
-  username:String | undefined,
-  password:String | undefined,
+  username:string | undefined,
+  password:string | undefined,
 }
 
 const route:Handler = async (req, res) => {
@@ -12,29 +13,19 @@ const route:Handler = async (req, res) => {
 
   const passportLogin = passport.authenticate('local', (error, user, info) => {
     if (error) {
-      return handleResponse(res, { error }, 400)
+      return handleResponse(res, isEmpty(info) ? { error } : { error, info }, 400)
     }
 
-    if (user) {
-      return handleResponse(res, user, 200)
+    if (!user || isEmpty(user)) {
+      if (isEmpty(info)) {
+        return handleResponse(res, { message: 'Bad request' }, 400)
+      }
+
+      return handleResponse(res, info, 401)
     }
 
-    return handleResponse(res, {}, 500)
+    return handleResponse(res, { ...user, password: undefined }, 200)
   })
-
-  // const errors = []
-  // const { username, password }:Authorization = req.body
-
-  // if (!username) {
-  //   errors.push('`username` cannot be empty')
-  // }
-  // if (!password) {
-  //   errors.push('`password` cannot be empty')
-  // }
-
-  // if (errors.length) {
-  //   return handleResponse(res, { error: errors }, 400)
-  // }
 
   return runMiddleware(req, res, passportLogin)
 }

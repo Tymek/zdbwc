@@ -1,7 +1,7 @@
-import * as React from 'react'
+import React, { FunctionComponent } from 'react'
 import GraphQLProvider from './GraphQL'
 
-const Providers = ({ children }) => (
+const Providers:FunctionComponent = ({ children }) => (
   <>
     <GraphQLProvider>
       {children}

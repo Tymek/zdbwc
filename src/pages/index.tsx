@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
@@ -15,13 +15,12 @@ const SESSIONS = gql`
   }
 `
 
-const Home = () => {
+const Home:FunctionComponent = () => {
   const { loading, error, data } = useQuery(SESSIONS)
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
   const { session } = data
-  console.log(data)
 
   return (
     <div className="container">
@@ -31,15 +30,20 @@ const Home = () => {
       </Head>
 
       <main role="main">
-        <h1 className="title" role="heading">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+        <h1 className="title">
+          Welcome to
+          {' '}
+          <a href="https://nextjs.org">Next.js!</a>
         </h1>
-        {session.map(({ id, name, start, end }) => (
+        {session.map(({
+          id, name, start, end,
+        }) => (
           <Session key={id} name={name} start={start} end={end} />
         ))}
       </main>
 
-      <style jsx>{`
+      <style jsx>
+        {`
         .title a {
           color: #0070f3;
           text-decoration: none;
@@ -56,9 +60,11 @@ const Home = () => {
           line-height: 1.15;
           font-size: 4rem;
         }
-      `}</style>
+      `}
+      </style>
 
-      <style global jsx>{`
+      <style global jsx>
+        {`
         html,
         body {
           padding: 0;
@@ -71,7 +77,8 @@ const Home = () => {
         * {
           box-sizing: border-box;
         }
-      `}</style>
+      `}
+      </style>
     </div>
   )
 }
