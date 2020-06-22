@@ -2,6 +2,7 @@
 
 ``` bash
 docker-compose up -d
+npx pnpm install
 npm run dev
 ```
 

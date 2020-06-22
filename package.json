@@ -43,6 +43,7 @@
     "urql": "^1.9.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.3",
     "@scrlk/eslint-config": "0.0.0",
     "@testing-library/jest-dom": "^5.10.1",
     "@testing-library/react": "^10.3.0",
