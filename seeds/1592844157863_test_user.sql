@@ -1,0 +1,1 @@
+INSERT INTO public."user" (id, created_at, updated_at, username, password) VALUES ('02d37a80-b476-4947-84c4-c9048e8a0950', '2020-06-22 16:40:44.012246+00', '2020-06-22 16:40:44.012246+00', 'test', '$2b$10$HmUZ3ioePKfKyUYMvgZu8ukSMV/Fr.9MckLPWZcx2XOxMDCu4fwzO');
