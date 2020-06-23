@@ -1,0 +1,96 @@
+version: 2
+tables:
+- table:
+    schema: public
+    name: session
+  insert_permissions:
+  - role: manager
+    permission:
+      check: {}
+      columns:
+      - description
+      - location
+      - name
+      - speaker
+      - created_at
+      - end
+      - start
+      - updated_at
+      - id
+      backend_only: false
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - created_at
+      - description
+      - end
+      - id
+      - location
+      - name
+      - speaker
+      - start
+      - updated_at
+      filter: {}
+  - role: manager
+    permission:
+      columns:
+      - description
+      - location
+      - name
+      - speaker
+      - created_at
+      - end
+      - start
+      - updated_at
+      - id
+      filter: {}
+  update_permissions:
+  - role: manager
+    permission:
+      columns:
+      - description
+      - location
+      - name
+      - speaker
+      - created_at
+      - end
+      - start
+      - updated_at
+      - id
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: manager
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: user
+actions:
+- name: login
+  definition:
+    handler: http://next:3000
+    output_type: UserInfo
+    forward_client_headers: true
+    headers:
+    - value: ACTION_SECRET_ENV
+      name: ACTION_SECRET
+    arguments:
+    - name: username
+      type: String!
+    - name: password
+      type: String!
+    type: mutation
+    kind: synchronous
+  permissions:
+  - role: anonymous
+  - role: manager
+custom_types:
+  objects:
+  - name: UserInfo
+    fields:
+    - name: id
+      type: uuid!
+    - name: username
+      type: String!

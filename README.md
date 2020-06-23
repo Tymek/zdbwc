@@ -1,11 +1,15 @@
 # zdbwc
 
 ``` bash
+pnpm install
 docker-compose up -d
-npx pnpm install
-npm run dev
+pnpm run migrate
+pnpm run seed
 ```
 
-[http://localhost:8080/console](http://localhost:8080/console), default password: `0`
+- [localhost:3000](http://localhost:3000)
+- [localhost:8080/console](http://localhost:8080/console), default password: `0`
 
 Default seed user: `test:test`
+
+ESlint fix: `pnpm run test:eslint -- --fix`

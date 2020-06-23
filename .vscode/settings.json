@@ -1,0 +1,17 @@
+{
+  "eslint.packageManager": "pnpm",
+  "eslint.probe": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "html",
+      "vue",
+      "markdown",
+      "json"
+  ],
+  "eslint.options": {
+    "ext": ".js,.jsx,.ts,.tsx,.json",
+    "ignorePath": ".gitignore"
+  }
+}

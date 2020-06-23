@@ -1,4 +1,3 @@
-import passport from '../../utils/api/passport'
 import { Handler, runMiddleware } from '../../utils/api/middleware'
 import handleResponse from '../../utils/api/handleResponse'
 

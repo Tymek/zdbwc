@@ -1,5 +1,15 @@
 version: '3.6'
 services:
+  next:
+    image: "${APP_DOCKER_IMAGE}"
+    restart: always
+    ports:
+      - "80:3000"
+    depends_on:
+      - hasura
+    environment:
+      ACTION_SECRET_ENV: "${ACTION_SECRET_ENV}"
+
   postgres:
     image: postgres:12
     restart: always
@@ -10,7 +20,7 @@ services:
     networks:
       - lan
 
-  graphql-engine:
+  hasura:
     image: "hasura/graphql-engine:${HASURA_VERSION:-v1.3.0-beta.2}.cli-migrations"
     depends_on:
       - postgres
@@ -21,8 +31,9 @@ services:
       HASURA_GRAPHQL_ENABLE_CONSOLE: "${HASURA_GRAPHQL_ENABLE_CONSOLE:-false}"
       HASURA_GRAPHQL_ENABLE_TELEMETRY: "${HASURA_GRAPHQL_ENABLE_TELEMETRY:-false}"
       HASURA_GRAPHQL_ADMIN_SECRET: "${HASURA_GRAPHQL_ADMIN_SECRET}"
-      # HASURA_GRAPHQL_AUTH_HOOK_MODE: POST
-      HASURA_GRAPHQL_AUTH_HOOK: "${HASURA_GRAPHQL_AUTH_HOOK}"
+      HASURA_GRAPHQL_AUTH_HOOK: "http://next:3000/api/auth-webhook"
+      ACTION_SECRET_ENV: "${ACTION_SECRET_ENV}"
+
     networks:
       - wan
       - lan

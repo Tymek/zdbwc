@@ -1,7 +1,10 @@
-const handleResponse = (res, statusMsg, code = 200) => {
+import { NextApiResponse } from 'next'
+
+const handleResponse = (res: NextApiResponse, statusMsg: object = {}, code = 200): NextApiResponse => {
   res.setHeader('Content-Type', 'application/json')
   res.status(code)
-  return res.end(JSON.stringify(statusMsg))
+  res.end(JSON.stringify(statusMsg))
+  return res
 }
 
 export default handleResponse
