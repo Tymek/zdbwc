@@ -21,7 +21,6 @@ module.exports = {
   ],
   setupFilesAfterEnv: [
     '<rootDir>/jest.setup.ts',
-    // "@testing-library/jest-dom/extend-expect"
   ],
   coverageReporters: ["json", "lcov", "text", "text-summary"],
   moduleNameMapper: {
@@ -32,17 +31,12 @@ module.exports = {
   testPathIgnorePatterns: [
     '/node_modules/',
     '/.next/',
-    '/src/utils/test.tsx?'
+    '/src/utils/test/'
   ],
-  // preset: 'ts-jest',
   preset: 'ts-jest/presets/js-with-ts',
-  // transform: {
-  //   '^.+\\.tsx?$': 'babel-jest',
-  // },
   transform: {
-    // "^.+\\.tsx?$": "ts-jest",
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
-  // //   // '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
+    // '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
   },
   transformIgnorePatterns: [
     '/node_modules/',

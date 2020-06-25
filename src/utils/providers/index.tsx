@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react'
-// import GraphQLProvider from './GraphQL'
+import GraphQLProvider from './GraphQL'
 
 const Providers:FunctionComponent = ({ children }) => (
   <>
-    {/* <GraphQLProvider> */}
+    <GraphQLProvider>
       {children}
-    {/* </GraphQLProvider> */}
+    </GraphQLProvider>
   </>
 )
 

@@ -1,35 +1,30 @@
 import React, { FunctionComponent } from 'react'
-import fetch from 'isomorphic-unfetch'
-import { ApolloClient } from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { createHttpLink } from 'apollo-link-http'
-import { onError } from 'apollo-link-error'
-import { ApolloProvider } from '@apollo/react-hooks'
+import isofetch from 'isomorphic-unfetch'
+import {
+  ApolloClient,
+  ApolloLink,
+  HttpLink,
+  InMemoryCache,
+  ApolloProvider
+} from '@apollo/client'
 
-const uri = typeof window === 'undefined' ?
+let uri = typeof window === 'undefined' ?
   'http://hasura:8080/v1/graphql' :
   'http://localhost:8080/v1/graphql'
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors.forEach(
-      ({ message, locations, path }) =>
-        console.log(`[GraphQL error]: Message: ${message}, Location: ${String(locations)}, Path: ${String(path)}`)
-    )
-  if (networkError)
-    console.log(`[Network error]: ${String(networkError)}`)
-})
+if (process.env.NODE_ENV === 'test') {
+  uri = 'http://localhost:3000/graphql'
+}
 
-const httpLink = createHttpLink({
-  fetch,
+const httpLink = new HttpLink({
+  fetch: (...args) => process.env.NODE_ENV === 'test' ? fetch(...args) : isofetch(...args),
   uri,
   credentials: 'include',
 })
 
 const client = new ApolloClient({
   link: ApolloLink.from([
-    errorLink,
+    // NOTE: errorLink,
     httpLink
   ]),
   cache: new InMemoryCache()
