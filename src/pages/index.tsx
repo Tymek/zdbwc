@@ -1,32 +1,32 @@
 import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
-import { useQuery } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
-import Session from '../components/Session'
+// import { useQuery } from '@apollo/react-hooks'
+// import { gql } from 'apollo-boost'
+// import Session from '../components/Session'
 
-const SESSIONS = gql`
-  {
-    session {
-      id
-      name
-      start
-      end
-    }
-  }
-`
+// const SESSIONS = gql`
+//   {
+//     session {
+//       id
+//       name
+//       start
+//       end
+//     }
+//   }
+// `
 
 const Home:FunctionComponent = () => {
-  const { loading, error, data } = useQuery(SESSIONS)
+  // const { loading, error, data } = useQuery(SESSIONS)
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :(</p>
-  const { session } = data
+  // if (loading) return <p>Loading...</p>
+  // if (error) return <p>Error :(</p>
+  // const { session } = data
 
   return (
     <div className="container">
       <Head>
         <title key="title">App</title>
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main role="main">
@@ -35,15 +35,14 @@ const Home:FunctionComponent = () => {
           {' '}
           <a href="https://nextjs.org">Next.js!</a>
         </h1>
-        {session.map(({
+        {/* {session.map(({
           id, name, start, end,
         }) => (
           <Session key={id} name={name} start={start} end={end} />
-        ))}
+        ))} */}
       </main>
 
-      <style jsx>
-        {`
+      <style jsx>{`
         .title a {
           color: #0070f3;
           text-decoration: none;
@@ -60,11 +59,9 @@ const Home:FunctionComponent = () => {
           line-height: 1.15;
           font-size: 4rem;
         }
-      `}
-      </style>
-
-      <style global jsx>
-        {`
+    `}</style>
+ 
+      <style global jsx>{`
         html,
         body {
           padding: 0;
@@ -77,8 +74,7 @@ const Home:FunctionComponent = () => {
         * {
           box-sizing: border-box;
         }
-      `}
-      </style>
+      `}</style>
     </div>
   )
 }

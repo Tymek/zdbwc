@@ -1,6 +1,11 @@
+image: node:14
+before_script:
+  - npm ci
+
 test:
-  image: node:14
-  before_script:
-    - npm ci
   script:
-    - npm run test:ci
+    - npm run test
+
+build:
+  script:
+    - npm run build

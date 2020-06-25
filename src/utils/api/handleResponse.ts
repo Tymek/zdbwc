@@ -1,6 +1,9 @@
 import { NextApiResponse } from 'next'
 
-const handleResponse = (res: NextApiResponse, statusMsg: object = {}, code = 200): NextApiResponse => {
+const handleResponse = (res?: NextApiResponse, statusMsg: Record<string, unknown> = {}, code = 200): unknown => {
+  if (res === undefined) {
+    return
+  }
   res.setHeader('Content-Type', 'application/json')
   res.status(code)
   res.end(JSON.stringify(statusMsg))

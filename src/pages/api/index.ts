@@ -1,11 +1,12 @@
 // import bcrypt from 'bcrypt'
-import middleware, { Handler } from '../../utils/api/middleware'
+import middleware, { Handler } from 'utils/api/middleware'
+import handleResponse from 'utils/api/handleResponse'
 // import handler from '../../utils/api/handler'
 
 const route:Handler = async (req, res) => {
   await middleware(req, res)
 
-  res.end(JSON.stringify({ status: 'OK' }))
+  handleResponse(res, { status: 'OK' })
 }
 
 export default route

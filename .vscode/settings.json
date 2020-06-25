@@ -1,5 +1,5 @@
 {
-  "eslint.packageManager": "pnpm",
+  // "eslint.packageManager": "pnpm",
   "eslint.probe": [
       "javascript",
       "javascriptreact",

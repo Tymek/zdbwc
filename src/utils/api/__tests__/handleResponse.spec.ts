@@ -1,14 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 
 import handleResponse from '../handleResponse'
 
-// const handleResponse = (res, statusMsg, code = 200) => {
-//   res.setHeader('Content-Type', 'application/json')
-//   res.status(code)
-//   return res.end(JSON.stringify(statusMsg))
-// }
-
-// export default handleResponse
-let res
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let res: any = {
+  setHeader: jest.fn((name, value) => [name, value]),
+  status: jest.fn(status => status),
+  end: jest.fn(response => response),
+}
 
 beforeEach(() => {
   res = {

@@ -1,30 +1,49 @@
 module.exports = {
+  rootDir: '.',
+  testEnvironment: 'jsdom',
   globals: {
     'ts-jest': {
       // https://github.com/zeit/next.js/issues/8663#issue-490553899
-      tsConfig: 'tsconfig.jest.json',
+      tsConfig: './tsconfig.jest.json',
+      babelConfig: true,
+      diagnostics: false,
+      packageJson: 'package.json',
     },
   },
+  moduleDirectories: ['node_modules', 'src'],
   collectCoverageFrom: [
-    '**/*.{js,jsx,ts,tsx}',
+    '<rootDir>/src/**/*.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
     '!**/node_modules/**',
     '!**/coverage/**',
     '!**/config/**',
     '!**/*.config.js',
   ],
-  // setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
-  testPathIgnorePatterns: ['/node_modules/', '/.next/'],
-
-  preset: 'ts-jest',
-  transform: {
-    '^.+\\.tsx?$': 'babel-jest',
+  setupFilesAfterEnv: [
+    '<rootDir>/jest.setup.ts',
+    // "@testing-library/jest-dom/extend-expect"
+  ],
+  coverageReporters: ["json", "lcov", "text", "text-summary"],
+  moduleNameMapper: {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/__mocks__/index.tx",
+      "\\.(css|less|scss|html)$": "<rootDir>/__mocks__/index.ts",
   },
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/.next/',
+    '/src/utils/test.tsx?'
+  ],
+  // preset: 'ts-jest',
+  preset: 'ts-jest/presets/js-with-ts',
   // transform: {
-  //   "^.+\\.tsx?$": "ts-jest",
-  //   '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',
-  //   // '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
+  //   '^.+\\.tsx?$': 'babel-jest',
   // },
+  transform: {
+    // "^.+\\.tsx?$": "ts-jest",
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+  // //   // '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
+  },
   transformIgnorePatterns: [
     '/node_modules/',
     '^.+\\.module\\.(css|sass|scss)$',

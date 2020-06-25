@@ -3,12 +3,13 @@ services:
   next:
     image: "${APP_DOCKER_IMAGE}"
     restart: always
-    ports:
-      - "80:3000"
     depends_on:
       - hasura
     environment:
       ACTION_SECRET_ENV: "${ACTION_SECRET_ENV}"
+    networks:
+      - wan
+      - lan
 
   postgres:
     image: postgres:12
@@ -33,7 +34,6 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: "${HASURA_GRAPHQL_ADMIN_SECRET}"
       HASURA_GRAPHQL_AUTH_HOOK: "http://next:3000/api/auth-webhook"
       ACTION_SECRET_ENV: "${ACTION_SECRET_ENV}"
-
     networks:
       - wan
       - lan

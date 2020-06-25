@@ -11,6 +11,9 @@ services:
     environment:
       ACTION_SECRET_ENV: "${ACTION_SECRET_ENV}"
     command: npm run dev
+    tty: true
+    environment:
+      TERM: xterm-256color
 
   postgres:
     restart: unless-stopped
@@ -18,12 +21,17 @@ services:
       - "5432:5432"
     volumes:
       - /var/lib/postgresql/data
+    tty: true
+    environment:
+      TERM: xterm-256color
 
   hasura:
     restart: unless-stopped
     ports:
       - "8080:8080"
+    tty: true
     environment:
+      TERM: xterm-256color
       HASURA_GRAPHQL_CORS_DOMAIN: "*"
       HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: "/srv/console-assets"
       HASURA_GRAPHQL_ENABLE_CONSOLE: "${HASURA_GRAPHQL_ENABLE_CONSOLE:-true}"
@@ -38,7 +46,9 @@ services:
       - postgres
     ports:
       - 5050:80
+    tty: true
     environment:
+      TERM: xterm-256color
       PGADMIN_DEFAULT_EMAIL: "admin@localhost"
       PGADMIN_DEFAULT_PASSWORD: "0"
     networks:
