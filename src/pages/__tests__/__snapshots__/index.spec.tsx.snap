@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`loads and displays greeting 1`] = `
+Array [
+  Object {
+    "children": Array [
+      <title>
+        App
+      </title>,
+      <link
+        href="/favicon.ico"
+        rel="icon"
+      />,
+    ],
+  },
+  Object {},
+]
+`;

@@ -7,6 +7,8 @@ const customRender = (
     options?: Omit<RenderOptions, 'queries'>
 ): RenderResult => render(ui, { wrapper: Providers as React.ComponentType, ...options })
 
+export { mocked } from 'ts-jest/utils'
+
 // eslint-disable-next-line import/export
 export * from '@testing-library/react'
 // eslint-disable-next-line import/export

@@ -1,13 +1,36 @@
 {
 	"folders": [
 		{
-			"name": "root",
+			"name": "{ zdbwc }",
 			"path": ".."
-		},
-		{
-			"name": "src",
-			"path": "../src"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			".*": true,
+			".vscode": true,
+			"*.js": true,
+			"*.md": true,
+			"*.ts": true,
+			"*.yml": true,
+			"*.yaml": true,
+			"tsconfig.*": true,
+			"graphql.schema.json": true,
+			"package-lock.json": true,
+			// "package.json": true,
+			// "migrations": true,
+			// "seeds": true,
+			"node_modules": true,
+			"coverage": true,
+		},
+		// "files.include": {
+		// 	"package.json": true,
+		// }
+		// "explorerExclude.backup": null
+	}
 }
