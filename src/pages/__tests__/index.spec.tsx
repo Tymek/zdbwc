@@ -9,11 +9,11 @@ jest.mock('next/head')
 const mockedHead = mocked(Head)
 
 test('loads and displays greeting', async () => {
-  render(<Index />)
+	render(<Index />)
 
-  await waitFor(() => screen.getByRole('main'))
+	await waitFor(() => screen.getByRole('main'))
 
-  expect(mockedHead).toHaveBeenCalledTimes(1)
-  expect(mockedHead.mock.calls[0]).toMatchSnapshot()
-  expect(screen.getByRole('heading')).toHaveTextContent('Welcome')
+	expect(mockedHead).toHaveBeenCalledTimes(1)
+	expect(mockedHead.mock.calls[0]).toMatchSnapshot()
+	expect(screen.getByRole('heading')).toHaveTextContent('Welcome')
 })

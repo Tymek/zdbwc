@@ -1,12 +1,12 @@
 {
-  "presets": [
-    [
-      "next/babel",
-      {
-        "styled-jsx": {
-          "babel-test": true
-        }
-      }
-    ]
-  ]
+	"presets": [
+		[
+			"next/babel",
+			{
+				"styled-jsx": {
+					"babel-test": true
+				}
+			}
+		]
+	]
 }

@@ -8,12 +8,11 @@ services:
     volumes:
       - ./:/srv
     working_dir: /srv
-    environment:
-      ACTION_SECRET_ENV: "${ACTION_SECRET_ENV}"
-    command: npm run dev
     tty: true
     environment:
       TERM: xterm-256color
+      ACTION_SECRET_ENV: "${ACTION_SECRET_ENV}"
+    command: npm run dev
 
   postgres:
     restart: unless-stopped

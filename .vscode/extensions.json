@@ -1,13 +1,13 @@
 {
-  "recommendations": [
-    "apollographql.vscode-apollo",
-    "codezombiech.gitignore",
-    "dbaeumer.vscode-eslint",
-    "kumar-harsh.graphql-for-vscode",
-    "mikestead.dotenv",
-    "ms-azuretools.vscode-docker",
-    "pflannery.vscode-versionlens",
-    "foxundermoon.next-js",
-    "tabnine.tabnine-vscode"
-  ]
+	"recommendations": [
+		"apollographql.vscode-apollo",
+		"codezombiech.gitignore",
+		"dbaeumer.vscode-eslint",
+		"kumar-harsh.graphql-for-vscode",
+		"mikestead.dotenv",
+		"ms-azuretools.vscode-docker",
+		"pflannery.vscode-versionlens",
+		"foxundermoon.next-js",
+		"tabnine.tabnine-vscode"
+	]
 }

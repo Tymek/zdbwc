@@ -8,62 +8,62 @@ import { render, waitFor, screen } from 'utils/test'
 import GraphQL from '../GraphQL'
 
 type itemType = {
-  id: string | number
+	id: string | number
 }
 
 interface ItemsData {
-  items: itemType[];
+	items: itemType[];
 }
 
 const GET_ITEMS = gql`
-  query GetItems {
-    items {
-      id
-    }
-  }
+	query GetItems {
+		items {
+		id
+		}
+	}
 `
 
 const handlers = [
-  graphql.query('GetItems', (req, res, ctx) => {
-    return res(
-      ctx.data({
-        items: [
-          {
-            id: 1,
-          }
-        ]
-      })
-    )
-  }),
+	graphql.query('GetItems', (req, res, ctx) => {
+		return res(
+			ctx.data({
+				items: [
+					{
+						id: 1,
+					}
+				]
+			})
+		)
+	}),
 ]
 
 server(handlers)
 
 describe('utils/providers/GraphQL', () => {
-  it(`renders on it's own`, () => {
-    const output = render(<GraphQL />)
+	it(`renders on it's own`, () => {
+		const output = render(<GraphQL />)
 
-    expect(output).toBeInstanceOf(Object)
-  })
+		expect(output).toBeInstanceOf(Object)
+	})
 
-  it('loads queries', async () => {
-    const MockQueryComponent: FunctionComponent = () => {
-      const { error, data } = useQuery<ItemsData>(GET_ITEMS)
+	it('loads queries', async () => {
+		const MockQueryComponent: FunctionComponent = () => {
+			const { error, data } = useQuery<ItemsData>(GET_ITEMS)
 
-      if (error) {
-        return <>{JSON.stringify(error)}</>
-      }
-      return <>{JSON.stringify(data)}</>
-    }
+			if (error) {
+				return <>{JSON.stringify(error)}</>
+			}
+			return <>{JSON.stringify(data)}</>
+		}
 
-    const output = render(
-      <GraphQL>
-        <MockQueryComponent />
-      </GraphQL>
-    )
+		const output = render(
+			<GraphQL>
+				<MockQueryComponent />
+			</GraphQL>
+		)
 
-    await waitFor(() => screen.getByText('{"items":[{"id":1}]}'))
+		await waitFor(() => screen.getByText('{"items":[{"id":1}]}'))
 
-    expect(output).toBeInstanceOf(Object)
-  })
+		expect(output).toBeInstanceOf(Object)
+	})
 })

@@ -1,43 +1,43 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "*": ["src/*"]
-    },
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "sourceMap": true,
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve"
-  },
-  "exclude": [
-    "node_modules",
-    "dist",
-    ".next",
-    "out",
-    "next.config.js",
-    ".babelrc",
-    "bundles",
-    "coverage",
-    "test/*"
-  ],
-  "include": [
-    "__mocks__/**/*.ts",
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"*": ["src/*"]
+		},
+		"target": "es5",
+		"lib": [
+			"dom",
+			"dom.iterable",
+			"esnext"
+		],
+		"sourceMap": true,
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "preserve"
+	},
+	"exclude": [
+		"node_modules",
+		"dist",
+		".next",
+		"out",
+		"next.config.js",
+		".babelrc",
+		"bundles",
+		"coverage",
+		"test/*"
+	],
+	"include": [
+		"__mocks__/**/*.ts",
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx"
+	]
 }

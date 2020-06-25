@@ -4,9 +4,9 @@ import handleResponse from 'utils/api/handleResponse'
 // import handler from '../../utils/api/handler'
 
 const route:Handler = async (req, res) => {
-  await middleware(req, res)
+	await middleware(req, res)
 
-  handleResponse(res, { status: 'OK' })
+	handleResponse(res, { status: 'OK' })
 }
 
 export default route

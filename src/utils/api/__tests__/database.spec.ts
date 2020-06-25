@@ -1,10 +1,10 @@
 import {
-  createPool,
+	createPool,
 } from 'slonik'
 import database, { createPoolType } from '../database'
 
 interface createPoolTypeMock extends createPoolType {
-  mockResolvedValue: (value: null) => void
+	mockResolvedValue: (value: null) => void
 }
 
 jest.mock('slonik')
@@ -14,7 +14,7 @@ mockedCreatePool.mockResolvedValue(null)
 
 describe('/utils/api/database', () => {
 
-  it('creates connection pool', () => {
-    expect(database).toBeTruthy()
-  })
+	it('creates connection pool', () => {
+		expect(database).toBeTruthy()
+	})
 })
