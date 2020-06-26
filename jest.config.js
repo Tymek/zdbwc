@@ -18,20 +18,22 @@ module.exports = {
 		'!**/coverage/**',
 		'!**/config/**',
 		'!**/*.config.js',
+		'!<rootDir>/src/utils/test/**/*',
+		'!<rootDir>/src/generated/**/*',
 	],
 	setupFilesAfterEnv: [
 		'<rootDir>/jest.setup.ts',
 	],
-	coverageReporters: ["json", "lcov", "text", "text-summary"],
+	coverageReporters: ['json', 'lcov', 'text', 'text-summary'],
 	moduleNameMapper: {
-		"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-			"<rootDir>/__mocks__/index.tx",
-		"\\.(css|less|scss|html)$": "<rootDir>/__mocks__/index.ts",
+		'\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+			'<rootDir>/__mocks__/index.tx',
+		'\\.(css|less|scss|html)$': '<rootDir>/__mocks__/index.ts',
 	},
 	testPathIgnorePatterns: [
 		'/node_modules/',
 		'/.next/',
-		'/src/utils/test/'
+		'/src/utils/test/',
 	],
 	preset: 'ts-jest/presets/js-with-ts',
 	transform: {

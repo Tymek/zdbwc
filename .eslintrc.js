@@ -3,7 +3,7 @@ module.exports = {
 	extends: '@scrlk',
 	parserOptions: {
 		project: './tsconfig.json',
-		tsconfigRootDir: __dirname
+		tsconfigRootDir: __dirname,
 	},
-	plugins: ['import', 'jest-dom']
+	plugins: ['import', 'jest-dom'],
 }

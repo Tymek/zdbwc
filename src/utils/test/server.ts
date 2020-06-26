@@ -1,6 +1,6 @@
 import { RequestHandler } from 'msw'
 import { setupServer } from 'msw/node'
-import noop from 'utils/noop'
+import noop from 'utils/test/noop'
 
 const mockServer = <T, Y>(handlers: RequestHandler<T, Y>[]) => {
 	const server = setupServer(...handlers)

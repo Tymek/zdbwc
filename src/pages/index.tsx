@@ -60,7 +60,7 @@ const Home:FunctionComponent = () => {
 					font-size: 4rem;
 				}
 		`}</style>
- 
+
 			<style global jsx>{`
 				html,
 				body {

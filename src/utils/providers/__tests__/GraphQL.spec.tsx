@@ -30,8 +30,8 @@ const handlers = [
 				items: [
 					{
 						id: 1,
-					}
-				]
+					},
+				],
 			})
 		)
 	}),
@@ -40,7 +40,7 @@ const handlers = [
 server(handlers)
 
 describe('utils/providers/GraphQL', () => {
-	it(`renders on it's own`, () => {
+	it("renders on it's own", () => {
 		const output = render(<GraphQL />)
 
 		expect(output).toBeInstanceOf(Object)

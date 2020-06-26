@@ -3,11 +3,13 @@
 		"apollographql.vscode-apollo",
 		"codezombiech.gitignore",
 		"dbaeumer.vscode-eslint",
+		"editorconfig.editorconfig",
+		"foxundermoon.next-js",
 		"kumar-harsh.graphql-for-vscode",
 		"mikestead.dotenv",
 		"ms-azuretools.vscode-docker",
 		"pflannery.vscode-versionlens",
-		"foxundermoon.next-js",
+		"redhat.vscode-yaml",
 		"tabnine.tabnine-vscode"
 	]
 }

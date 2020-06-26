@@ -5,7 +5,7 @@ import {
 	ApolloLink,
 	HttpLink,
 	InMemoryCache,
-	ApolloProvider
+	ApolloProvider,
 } from '@apollo/client'
 
 let uri = typeof window === 'undefined' ?
@@ -25,9 +25,9 @@ const httpLink = new HttpLink({
 const client = new ApolloClient({
 	link: ApolloLink.from([
 		// NOTE: errorLink,
-		httpLink
+		httpLink,
 	]),
-	cache: new InMemoryCache()
+	cache: new InMemoryCache(),
 })
 
 const GraphqlProvider:FunctionComponent = ({ children }) => (

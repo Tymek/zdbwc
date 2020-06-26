@@ -30,4 +30,8 @@ describe('utils/api/handleResponse', () => {
 
 		expect(res.status).toHaveBeenCalledWith(200)
 	})
+
+	it('does nothing without `res`', () => {
+		expect(handleResponse()).toBeUndefined()
+	})
 })
