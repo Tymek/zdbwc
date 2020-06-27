@@ -1,9 +1,9 @@
-import { Handler, runMiddleware } from '../../utils/api/middleware'
+import { Handler } from '../../utils/api/middleware'
 import handleResponse from '../../utils/api/handleResponse'
 
-const getCookies: Handler = async () => {
-	return await Promise.resolve()
-}
+// const getCookies: Handler = async () => {
+// 	return await Promise.resolve()
+// }
 
 const route:Handler = async (req, res) => {
 	//   if (error) {
@@ -17,14 +17,14 @@ const route:Handler = async (req, res) => {
 	//     })
 	//   }
 
-	//   return handleResponse(res, { 'X-Hasura-Role': 'anonymous' })
+	return await handleResponse(res, { 'X-Hasura-Role': 'anonymous' })
 	// })
 
 	// try {
 
 	// } catch (error) {
-	await runMiddleware(req, res, getCookies)
-	return handleResponse(res, {}, 500)
+	// await runMiddleware(req, res, getCookies)
+	// return handleResponse(res, {}, 500)
 	// }
 }
 

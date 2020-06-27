@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { graphql } from 'msw'
-import server from 'utils/test/server'
+import server from 'utils/test/mockServer'
 
 import { render, waitFor, screen } from 'utils/test'
 import GraphQL from '../GraphQL'

@@ -3,7 +3,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type Handler = (req?: NextApiRequest, res?: NextApiResponse, next?: Handler) => Promise<any> | void
+export type Handler = (req: NextApiRequest, res: NextApiResponse, next?: Handler) => Promise<any> | void
 
 // ExpressJS-like compatibility layer
 export const runMiddleware = (

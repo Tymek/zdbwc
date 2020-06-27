@@ -1,6 +1,10 @@
 import { NextApiResponse } from 'next'
 
-const handleResponse = (res?: NextApiResponse, statusMsg: Record<string, unknown> = {}, code = 200): unknown => {
+const handleResponse = (
+	res?: NextApiResponse,
+	statusMsg: string | Record<string, unknown> = {},
+	code = 200
+): unknown => {
 	if (res === undefined) {
 		return
 	}
