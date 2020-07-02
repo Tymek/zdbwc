@@ -3,20 +3,18 @@
 import {
 	createMockPool,
 	createMockQueryResult,
+	DatabasePoolType,
+	PrimitiveValueExpressionType,
 } from 'slonik'
 
-let pool: any = {}
+const query = jest.fn()
 
-const mock = (rows: any): void => {
-	pool = createMockPool({
-		query: async () => {
-			return await Promise.resolve(createMockQueryResult(rows))
-		},
-	})
+const pool = createMockPool({
+	query: async (sql: string, values: PrimitiveValueExpressionType[]) => await Promise.resolve(
+		createMockQueryResult(query(sql, values))
+	),
+}) as DatabasePoolType & { mock: jest.Mock }
 
-	pool.mock = mock
-}
-
-pool.mock = mock
+pool.mock = query
 
 export default pool

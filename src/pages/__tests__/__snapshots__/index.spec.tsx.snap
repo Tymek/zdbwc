@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`loads and displays greeting 1`] = `
+exports[`pages/index loads and displays greeting 1`] = `
 Array [
   Object {
     "children": Array [

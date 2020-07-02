@@ -1,13 +1,12 @@
-/* eslint-disable unicorn/consistent-function-scoping */
 import { NextApiRequest, NextApiResponse } from 'next'
 import morgan from 'morgan'
 import helmet from 'helmet'
 
 jest.mock('morgan', () => jest.fn().mockImplementation(() =>
-	(format: string): Handler => () => Promise.resolve()
+	(format: string): Handler => jest.fn(() => Promise.resolve())
 ))
 jest.mock('helmet', () => jest.fn().mockImplementation(() =>
-	(format: string): Handler => () => Promise.resolve()
+	(format: string): Handler => jest.fn(() => Promise.resolve())
 ))
 
 import middleware, { runMiddleware, Handler } from '../middleware'

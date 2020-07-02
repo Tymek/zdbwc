@@ -1,5 +1,5 @@
-import { Handler } from '../../utils/api/middleware'
-import handleResponse from '../../utils/api/handleResponse'
+import { Handler } from 'utils/api/middleware'
+import handleResponse from 'utils/api/helpers/handleResponse'
 
 // const getCookies: Handler = async () => {
 // 	return await Promise.resolve()

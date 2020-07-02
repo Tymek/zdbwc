@@ -4,8 +4,9 @@ import listen from 'test-listen'
 import { apiResolver } from 'next/dist/next-server/server/api-utils'
 
 import { Handler } from '../api/middleware'
+import { NextConnect } from 'next-connect'
 
-export const setup = (handler: Handler): [http.Server, Promise<string>] => {
+export const setup = (handler: Handler | NextConnect): [http.Server, Promise<string>] => {
 	const requestHandler: RequestListener = (req, res) => {
 		return apiResolver(req, res, undefined, handler, {
 			previewModeId: '',
@@ -26,3 +27,5 @@ type ServerCloseCallback = ((err?: Error | undefined) => void) | undefined
 export const teardown = (server: http.Server, done?: jest.ProvidesCallback): void => {
 	server.close(done as unknown as ServerCloseCallback)
 }
+
+export type Server = http.Server

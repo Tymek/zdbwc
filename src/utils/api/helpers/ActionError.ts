@@ -3,12 +3,8 @@ export type ActionErrorType = { message: string, code?: string | number }
 class ActionError extends Error {
 	public code?: number | string
 
-	constructor(message: string, code?: string | number, ...params: string[]) {
-		if (params) {
-			super(...params)
-		} else {
-			super()
-		}
+	constructor(message: string, code?: string | number) {
+		super(message)
 
 		if (Error.captureStackTrace) {
 			Error.captureStackTrace(this, ActionError)

@@ -11,7 +11,8 @@ module.exports = {
 			},
 		},
 	],
-	documents: ['./src/**/*.tsx', './src/**/*.ts'],
+	// documents: ['./src/**/*.tsx', './src/**/*.ts'],
+	documents: [],
 	overwrite: true,
 	generates: {
 		'./src/generated/graphql.tsx': {
@@ -29,6 +30,12 @@ module.exports = {
 		},
 		'./graphql.schema.json': {
 			plugins: ['introspection'],
+		},
+	},
+	config: {
+		scalars: {
+			uuid: 'string',
+			timestamptz: 'string',
 		},
 	},
 }
