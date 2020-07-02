@@ -14,6 +14,6 @@ describe('/api', () => {
 		// expect.assertions(1)
 		const response = await request(await url)
 		expect(response).toHaveProperty('status', 200)
-		expect(response.headers.get('content-type')).toEqual('application/json')
+		expect(response.headers.get('content-type')).toEqual(expect.stringContaining('application/json'))
 	})
 })

@@ -14,7 +14,7 @@ const handleResponse = (
 
 	res.setHeader('Content-Type', 'application/json')
 	res.status(code)
-	res.end(JSON.stringify(statusMsg))
+	res.json(statusMsg)
 
 	return res
 }

@@ -5,7 +5,7 @@ import handleResponse from '../handleResponse'
 const res = {
 	setHeader: jest.fn(),
 	status: jest.fn(),
-	end: jest.fn(),
+	json: jest.fn(),
 }
 
 beforeEach(() => {
