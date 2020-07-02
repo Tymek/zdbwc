@@ -3,17 +3,16 @@ import fetch from 'isomorphic-unfetch'
 import listen from 'test-listen'
 import { apiResolver } from 'next/dist/next-server/server/api-utils'
 
-import { Handler } from '../api/middleware'
 import { NextConnect } from 'next-connect'
+import { Handler } from '../api/middleware'
 
-export const setup = (handler: Handler | NextConnect): [http.Server, Promise<string>] => {
-	const requestHandler: RequestListener = (req, res) => {
-		return apiResolver(req, res, undefined, handler, {
-			previewModeId: '',
-			previewModeEncryptionKey: '',
-			previewModeSigningKey: '',
-		}, false)
-	}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const setup = (handler: Handler | NextConnect<any, any>): [http.Server, Promise<string>] => {
+	const requestHandler: RequestListener = (req, res) => apiResolver(req, res, undefined, handler, {
+		previewModeId: '',
+		previewModeEncryptionKey: '',
+		previewModeSigningKey: '',
+	}, false)
 
 	const server = http.createServer(requestHandler)
 	return [server, listen(server)]

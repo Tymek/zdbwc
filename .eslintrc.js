@@ -5,5 +5,15 @@ module.exports = {
 		project: './tsconfig.json',
 		tsconfigRootDir: __dirname,
 	},
-	plugins: ['import', 'jest-dom'],
+	rules: {
+		'import/no-extraneous-dependencies': ['warn', {
+			'devDependencies': [
+				'**/*.spec.ts',
+				'**/*.spec.tsx',
+				'./*.ts',
+				'./*.js',
+				'./src/utils/test/**/*',
+			],
+		}],
+	},
 }

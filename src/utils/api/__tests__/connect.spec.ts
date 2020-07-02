@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-jest.mock('next-connect', () => jest.fn())
-
+/* eslint-disable @typescript-eslint/unbound-method */
 import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
 import connect, { action, onError } from '../connect'
 import middleware from '../middleware'
 import ActionError from '../helpers/ActionError'
+
+jest.mock('next-connect', () => jest.fn())
 
 const res = {
 	status: jest.fn(),
@@ -32,15 +31,15 @@ describe('utils/api/connect', () => {
 	it('is using middleware', () => {
 		const result = connect()
 
-		expect(result['use']).toBe(nc()['use'])
-		expect(result['use']).toHaveBeenCalledWith(middleware)
+		expect(result.use).toBe(nc().use)
+		expect(result.use).toHaveBeenCalledWith(middleware)
 	})
 
 	it('is can add `get` handler', () => {
 		const handler = jest.fn()
 		const result = connect(handler)
 
-		expect(result['get']).toHaveBeenCalledWith(handler)
+		expect(result.get).toHaveBeenCalledWith(handler)
 	})
 
 	it('has error handler', () => {

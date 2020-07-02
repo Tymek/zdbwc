@@ -7,12 +7,12 @@ import server from 'utils/test/mockServer'
 import { render, waitFor, screen } from 'utils/test'
 import GraphQL from '../GraphQL'
 
-type itemType = {
+type ItemType = {
 	id: string | number
 }
 
 interface ItemsData {
-	items: itemType[];
+	items: ItemType[];
 }
 
 const GET_ITEMS = gql`
@@ -24,17 +24,15 @@ const GET_ITEMS = gql`
 `
 
 const handlers = [
-	graphql.query('GetItems', (req, res, ctx) => {
-		return res(
-			ctx.data({
-				items: [
-					{
-						id: 1,
-					},
-				],
-			})
-		)
-	}),
+	graphql.query('GetItems', (req, res, ctx) => res(
+		ctx.data({
+			items: [
+				{
+					id: 1,
+				},
+			],
+		})
+	)),
 ]
 
 server(handlers)

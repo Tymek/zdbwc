@@ -21,7 +21,7 @@ const mockServer = <T, Y>(handlers: RequestHandler<T, Y>[]) => {
 }
 
 export default (
-	process.env.NODE_ENV === 'test' ?
-		mockServer :
-		noop
+	process.env.NODE_ENV === 'test'
+		? mockServer
+		: noop
 )

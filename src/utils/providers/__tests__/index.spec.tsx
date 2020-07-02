@@ -6,7 +6,7 @@ describe('utils/providers', () => {
 	it('renders', async () => {
 		render(
 			<Providers>
-				<div role="heading">Hello world!</div>
+				<div role="heading" aria-level={0}>Hello world!</div>
 			</Providers>
 		)
 

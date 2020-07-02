@@ -8,11 +8,13 @@ import type {
 
 declare module 'slonik' {
 	export function createMockPool(
-    overrides?: {
-			readonly query?: (sql: string, values: readonly Array<PrimitiveValueExpressionType>) =>
-				Promise<QueryResultType<QueryResultRowType>>
+		overrides?: {
+			readonly query?: (
+				sql: string,
+				values: readonly Array<PrimitiveValueExpressionType>
+			) => Promise<QueryResultType<QueryResultRowType>>
 		},
-    clientUserConfiguration?: ClientConfigurationInputType
+		clientUserConfiguration?: ClientConfigurationInputType
 	): DatabasePoolType
 
 	export function createMockQueryResult(rows: readOnly <QueryResultRowType>): QueryResultType<QueryResultRowType>

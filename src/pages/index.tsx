@@ -15,14 +15,14 @@ import Head from 'next/head'
 //   }
 // `
 
-const Home:FunctionComponent = () => {
-	// const { loading, error, data } = useQuery(SESSIONS)
+const Home:FunctionComponent = () =>
+// const { loading, error, data } = useQuery(SESSIONS)
 
-	// if (loading) return <p>Loading...</p>
-	// if (error) return <p>Error :(</p>
-	// const { session } = data
+// if (loading) return <p>Loading...</p>
+// if (error) return <p>Error :(</p>
+// const { session } = data
 
-	return (
+	(
 		<div className="container">
 			<Head>
 				<title key="title">App</title>
@@ -59,7 +59,8 @@ const Home:FunctionComponent = () => {
 					line-height: 1.15;
 					font-size: 4rem;
 				}
-		`}</style>
+		`}
+			</style>
 
 			<style global jsx>{`
 				html,
@@ -74,9 +75,9 @@ const Home:FunctionComponent = () => {
 				* {
 					box-sizing: border-box;
 				}
-			`}</style>
+			`}
+			</style>
 		</div>
 	)
-}
 
 export default Home

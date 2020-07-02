@@ -10,7 +10,7 @@ import {
 const query = jest.fn()
 
 const pool = createMockPool({
-	query: async (sql: string, values: PrimitiveValueExpressionType[]) => await Promise.resolve(
+	query: async (sql: string, values: PrimitiveValueExpressionType[]) => Promise.resolve(
 		createMockQueryResult(query(sql, values))
 	),
 }) as DatabasePoolType & { mock: jest.Mock }

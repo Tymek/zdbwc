@@ -1,8 +1,8 @@
-jest.mock('utils/api/database')
-
 import database from 'utils/api/database'
 import { DatabasePoolType } from 'slonik'
 
-const mock = (database as DatabasePoolType & { mock: jest.Mock }).mock
+jest.mock('utils/api/database')
+
+const { mock } = database as DatabasePoolType & { mock: jest.Mock }
 
 export default mock

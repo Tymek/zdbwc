@@ -1,8 +1,7 @@
 import { setup, request, teardown, Server } from 'utils/test/server'
+import handler from '..'
 
 jest.mock('utils/api/middleware')
-
-import handler from '..'
 
 let server: Server
 let url: Promise<string>

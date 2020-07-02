@@ -1,16 +1,21 @@
 import { NextApiResponse } from 'next'
 
+/**
+ * @deprecated use utils/api/connect
+ */
 const handleResponse = (
 	res?: NextApiResponse,
 	statusMsg: string | Record<string, unknown> = {},
 	code = 200
 ): unknown => {
 	if (res === undefined) {
-		return
+		return res
 	}
+
 	res.setHeader('Content-Type', 'application/json')
 	res.status(code)
 	res.end(JSON.stringify(statusMsg))
+
 	return res
 }
 

@@ -19,7 +19,7 @@ export const handler = async ({ username, password }: Mutation_RootLoginArgs): P
 	const { id, password: userPassword } = result
 	// const { id, password: userPassword } = result as { id: string, password: User['password'] }
 
-	console.info(userPassword)
+	console.info(password, userPassword)
 
 	return {
 		id,

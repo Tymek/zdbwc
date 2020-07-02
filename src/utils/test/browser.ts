@@ -10,7 +10,7 @@ const mockServiceWorker = async <T, Y>(handlers: RequestHandler<T, Y>[]) => {
 }
 
 export default (
-	process.env.NODE_ENV === 'test' ?
-		mockServiceWorker :
-		noop
+	process.env.NODE_ENV === 'test'
+		? mockServiceWorker
+		: noop
 )

@@ -8,16 +8,16 @@ import {
 	ApolloProvider,
 } from '@apollo/client'
 
-let uri = typeof window === 'undefined' ?
-	'http://hasura:8080/v1/graphql' :
-	'http://localhost:8080/v1/graphql'
+let uri = typeof window === 'undefined'
+	? 'http://hasura:8080/v1/graphql'
+	: 'http://localhost:8080/v1/graphql'
 
 if (process.env.NODE_ENV === 'test') {
 	uri = 'http://localhost:3000/graphql'
 }
 
 const httpLink = new HttpLink({
-	fetch: (...args) => process.env.NODE_ENV === 'test' ? fetch(...args) : isofetch(...args),
+	fetch: (...args) => (process.env.NODE_ENV === 'test' ? fetch(...args) : isofetch(...args)),
 	uri,
 	credentials: 'include',
 })

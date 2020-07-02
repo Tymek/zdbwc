@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import nc, { NextConnect, NextHandler } from 'next-connect'
+import { pathOr } from 'ramda'
 import middleware from './middleware'
 import { ActionErrorType as OriginalActionErrorType } from './helpers/ActionError'
-import { pathOr } from 'ramda'
 
 export const onError = (err: ActionErrorType, req: NextApiRequest, res: NextApiResponse): void => {
 	if (err.code && typeof err.code === 'number') {
@@ -10,7 +10,7 @@ export const onError = (err: ActionErrorType, req: NextApiRequest, res: NextApiR
 		res.json(err)
 	} else {
 		res.status(400)
-		res.json({ message: 'unknown error'})
+		res.json({ message: 'unknown error' })
 	}
 }
 

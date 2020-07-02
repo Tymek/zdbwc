@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import ActionError from '../ActionError'
 
 describe('utils/api/actionError', () => {
@@ -21,11 +22,12 @@ describe('utils/api/actionError', () => {
 	})
 
 	it('will call captureStackTrace', () => {
-		const captureStackTrace = Error['captureStackTrace']
+		const { captureStackTrace } = Error
 		Error.captureStackTrace = jest.fn()
+		// eslint-disable-next-line no-new
 		new ActionError('test')
 
-		expect(Error['captureStackTrace']).toHaveBeenCalled()
+		expect(Error.captureStackTrace).toHaveBeenCalled()
 		Error.captureStackTrace = captureStackTrace
 	})
 })

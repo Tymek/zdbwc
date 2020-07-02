@@ -24,7 +24,7 @@ class ActionError extends Error {
 		}
 
 		if (this.code !== undefined) {
-			output['code'] = this.code
+			output.code = this.code
 		}
 
 		return output
