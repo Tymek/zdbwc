@@ -2,7 +2,7 @@ import { sql } from 'slonik'
 
 import db from 'utils/api/database'
 
-import { UserInfo, Mutation_RootLoginArgs, User } from 'utils/ts/graphql'
+import { UserInfo, Mutation_RootLoginArgs, User } from 'ts/graphql'
 import connect, { action, ActionError } from 'utils/api/connect'
 
 export const handler = async ({ username, password }: Mutation_RootLoginArgs): Promise<UserInfo> => {

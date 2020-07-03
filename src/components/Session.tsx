@@ -1,4 +1,5 @@
 import React, { FunctionComponent, ReactText } from 'react'
+import moment from 'moment'
 
 export type SessionProps = {
 	name: ReactText,
@@ -14,10 +15,11 @@ const Session:FunctionComponent<SessionProps> = ({
 	<div>
 		<h2>{name}</h2>
 		<p>
-			{start}
+			{moment(start).format('LLLL')}
 			{' '}
 			&ndash;
-			{end}
+			{' '}
+			{moment(end).format('LLLL')}
 		</p>
 	</div>
 )

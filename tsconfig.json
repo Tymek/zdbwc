@@ -35,8 +35,6 @@
 		"test/*"
 	],
 	"include": [
-		"__mocks__/**/*.ts",
-		"next-env.d.ts",
 		"**/*.ts",
 		"**/*.tsx"
 	]

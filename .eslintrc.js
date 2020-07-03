@@ -15,5 +15,8 @@ module.exports = {
 				'./src/utils/test/**/*',
 			],
 		}],
+		'react/static-property-placement': ['off'],
+		'@typescript-eslint/no-unsafe-assignment': ['off'],
+		// 'react/jsx-closing-tag-location': ['off'], // for <style> tag
 	},
 }

@@ -5,7 +5,7 @@ import { graphql } from 'msw'
 import server from 'utils/test/mockServer'
 
 import { render, waitFor, screen } from 'utils/test'
-import GraphQL from '../GraphQL'
+import { Provider as GraphQLProvider } from '../GraphQL'
 
 type ItemType = {
 	id: string | number
@@ -39,7 +39,7 @@ server(handlers)
 
 describe('utils/providers/GraphQL', () => {
 	it("renders on it's own", () => {
-		const output = render(<GraphQL />)
+		const output = render(<GraphQLProvider pageProps={{}} />)
 
 		expect(output).toBeInstanceOf(Object)
 	})
@@ -55,9 +55,9 @@ describe('utils/providers/GraphQL', () => {
 		}
 
 		const output = render(
-			<GraphQL>
+			<GraphQLProvider pageProps={{}}>
 				<MockQueryComponent />
-			</GraphQL>
+			</GraphQLProvider>
 		)
 
 		await waitFor(() => screen.getByText('{"items":[{"id":1}]}'))
