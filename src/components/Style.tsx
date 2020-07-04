@@ -10,6 +10,8 @@ const Style: React.FunctionComponent = () => (
 
 			--font: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
 				Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+			--border-radius: 0.1875rem;
 		}
 
 		/* Reset */
@@ -54,16 +56,17 @@ const Style: React.FunctionComponent = () => (
 			background: var(--accent);
 		}
 
-		a[href] {
+		a {
 			color: var(--accent);
+			transition: all 150ms ease-out;
 		}
 
-		a[href]:hover,
-		a[href]:focus {
+		a:hover,
+		a:focus {
 			color: var(--accent-lighten);
 		}
 
-		a[href]:visited {
+		a:visited {
 			color: var(--accent-darken);
 		}
 

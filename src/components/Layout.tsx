@@ -18,7 +18,7 @@ const Layout: React.FunctionComponent = ({ children }) => (
 			}
 
 			header {
-				padding: 1rem;
+				padding: 1.5rem 2rem 1rem;
 				background: var(--dark-background);
 			}
 

@@ -17,6 +17,7 @@ module.exports = {
 		}],
 		'react/static-property-placement': ['off'],
 		'@typescript-eslint/no-unsafe-assignment': ['off'],
+		'jsx-a11y/anchor-is-valid': ['off'], // next/link
 		// 'react/jsx-closing-tag-location': ['off'], // for <style> tag
 	},
 }

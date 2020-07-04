@@ -1,6 +1,6 @@
 import moment from '.'
 
-class Range {
+class TimeRange {
 	public start: moment.Moment
 
 	public end: moment.Moment
@@ -34,6 +34,18 @@ class Range {
 
 		return days
 	}
+
+	public overlaps(range: TimeRange): boolean {
+		return (
+			range.contains(this.start) || range.contains(this.end)
+		) || (
+			this.contains(range.start) || this.contains(range.end)
+		)
+	}
+
+	public duration(): moment.Duration {
+		return moment.duration(this.start.diff(this.end))
+	}
 }
 
-export default Range
+export default TimeRange

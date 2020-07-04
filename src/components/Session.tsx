@@ -1,25 +1,34 @@
 import moment from 'utils/moment'
+import { Session as SessionType } from 'ts/graphql'
 
-export type SessionProps = {
-	name: React.ReactText,
-	start?: React.ReactText,
-	end?: React.ReactText,
-}
-
-const Session: React.FunctionComponent<SessionProps> = ({
+const Session: React.FunctionComponent<SessionType> = ({
 	name,
 	start,
 	end,
+	speaker,
 }) => (
-	<div>
+	<div className="container">
 		<h2>{name}</h2>
-		<p>
-			{moment(start).format('LLLL')}
-			{' '}
+		<div className="content">
+			{moment(start).format('LT')}
 			&ndash;
-			{' '}
-			{moment(end).format('LLLL')}
-		</p>
+			{moment(end).format('LT')}
+			{ speaker && (<span><br />{speaker}</span>)}
+		</div>
+		<style jsx>{`
+			.container {
+				background: white;
+				padding: 0.2rem 1rem 1rem;
+				margin: 1rem 0;
+				box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.2);
+			}
+
+			h2 {
+				font-size: 1.2rem;
+				margin: 0.5rem 0;
+			}
+		`}
+		</style>
 	</div>
 )
 

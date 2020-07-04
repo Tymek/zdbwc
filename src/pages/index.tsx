@@ -4,7 +4,7 @@ import SessionList, { QUERY } from 'components/ListOfDays'
 // import { useQuery } from '@apollo/react-hooks'
 
 const Home:React.FunctionComponent = () => (
-	<div className="container">
+	<>
 		<main role="main">
 			{/* <h1 className="title">
 				Welcome to
@@ -16,6 +16,12 @@ const Home:React.FunctionComponent = () => (
 		</main>
 
 		<style jsx>{`
+			main {
+				display: flex;
+				flex-grow: 1;
+				flex-direction: column;
+			}
+
 			.title a {
 				text-decoration: none;
 			}
@@ -33,7 +39,7 @@ const Home:React.FunctionComponent = () => (
 			}
 		`}
 		</style>
-	</div>
+	</>
 )
 
 export const getStaticProps = precacheQuery({
