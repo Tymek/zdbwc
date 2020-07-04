@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { Component } from 'react'
 import Head from 'next/head'
 import { NextPageContext } from 'next'
 import Link from 'next/link'
@@ -25,14 +25,14 @@ function initialPropsGetter({
 	return { statusCode }
 }
 
-export default class Error<P = unknown> extends React.Component<P & ErrorProps> {
+export default class Error<P = unknown> extends Component<P & ErrorProps> {
 	static displayName = 'ErrorPage'
 
 	static getInitialProps = initialPropsGetter
 
 	static origGetInitialProps = initialPropsGetter
 
-	render(): ReactElement {
+	render(): React.ReactElement {
 		const { statusCode } = this.props
 		const title = this.props.title // eslint-disable-line react/destructuring-assignment
 			|| statusCodes[statusCode]

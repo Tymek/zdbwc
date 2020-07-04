@@ -1,6 +1,4 @@
-import { FunctionComponent } from 'react'
-
-const Style: FunctionComponent = () => (
+const Style: React.FunctionComponent = () => (
 	<style global jsx>{`
 		:root {
 			--background: hsla(0, 0%, 90%, 1);

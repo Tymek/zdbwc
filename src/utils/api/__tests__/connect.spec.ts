@@ -21,62 +21,60 @@ beforeEach(() => {
 	res.json.mockReset()
 })
 
-describe('utils/api/connect', () => {
-	it('initializes and returns next-connect', () => {
-		connect()
+it('initializes and returns next-connect', () => {
+	connect()
 
-		expect(nc).toHaveBeenCalled()
+	expect(nc).toHaveBeenCalled()
+})
+
+it('is using middleware', () => {
+	const result = connect()
+
+	expect(result.use).toBe(nc().use)
+	expect(result.use).toHaveBeenCalledWith(middleware)
+})
+
+it('is can add `get` handler', () => {
+	const handler = jest.fn()
+	const result = connect(handler)
+
+	expect(result.get).toHaveBeenCalledWith(handler)
+})
+
+it('has error handler', () => {
+	connect()
+	const { onError: connectErrorHandler } = (nc as jest.Mock).mock.calls[0][0]
+	expect(connectErrorHandler).toBe(onError)
+})
+
+describe('onError', () => {
+	it('sets 400 status by default', () => {
+		onError(new ActionError('message'), null as unknown as NextApiRequest, res as unknown as NextApiResponse)
+
+		expect(res.status).toHaveBeenCalledWith(400)
+
+		onError(new Error(), null as unknown as NextApiRequest, res as unknown as NextApiResponse)
+		expect(res.status).toHaveBeenCalledWith(400)
 	})
 
-	it('is using middleware', () => {
-		const result = connect()
+	it('sets status from ActionError', () => {
+		res.status.mockReset()
+		onError(
+			new ActionError('not found', 404),
+			null as unknown as NextApiRequest,
+			res as unknown as NextApiResponse
+		)
 
-		expect(result.use).toBe(nc().use)
-		expect(result.use).toHaveBeenCalledWith(middleware)
+		expect(res.status).toHaveBeenCalledWith(404)
 	})
+})
 
-	it('is can add `get` handler', () => {
+describe('action', () => {
+	it('calls handler with body input', async () => {
 		const handler = jest.fn()
-		const result = connect(handler)
-
-		expect(result.get).toHaveBeenCalledWith(handler)
-	})
-
-	it('has error handler', () => {
-		connect()
-		const { onError: connectErrorHandler } = (nc as jest.Mock).mock.calls[0][0]
-		expect(connectErrorHandler).toBe(onError)
-	})
-
-	describe('onError', () => {
-		it('sets 400 status by default', () => {
-			onError(new ActionError('message'), null as unknown as NextApiRequest, res as unknown as NextApiResponse)
-
-			expect(res.status).toHaveBeenCalledWith(400)
-
-			onError(new Error(), null as unknown as NextApiRequest, res as unknown as NextApiResponse)
-			expect(res.status).toHaveBeenCalledWith(400)
-		})
-
-		it('sets status from ActionError', () => {
-			res.status.mockReset()
-			onError(
-				new ActionError('not found', 404),
-				null as unknown as NextApiRequest,
-				res as unknown as NextApiResponse
-			)
-
-			expect(res.status).toHaveBeenCalledWith(404)
-		})
-	})
-
-	describe('action', () => {
-		it('calls handler with body input', async () => {
-			const handler = jest.fn()
-			const req = { body: { input: 'test' } }
-			const wrappedHandler = action(handler)
-			await wrappedHandler(req as unknown as NextApiRequest, res as unknown as NextApiResponse)
-			expect(handler).toHaveBeenCalledWith('test', req)
-		})
+		const req = { body: { input: 'test' } }
+		const wrappedHandler = action(handler)
+		await wrappedHandler(req as unknown as NextApiRequest, res as unknown as NextApiResponse)
+		expect(handler).toHaveBeenCalledWith('test', req)
 	})
 })

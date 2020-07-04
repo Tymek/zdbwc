@@ -1,3 +1,6 @@
+process.env.NODE_ENV = 'test'
+process.env.TZ = 'Europe/Warsaw'
+
 module.exports = {
 	rootDir: '.',
 	testEnvironment: 'jsdom',

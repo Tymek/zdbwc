@@ -1,9 +1,9 @@
-import { FunctionComponent } from 'react'
 import { precacheQuery } from 'utils/GraphQL'
 import SessionList, { QUERY } from 'components/SessionList'
+
 // import { useQuery } from '@apollo/react-hooks'
 
-const Home:FunctionComponent = () => (
+const Home:React.FunctionComponent = () => (
 	<div className="container">
 		<main role="main">
 			{/* <h1 className="title">

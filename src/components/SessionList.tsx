@@ -1,4 +1,3 @@
-import { FunctionComponent } from 'react'
 import { useQuery, gql } from '@apollo/client'
 
 import { Session } from 'ts/graphql'
@@ -14,7 +13,7 @@ export const QUERY = gql`
   }
 `
 
-const SessionList: FunctionComponent = () => {
+const SessionList: React.FunctionComponent = () => {
 	const { loading, error, data } = useQuery(QUERY)
 
 	if (loading) return <p>Loading...</p>

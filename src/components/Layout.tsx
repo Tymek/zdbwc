@@ -1,7 +1,6 @@
-import { FunctionComponent } from 'react'
 import Link from 'next/link'
 
-const Layout: FunctionComponent = ({ children }) => (
+const Layout: React.FunctionComponent = ({ children }) => (
 	<div className="container">
 		<header>
 			<Link href="/">

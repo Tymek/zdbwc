@@ -1,13 +1,12 @@
-import React, { FunctionComponent, ReactText } from 'react'
 import moment from 'moment'
 
 export type SessionProps = {
-	name: ReactText,
-	start?: ReactText,
-	end?: ReactText,
+	name: React.ReactText,
+	start?: React.ReactText,
+	end?: React.ReactText,
 }
 
-const Session:FunctionComponent<SessionProps> = ({
+const Session: React.FunctionComponent<SessionProps> = ({
 	name,
 	start,
 	end,

@@ -37,31 +37,29 @@ const handlers = [
 
 server(handlers)
 
-describe('utils/providers/GraphQL', () => {
-	it("renders on it's own", () => {
-		const output = render(<GraphQLProvider pageProps={{}} />)
+it("renders on it's own", () => {
+	const output = render(<GraphQLProvider pageProps={{}} />)
 
-		expect(output).toBeInstanceOf(Object)
-	})
+	expect(output).toBeInstanceOf(Object)
+})
 
-	it('loads queries', async () => {
-		const MockQueryComponent: FunctionComponent = () => {
-			const { error, data } = useQuery<ItemsData>(GET_ITEMS)
+it('loads queries', async () => {
+	const MockQueryComponent: React.FunctionComponent = () => {
+		const { error, data } = useQuery<ItemsData>(GET_ITEMS)
 
-			if (error) {
-				return <>{JSON.stringify(error)}</>
-			}
-			return <>{JSON.stringify(data)}</>
+		if (error) {
+			return <>{JSON.stringify(error)}</>
 		}
+		return <>{JSON.stringify(data)}</>
+	}
 
-		const output = render(
-			<GraphQLProvider pageProps={{}}>
-				<MockQueryComponent />
-			</GraphQLProvider>
-		)
+	const output = render(
+		<GraphQLProvider pageProps={{}}>
+			<MockQueryComponent />
+		</GraphQLProvider>
+	)
 
-		await waitFor(() => screen.getByText('{"items":[{"id":1}]}'))
+	await waitFor(() => screen.getByText('{"items":[{"id":1}]}'))
 
-		expect(output).toBeInstanceOf(Object)
-	})
+	expect(output).toBeInstanceOf(Object)
 })

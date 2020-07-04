@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Provider as GraphQLProvider } from 'utils/GraphQL'
@@ -9,8 +8,8 @@ import 'moment/locale/pl'
 
 moment.locale('pl')
 
-const MyApp:FunctionComponent<AppProps> = ({ Component, pageProps }) => (
-	<GraphQLProvider pageProps={pageProps}> { /* eslint-disable-line @typescript-eslint/no-unsafe-assignment */ }
+const MyApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }) => (
+	<GraphQLProvider pageProps={pageProps}>
 		<Head>
 			<title key="title">zdbwc</title>
 			<link rel="icon" href="/favicon.ico" />
