@@ -25,6 +25,7 @@
 		"helmet": "^3.23.3",
 		"isomorphic-unfetch": "^3.0.0",
 		"moment": "^2.27.0",
+		"moment-timezone": "^0.5.31",
 		"morgan": "^1.10.0",
 		"next": "9.4.5-canary.16",
 		"next-connect": "0.8.0",

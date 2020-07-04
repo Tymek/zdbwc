@@ -1,4 +1,4 @@
-import moment from 'moment'
+import moment from 'utils/moment'
 
 export type SessionProps = {
 	name: React.ReactText,

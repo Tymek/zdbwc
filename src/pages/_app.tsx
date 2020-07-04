@@ -3,10 +3,6 @@ import Head from 'next/head'
 import { Provider as GraphQLProvider } from 'utils/GraphQL'
 import Layout from 'components/Layout'
 import Style from 'components/Style'
-import moment from 'moment'
-import 'moment/locale/pl'
-
-moment.locale('pl')
 
 const MyApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }) => (
 	<GraphQLProvider pageProps={pageProps}>

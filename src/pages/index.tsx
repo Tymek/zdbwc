@@ -1,5 +1,5 @@
 import { precacheQuery } from 'utils/GraphQL'
-import SessionList, { QUERY } from 'components/SessionList'
+import SessionList, { QUERY } from 'components/ListOfDays'
 
 // import { useQuery } from '@apollo/react-hooks'
 
