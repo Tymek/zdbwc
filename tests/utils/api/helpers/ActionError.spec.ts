@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import ActionError from '../ActionError'
+import ActionError from 'utils/api/helpers/ActionError'
 
 it('creates an Error', () => {
 	expect(new ActionError('message')).toBeInstanceOf(Error)

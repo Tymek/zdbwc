@@ -1,5 +1,5 @@
 import moment from 'moment'
-import TimeRange from '../Range'
+import TimeRange from 'utils/moment/Range'
 
 it('can be created', () => {
 	const start = new Date(2020, 7, 7)

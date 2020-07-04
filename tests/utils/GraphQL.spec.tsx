@@ -5,7 +5,7 @@ import { graphql } from 'msw'
 import server from 'utils/test/mockServer'
 
 import { render, waitFor, screen } from 'utils/test'
-import { Provider as GraphQLProvider } from '../GraphQL'
+import { Provider as GraphQLProvider } from 'utils/GraphQL'
 
 type ItemType = {
 	id: string | number

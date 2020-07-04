@@ -2,7 +2,7 @@
 // 	Promise.resolve(handleResponse(res, { 'X-Hasura-Role': 'anonymous' }))
 
 import { setup, request, teardown, Server } from 'utils/test/server'
-import handler from '../auth-webhook'
+import handler from 'pages/api/auth-webhook'
 
 jest.mock('utils/api/middleware')
 

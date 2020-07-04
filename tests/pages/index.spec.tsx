@@ -1,6 +1,6 @@
 import { render } from 'utils/test'
 
-import Index from '..'
+import Index from 'pages'
 
 jest.mock('utils/GraphQL')
 jest.mock('components/ListOfDays', () => () => <></>)

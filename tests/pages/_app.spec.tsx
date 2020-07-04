@@ -1,7 +1,7 @@
 import { render, mocked, waitFor, screen } from 'utils/test'
 import Head from 'next/head'
 
-import MyApp from '../_app'
+import MyApp from 'pages/_app'
 
 jest.mock('next/head')
 const mockedHead = mocked(Head)

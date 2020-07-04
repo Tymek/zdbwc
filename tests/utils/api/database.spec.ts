@@ -2,7 +2,7 @@ import {
 	createPool,
 } from 'slonik'
 
-import database from '../database'
+import database from 'utils/api/database'
 
 jest.mock('slonik', () => ({
 	createPool: jest.fn(() => 'pool'),

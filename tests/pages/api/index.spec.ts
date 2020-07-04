@@ -1,5 +1,5 @@
 import { setup, request, teardown, Server } from 'utils/test/server'
-import handler from '..'
+import handler from 'pages/api'
 
 jest.mock('utils/api/middleware')
 

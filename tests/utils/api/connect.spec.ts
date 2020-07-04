@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
-import connect, { action, onError } from '../connect'
-import middleware from '../middleware'
-import ActionError from '../helpers/ActionError'
+import connect, { action, onError } from 'utils/api/connect'
+import middleware from 'utils/api/middleware'
+import ActionError from 'utils/api/helpers/ActionError'
 
 jest.mock('next-connect', () => jest.fn())
 

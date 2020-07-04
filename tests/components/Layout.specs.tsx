@@ -1,9 +1,9 @@
 import { render } from 'utils/test'
 
-import Style from '../Style'
+import Layout from 'components/Layout'
 
 it('renders', () => {
-	const result = render(<Style />)
+	const result = render(<Layout />)
 
 	expect(result).toBeTruthy()
 })

@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import morgan from 'morgan'
 import helmet from 'helmet'
 
-import middleware, { runMiddleware, Handler } from '../middleware'
+import middleware, { runMiddleware, Handler } from 'utils/api/middleware'
 
 jest.mock('morgan', () => jest.fn().mockImplementation(() =>
 	(): Handler => jest.fn(() => Promise.resolve())))

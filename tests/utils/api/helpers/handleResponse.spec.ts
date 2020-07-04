@@ -1,6 +1,6 @@
 /* eslint-disable deprecation/deprecation */
 import { NextApiResponse } from 'next'
-import handleResponse from '../handleResponse'
+import handleResponse from 'utils/api/helpers/handleResponse'
 
 const res = {
 	setHeader: jest.fn(),

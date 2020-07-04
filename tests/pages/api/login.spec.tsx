@@ -1,7 +1,7 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+// import { NextApiRequest, NextApiResponse } from 'next'
 import database from 'utils/test/database'
 
-import route, { handler } from '../login'
+import route, { handler } from 'pages/api/login'
 
 jest.mock('utils/api/middleware')
 
