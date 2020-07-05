@@ -15,7 +15,7 @@ const Container: React.FunctionComponent = ({ children }) => (
 		<style jsx>{`
 			.container {
 				flex-grow: 1;
-				padding: 1rem 2rem;
+				padding: 1rem;
 			}
 		`}
 		</style>

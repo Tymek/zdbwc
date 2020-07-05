@@ -44,7 +44,7 @@ class TimeRange {
 	}
 
 	public duration(): moment.Duration {
-		return moment.duration(this.start.diff(this.end))
+		return moment.duration(this.end.diff(this.start))
 	}
 }
 

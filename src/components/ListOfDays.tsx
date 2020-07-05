@@ -23,9 +23,9 @@ const Container: React.FunctionComponent = ({ children }) => (
 		<style jsx>{`
 			.container {
 				flex-grow: 1;
-				padding: 1rem 2rem;
-				background: var(--dark-background);
-				color: var(--background);
+				padding: calc(var(--spacing) * 1) calc(var(--spacing) * 2);
+				background: var(--dark);
+				color: var(--light);
 			}
 		`}
 		</style>
@@ -71,8 +71,8 @@ const ListOfDays: React.FunctionComponent = () => {
 				.day {
 					position: relative;
 					text-align: center;
-					color: var(--foreground);
-					background: var(--background);
+					color: var(--black);
+					background: var(--light);
 					border-radius: var(--border-radius);
 				}
 
@@ -81,12 +81,12 @@ const ListOfDays: React.FunctionComponent = () => {
 				}
 
 				.current.day {
-					color: var(--background-dark);
+					color: var(--dark);
 					background: var(--accent);
 				}
 
 				.current.day:hover, .current.day:focus, .current.day:active {
-					color: var(--foreground);
+					color: var(--black);
 				}
 
 				.day::before {

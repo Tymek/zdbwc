@@ -3,6 +3,7 @@ import moment from 'utils/moment'
 import Error from 'pages/_error'
 import { Session as SessionType } from 'ts/graphql'
 import TimeRange from 'utils/moment/Range'
+import { useMedia } from 'utils/hooks'
 import SessionItem from './Session'
 
 export const QUERY = gql`
@@ -46,21 +47,58 @@ const Schedule: React.FunctionComponent<{ day: string }> = ({ day }) => {
 		},
 	})
 
+	const rowSizing = useMedia(
+		['(min-width: 1600px)'],
+		['1fr'],
+		'auto'
+	)
+
 	if (loading) return <Container>Wczytywanie&hellip;</Container>
 	if (error || !data || !data.session?.length) return <Error statusCode={503} />
 	const { session } = data
-	const duration = new TimeRange(session[0].start, session[session.length - 1].end)
+	const timeRange = new TimeRange(session[0].start, session[session.length - 1].end)
+	const minutes = timeRange.duration().asMinutes()
+	const offset = (props: SessionType): string => moment(props.start).diff(timeRange.start, 'minutes').toString()
+	const duration = (props: SessionType): string => moment(props.end).diff(props.start, 'minutes').toString()
+	const buckets = session.reduce((acc: SessionType[][], current: SessionType) => {
+		for (let i = 0; i < acc.length; i += 1) {
+			if (acc[i][0].start === current.start && acc[i][0].end === current.end) {
+				acc[i].push(current)
+				return acc
+			}
+		}
+
+		acc.push([current])
+		return acc
+	}, [])
 
 	return (
 		<Container>
-			<div className="items">
-				{session.map(props => (
-					<SessionItem key={props.id} {...props} />
+			<div className="items" style={{ gridTemplateRows: `repeat(${minutes}, ${rowSizing})` }}>
+				{buckets.map(bucket => (
+					<div
+						className="bucket"
+						key={bucket[0].id}
+						style={{ gridRowStart: offset(bucket[0]), gridRowEnd: `span ${duration(bucket[0])}` }}
+					>
+						{ bucket.map(props => (
+							<SessionItem key={props.id} {...props} />
+						)) }
+					</div>
 				))}
 			</div>
-			{JSON.stringify(duration)}
 			<style jsx>{`
+				.items {
+					display: grid;
+					grid-template-columns: repeat(auto-fit, 1fr);
+				}
 
+				.bucket {
+					display: grid;
+					margin-bottom: var(--spacing);
+					grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+					grid-gap: var(--spacing);
+				}
 			`}
 			</style>
 		</Container>

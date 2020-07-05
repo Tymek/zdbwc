@@ -7,7 +7,6 @@ import {
 	InMemoryCache,
 	ApolloProvider,
 	NormalizedCacheObject,
-	HttpOptions,
 	QueryOptions,
 } from '@apollo/client'
 
@@ -18,14 +17,12 @@ let uri = ssrMode
 	? 'http://hasura:8080/v1/graphql'
 	: 'http://localhost:8080/v1/graphql'
 
-const httpLinkhttpLinkOptions: HttpOptions = {
-	uri,
-	credentials: 'include', // NOTE: 'same-origin'?
+if (process.env.NODE_ENV === 'development' && !ssrMode) {
+	uri = `http://${window.location.hostname}:8080/v1/graphql`
 }
 
 if (process.env.NODE_ENV === 'test') {
 	uri = 'http://localhost:3000/graphql'
-	httpLinkhttpLinkOptions.fetch = isofetch
 }
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
@@ -34,7 +31,12 @@ export function gqlClient(initialState?: NormalizedCacheObject): ApolloClient<No
 	const client = apolloClient ?? new ApolloClient({
 		ssrMode,
 		link: ApolloLink.from([
-			new HttpLink(httpLinkhttpLinkOptions),
+			new HttpLink({
+				uri,
+				credentials: 'include', // NOTE: 'same-origin'?
+				fetch: isofetch,
+			}),
+			// NOTE: error link?
 		]),
 		cache: new InMemoryCache(),
 	})

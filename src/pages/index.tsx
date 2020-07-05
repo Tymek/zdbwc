@@ -1,5 +1,4 @@
-import { precacheQuery } from 'utils/GraphQL'
-import SessionList, { QUERY } from 'components/ListOfDays'
+import ListOfDays from 'components/ListOfDays'
 
 // import { useQuery } from '@apollo/react-hooks'
 
@@ -11,7 +10,7 @@ const Home:React.FunctionComponent = () => (
 				{' '}
 				<a href="https://nextjs.org">Next.js!</a>
 			</h1> */}
-			<SessionList />
+			<ListOfDays />
 
 		</main>
 
@@ -41,10 +40,5 @@ const Home:React.FunctionComponent = () => (
 		</style>
 	</>
 )
-
-export const getStaticProps = precacheQuery({
-	query: QUERY,
-	// variables: allPostsQueryVars,
-})
 
 export default Home

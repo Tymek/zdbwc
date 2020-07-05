@@ -86,7 +86,7 @@ const styles: { [k: string]: React.CSSProperties } = {
 		display: 'inline-block',
 		textAlign: 'left',
 		lineHeight: '3.6rem',
-		height: '3.6rem',
+		height: '3.4rem',
 		verticalAlign: 'middle',
 	},
 

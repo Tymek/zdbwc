@@ -1,12 +1,14 @@
 const Style: React.FunctionComponent = () => (
 	<style global jsx>{`
 		:root {
-			--background: hsla(0, 0%, 90%, 1);
-			--foreground: hsla(0, 0%, 10%, 0.9);
+			--white: #ffffff;
+			--light: hsla(0, 0%, 90%, 1);
+			--black: hsla(0, 0%, 10%, 0.9);
 			--accent: #009ed1;
-			--dark-background: #041A33;
+			--dark: #041A33;
 			--accent-darken: hsl(195, 100%, 31%);
 			--accent-lighten: hsl(195, 100%, 61%);
+			--spacing: 0.5rem;
 
 			--font: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
 				Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -26,8 +28,8 @@ const Style: React.FunctionComponent = () => (
 			flex-direction: column;
 			position: relative;
 			min-height: 100%;
-			background: var(--background);
-			color: var(--foreground);
+			background: var(--light);
+			color: var(--black);
 			font-family: var(--font);
 		}
 
@@ -42,17 +44,19 @@ const Style: React.FunctionComponent = () => (
 
 		* {
 			box-sizing: border-box;
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
+			-webkit-tap-highlight-color: transparent;
 		}
 
 
 		/* Customization */
 
 		*::-moz-selection {
-			color: var(--background);
+			color: var(--light);
 			background: var(--accent);
 		}
 		*::selection {
-			color: var(--background);
+			color: var(--light);
 			background: var(--accent);
 		}
 
