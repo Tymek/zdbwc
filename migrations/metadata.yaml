@@ -74,8 +74,8 @@ actions:
     output_type: UserInfo
     forward_client_headers: true
     headers:
-    - value: ACTION_SECRET_ENV
-      name: ACTION_SECRET
+    - name: x-hasura-action-secret
+      value_from_env: HASURA_ACTION_SECRET
     arguments:
     - name: username
       type: String!

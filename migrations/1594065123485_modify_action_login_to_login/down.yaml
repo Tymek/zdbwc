@@ -1,0 +1,38 @@
+- args:
+    enums: []
+    input_objects: []
+    objects:
+    - description: null
+      fields:
+      - arguments: null
+        description: null
+        name: id
+        type: uuid!
+      - arguments: null
+        description: null
+        name: username
+        type: String!
+      name: UserInfo
+      relationships: null
+    scalars: []
+  type: set_custom_types
+- args:
+    comment: null
+    definition:
+      arguments:
+      - description: null
+        name: username
+        type: String!
+      - description: null
+        name: password
+        type: String!
+      forward_client_headers: true
+      handler: http://next:3000/api/login
+      headers:
+      - name: ACTION_SECRET
+        value: ACTION_SECRET_ENV
+      kind: synchronous
+      output_type: UserInfo
+      type: mutation
+    name: login
+  type: update_action

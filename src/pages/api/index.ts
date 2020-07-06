@@ -1,10 +1,11 @@
-import middleware, { Handler } from 'utils/api/middleware'
-import handleResponse from 'utils/api/helpers/handleResponse'
+import connect from 'utils/api/connect'
+import { NextApiResponse } from 'next'
 
-const route:Handler = async (req, res) => {
-	await middleware(req, res)
-
-	handleResponse(res, { status: 'OK' })
+const route = (req: never, res: NextApiResponse) => {
+	res.json({ status: 'OK' })
 }
 
-export default route
+export default connect(undefined, {
+	middleware: false,
+	verify: false,
+}).get(route)

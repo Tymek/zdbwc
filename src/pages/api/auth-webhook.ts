@@ -38,14 +38,14 @@ const user: RequestHandler<NextApiRequest, NextApiResponse> = async (req, res, n
 	}
 
 	return res.json({
-		'X-Hasura-Role': 'manager',
-		'X-Hasura-User-Id': `${data.id}`,
+		'x-hasura-role': 'manager',
+		'x-hasura-user-id': `${data.id}`,
 	})
 }
 
 const anonymous: RequestHandler<NextApiRequest, NextApiResponse> = (req, res) => {
 	res.json({
-		'X-Hasura-Role': 'anonymous',
+		'x-hasura-role': 'anonymous',
 	})
 }
 

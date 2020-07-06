@@ -17,7 +17,7 @@ it('stores message and code', () => {
 it('can be serialized', () => {
 	expect(JSON.stringify(new ActionError('info'))).toStrictEqual('{"message":"info"}')
 	expect(JSON.stringify(new ActionError('warning', 'code'))).toStrictEqual('{"message":"warning","code":"code"}')
-	expect(JSON.stringify(new ActionError('error', 400))).toStrictEqual('{"message":"error","code":400}')
+	expect(JSON.stringify(new ActionError('error', 400))).toStrictEqual('{"message":"error","code":"400"}')
 })
 
 it('will call captureStackTrace', () => {

@@ -11,6 +11,7 @@
 		"backend:seeds": "hasura seeds apply",
 		"backend:generate": "graphql-codegen --config codegen.js",
 		"backend": "run-s backend:*",
+		"console": "hasura console",
 		"test:eslint": "eslint . --ext .js,.jsx,.ts,.tsx,.json --ignore-path .gitignore",
 		"test:jest": "cross-env NODE_ENV=test BABEL_ENV=test jest . --ci --collectCoverage",
 		"test:depcheck": "depcheck . --ignore-dirs=tmp,coverage --ignores=eslint*,@typescript-eslint/*,generated,utils,components,@graphql-codegen/*,@babel/runtime,@scrlk/eslint-config,babel-eslint,styled-jsx",

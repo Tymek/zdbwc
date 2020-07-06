@@ -1,11 +1,14 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
-import connect, { action, onError } from 'utils/api/connect'
+import connect, { onError } from 'utils/api/connect'
 import middleware from 'utils/api/middleware'
 import ActionError from 'utils/api/helpers/ActionError'
 
-jest.mock('next-connect', () => jest.fn())
+jest.mock('next-connect', () => jest.fn().mockImplementation(() => ({
+	default: jest.fn(),
+	use: jest.fn(),
+})))
 
 const res = {
 	status: jest.fn(),
@@ -14,7 +17,7 @@ const res = {
 
 beforeEach(() => {
 	(nc as jest.Mock).mockReset().mockReturnValue({
-		get: jest.fn(),
+		post: jest.fn(),
 		use: jest.fn(),
 	})
 	res.status.mockReset()
@@ -34,11 +37,11 @@ it('is using middleware', () => {
 	expect(result.use).toHaveBeenCalledWith(middleware)
 })
 
-it('is can add `get` handler', () => {
+it('is can add `post` handler', () => {
 	const handler = jest.fn()
 	const result = connect(handler)
 
-	expect(result.get).toHaveBeenCalledWith(handler)
+	expect(result.post).toHaveBeenCalledWith(handler)
 })
 
 it('has error handler', () => {
@@ -66,15 +69,5 @@ describe('onError', () => {
 		)
 
 		expect(res.status).toHaveBeenCalledWith(404)
-	})
-})
-
-describe('action', () => {
-	it('calls handler with body input', async () => {
-		const handler = jest.fn()
-		const req = { body: { input: 'test' } }
-		const wrappedHandler = action(handler)
-		await wrappedHandler(req as unknown as NextApiRequest, res as unknown as NextApiResponse)
-		expect(handler).toHaveBeenCalledWith('test', req)
 	})
 })

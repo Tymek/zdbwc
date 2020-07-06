@@ -4,8 +4,6 @@
 import { setup, request, teardown, Server } from 'utils/test/server'
 import handler from 'pages/api/auth-webhook'
 
-jest.mock('utils/api/middleware')
-
 let server: Server
 let url: Promise<string>
 
@@ -21,5 +19,5 @@ it('responds to requests', async () => {
 it('returns hasura-role', async () => {
 	const response = await request(await url)
 
-	await expect(response.json()).resolves.toEqual({ 'X-Hasura-Role': 'anonymous' })
+	await expect(response.json()).resolves.toEqual({ 'x-hasura-role': 'anonymous' })
 })

@@ -1,11 +1,10 @@
-// import { NextApiRequest, NextApiResponse } from 'next'
+import { setup, request, teardown, Server } from 'utils/test/server'
+import { compare as bcryptCompare, hash as bcryptHash } from 'bcrypt'
 import database from 'utils/test/database'
 
-import { handler } from 'pages/api/login'
-import { compare as bcryptCompare, hash as bcryptHash } from 'bcrypt'
-import { NextApiResponse } from 'next'
+import route from 'pages/api/login'
 
-jest.mock('utils/api/middleware')
+// jest.mock('utils/api/middleware')
 jest.mock('bcrypt', () => ({
 	default: jest.fn(),
 	compare: jest.fn(),
@@ -13,14 +12,9 @@ jest.mock('bcrypt', () => ({
 }))
 const compare = bcryptCompare as jest.Mock
 const hash = bcryptHash as jest.Mock
-const req = {
-	headers: {
-		get: jest.fn(),
-	},
-}
-const res = {
-	setHeader: jest.fn(),
-} as unknown as NextApiResponse
+
+let server: Server
+let url: Promise<string>
 
 const defaultDatabaseUser = {
 	id: 'id',
@@ -29,8 +23,12 @@ const defaultDatabaseUser = {
 	created_at: 0,
 	updated_at: 0,
 }
-const defaultMockInput = { username: 'username', password: 'password' }
 const expected = { id: defaultDatabaseUser.id, username: defaultDatabaseUser.username }
+const options = {
+	method: 'POST',
+	headers: { 'content-type': 'application/json', 'x-hasura-action-secret': 1 },
+	body: JSON.stringify({ input: { username: 'username', password: 'password' } }),
+}
 
 beforeEach(() => {
 	database.mockReset().mockReturnValue([defaultDatabaseUser])
@@ -38,33 +36,33 @@ beforeEach(() => {
 	hash.mockReset().mockReturnValue(Promise.resolve(true))
 })
 
-it('queries the database', async () => {
-	const result = await handler(defaultMockInput, undefined, res)
+beforeAll(() => { [server, url] = setup(route) })
+afterAll(done => teardown(server, done))
 
-	expect(database).toHaveBeenCalledTimes(1)
-	expect(result).toStrictEqual(expected)
+it('returns user credentials', async () => {
+	const response = await request(await url, undefined, options)
+	expect(response).toHaveProperty('status', 200)
+	expect(response.headers.get('content-type')).toEqual(expect.stringMatching(/^application\/json/))
+	await expect(response.json()).resolves.toEqual(expected)
 })
 
-it('throws exception if user not fount', async () => {
-	database.mockReturnValueOnce([null])
+it('returns an error if user not fount', async () => {
+	database.mockReset().mockReturnValueOnce([null])
 
-	await expect(() => handler(defaultMockInput)).rejects.toThrow()
+	const response = await request(await url, undefined, options)
+	expect(response).toHaveProperty('status', 401)
+	await expect(response.json()).resolves.toHaveProperty('message')
 })
 
-it('throws exception if password compare fails', async () => {
-	compare.mockReturnValueOnce(Promise.resolve(false))
+it('returns an error if password compare fails', async () => {
+	compare.mockReturnValueOnce(false)
 
-	await expect(() => handler(defaultMockInput)).rejects.toThrow()
-})
-
-it('returns credentials', async () => {
-	// compare.mockReturnValue(true)
-	const result = await handler(defaultMockInput, undefined, res)
-	expect(result).toEqual(expected)
+	const response = await request(await url, undefined, options)
+	expect(response).toHaveProperty('status', 401)
+	await expect(response.json()).resolves.toHaveProperty('message')
 })
 
 it('should set cookie', async () => {
-	await handler(defaultMockInput, undefined, res)
-	// eslint-disable-next-line @typescript-eslint/unbound-method
-	expect(res.setHeader).toHaveBeenCalled()
+	const response = await request(await url, undefined, options)
+	expect(response.headers.get('set-cookie')).toEqual(expect.stringMatching(/^TOKEN=/))
 })

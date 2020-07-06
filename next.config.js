@@ -1,5 +1,8 @@
 module.exports = {
 	poweredByHeader: false,
+	serverRuntimeConfig: {
+		hasuraActionSecret: process.env.HASURA_ACTION_SECRET,
+	},
 	webpack(config) {
 		config.module.rules.push({
 			test: /\.svg$/,

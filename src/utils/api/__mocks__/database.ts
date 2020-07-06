@@ -17,4 +17,5 @@ const pool = createMockPool({
 
 pool.mock = query
 
+export * from 'slonik'
 export default pool

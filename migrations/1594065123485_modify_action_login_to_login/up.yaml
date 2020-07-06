@@ -1,0 +1,36 @@
+- args:
+    enums: []
+    input_objects: []
+    objects:
+    - description: null
+      fields:
+      - description: null
+        name: id
+        type: uuid!
+      - description: null
+        name: username
+        type: String!
+      name: UserInfo
+      relationships: null
+    scalars: []
+  type: set_custom_types
+- args:
+    comment: null
+    definition:
+      arguments:
+      - description: null
+        name: username
+        type: String!
+      - description: null
+        name: password
+        type: String!
+      forward_client_headers: true
+      handler: http://next:3000/api/login
+      headers:
+      - name: x-hasura-action-secret
+        value_from_env: HASURA_ACTION_SECRET
+      kind: synchronous
+      output_type: UserInfo
+      type: mutation
+    name: login
+  type: update_action

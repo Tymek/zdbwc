@@ -2,7 +2,8 @@ import { compare, hash } from 'bcrypt'
 import { serialize } from 'cookie'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import connect, { input, ActionError, RequestHandler } from 'utils/api/connect'
+import connect, { ActionError, RequestHandler } from 'utils/api/connect'
+import input from 'utils/api/helpers/input'
 import { UserInfo, Mutation_RootLoginArgs, User } from 'ts/graphql'
 import db, { sql } from 'utils/api/database'
 import moment from 'utils/moment'
@@ -14,7 +15,9 @@ const serializeCookie = (data: Mutation_RootLoginArgs): string => serialize('TOK
 })
 
 export const handler: RequestHandler<NextApiRequest, NextApiResponse> = async (req, res) => {
-	const { username, password } = input(req) as Mutation_RootLoginArgs
+	const args = input(req)
+	const { username, password } = args as Mutation_RootLoginArgs
+
 	const data: User | null = await db.maybeOne(sql`
 		SELECT *
 		FROM public.user
