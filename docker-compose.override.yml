@@ -11,7 +11,7 @@ services:
     tty: true
     environment:
       TERM: xterm-256color
-      ACTION_SECRET_ENV: "${ACTION_SECRET_ENV}"
+      ACTION_SECRET_ENV: "${ACTION_SECRET_ENV:-0}"
     command: npm run dev
 
   postgres:

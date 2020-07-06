@@ -7,4 +7,5 @@ const databaseUrl:string = process.env.DATABASE_URL || 'postgres://postgres:post
 
 const pool: DatabasePoolType = createPool(databaseUrl)
 
+export * from 'slonik'
 export default pool

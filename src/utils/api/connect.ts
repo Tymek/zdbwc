@@ -1,8 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import nc, { NextConnect, NextHandler } from 'next-connect'
+import nc, { NextConnect, RequestHandler } from 'next-connect'
 import { pathOr } from 'ramda'
 import middleware from './middleware'
 import { ActionErrorType as OriginalActionErrorType } from './helpers/ActionError'
+
+export * from 'next-connect'
+export { default as ActionError } from './helpers/ActionError'
+export type ActionErrorType = OriginalActionErrorType
 
 export const onError = (err: ActionErrorType, req: NextApiRequest, res: NextApiResponse): void => {
 	if (err.code && typeof err.code === 'number') {
@@ -10,23 +14,13 @@ export const onError = (err: ActionErrorType, req: NextApiRequest, res: NextApiR
 		res.json(err)
 	} else {
 		res.status(400)
-		res.json({ message: 'unknown error' })
+		res.json({ message: 'This request was bad 😦' })
 	}
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ActionHandler = (input: any, req?: NextApiRequest) => Promise<any>
+export const input = pathOr({}, ['body', 'input'])
 
-/**
- * Adapter for a handler serving Hasura action to Next API
- */
-export const action = (handler: ActionHandler) => async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-	const input = pathOr({}, ['body', 'input'], req)
-	res.json(await handler(input, req))
-}
-
-type RequestHandler<T, S> = (req: T, res: S, next: NextHandler) => void | Promise<void>
-export default <T, S>(handler?: RequestHandler<T, S>): NextConnect<NextApiRequest, NextApiResponse> => {
+export default <T, S>(handler?: RequestHandler<T, S>): NextConnect<NextApiRequest, NextApiResponse<T>> => {
 	const connect = nc({
 		onError,
 	})
@@ -34,11 +28,8 @@ export default <T, S>(handler?: RequestHandler<T, S>): NextConnect<NextApiReques
 	connect.use(middleware)
 
 	if (handler !== undefined) {
-		connect.get(handler)
+		connect.post(handler)
 	}
 
 	return connect
 }
-
-export { default as ActionError } from './helpers/ActionError'
-export type ActionErrorType = OriginalActionErrorType

@@ -33,6 +33,7 @@
 		"ramda": "^0.27.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
+		"react-hook-form": "^6.0.1",
 		"slonik": "^22.4.11"
 	},
 	"devDependencies": {
@@ -80,6 +81,7 @@
 		"url-loader": "^4.1.0"
 	},
 	"optionalDependencies": {
+		"@types/bcrypt": "^3.0.0",
 		"@types/helmet": "0.0.47",
 		"@types/jest": "^26.0.3",
 		"@types/morgan": "^1.9.1",

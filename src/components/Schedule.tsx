@@ -48,7 +48,7 @@ const Schedule: React.FunctionComponent<{ day: string }> = ({ day }) => {
 	})
 
 	const rowSizing = useMedia(
-		['(min-width: 1600px)'],
+		['(min-width: 1366px)'],
 		['1fr'],
 		'auto'
 	)
@@ -90,6 +90,8 @@ const Schedule: React.FunctionComponent<{ day: string }> = ({ day }) => {
 			<style jsx>{`
 				.items {
 					display: grid;
+					margin: 0 auto;
+					max-width: 1600px;
 					grid-template-columns: repeat(auto-fit, 1fr);
 				}
 

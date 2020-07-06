@@ -3,15 +3,20 @@ export type ActionErrorType = { message: string, code?: string | number }
 class ActionError extends Error {
 	public code?: number | string
 
-	constructor(message: string, code?: string | number) {
-		super(message)
+	constructor(messageOrError: string | Error, code?: string | number) {
+		if (typeof messageOrError === 'string') {
+			super(messageOrError)
+			this.message = messageOrError
+		} else {
+			super(messageOrError.message)
+			this.message = messageOrError.message
+		}
 
 		if (Error.captureStackTrace) {
 			Error.captureStackTrace(this, ActionError)
 		}
 
 		this.name = 'ActionError'
-		this.message = message
 
 		if (code !== undefined) {
 			this.code = code
@@ -24,7 +29,7 @@ class ActionError extends Error {
 		}
 
 		if (this.code !== undefined) {
-			output.code = this.code
+			output.code = `${this.code}`
 		}
 
 		return output
