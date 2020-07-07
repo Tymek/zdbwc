@@ -36,7 +36,7 @@ const ListOfDays: React.FunctionComponent = () => {
 	const { loading, error, data } = useQuery(QUERY)
 
 	if (loading) return <Container>Wczytywanie&hellip;</Container>
-	if (error) return <Error statusCode={503} />
+	if (error) return <Error statusCode={503} title="Nie dodano agendy 😶" />
 	const { session }: { session: Session[] } = data
 
 	const days = [...(
@@ -65,7 +65,7 @@ const ListOfDays: React.FunctionComponent = () => {
 				.grid {
 					display: grid;
 					grid-gap: 2rem;
-					grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+					grid-template-columns: repeat(auto-fit, minmax(10rem, 60vh));
 				}
 
 				.day {
@@ -112,7 +112,7 @@ const ListOfDays: React.FunctionComponent = () => {
 					/* font-size: 1.5rem; */
 					letter-spacing: 0.1rem;
 					text-transform: uppercase;
-					font-weight: bold;
+					font-weight: 600;
 				}
 
 				.day__date {

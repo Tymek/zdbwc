@@ -14,6 +14,8 @@ const Style: React.FunctionComponent = () => (
 				Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
 			--border-radius: 0.1875rem;
+
+			--box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2), 0px 1px 2px rgba(0, 0, 0, 0.1);
 		}
 
 		/* Reset */
@@ -31,6 +33,7 @@ const Style: React.FunctionComponent = () => (
 			background: var(--light);
 			color: var(--black);
 			font-family: var(--font);
+			font-weight: 300;
 		}
 
 		html,
@@ -46,6 +49,7 @@ const Style: React.FunctionComponent = () => (
 			box-sizing: border-box;
 			-webkit-tap-highlight-color: rgba(0,0,0,0);
 			-webkit-tap-highlight-color: transparent;
+			-webkit-appearance: none;
 		}
 
 

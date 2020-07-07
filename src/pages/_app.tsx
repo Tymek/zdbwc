@@ -9,7 +9,7 @@ const MyApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }) => (
 		<Head>
 			<title key="title">zdbwc</title>
 			<link rel="icon" href="/favicon.ico" />
-			<link href="https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap" rel="stylesheet" />
+			<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&amp;display=swap" rel="stylesheet" />
 			{/* TODO: local font */}
 		</Head>
 		<Layout>

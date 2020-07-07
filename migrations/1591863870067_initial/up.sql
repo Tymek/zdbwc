@@ -14,7 +14,7 @@ CREATE TABLE public.session (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     name text NOT NULL,
-    description jsonb DEFAULT jsonb_build_object() NOT NULL,
+    description text,
     start timestamp with time zone NOT NULL,
     "end" timestamp with time zone NOT NULL,
     location text,

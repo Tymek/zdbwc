@@ -1,6 +1,8 @@
-import { Mutation_RootLoginArgs } from 'ts/graphql'
-import { useForm } from 'react-hook-form'
+import { useEffect } from 'react'
 import { useMutation, gql } from '@apollo/client'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
+import { Mutation_RootLoginArgs, Mutation_Root } from 'ts/graphql'
 
 const LOGIN = gql`
 	mutation Login($username: String!, $password: String!) {
@@ -18,15 +20,21 @@ const Login:React.FunctionComponent = () => {
 		console.info('submit', variables)
 		await login({ variables })
 	}
-	const [login, { data }] = useMutation(LOGIN)
+	const [login, { data, error }] = useMutation(LOGIN, { errorPolicy: 'all' })
 
-	console.log('errors', errors)
+	const router = useRouter()
+	useEffect(() => {
+		const userInfo = (data as Mutation_Root)?.login
+		if (userInfo) {
+			router.push('/panel') // eslint-disable-line @typescript-eslint/no-floating-promises
+		}
+	}, [data, router])
 
 	return (
 		<>
 			<main role="main">
 				{ JSON.stringify(data) }
-				{ (errors.username || errors.password) && <p>Wpisz poprawną nazwę użytkownika i hasło</p> }
+				{ (errors.username || errors.password || error) && <p>Wpisz poprawną nazwę użytkownika i hasło</p> }
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className="input-group">
 						<input
@@ -62,7 +70,6 @@ const Login:React.FunctionComponent = () => {
 				}
 
 				input {
-					-webkit-appearance: none;
 					border-radius: var(--border-radius);
 					border: 1px solid var(--dark);
 					line-height: 1.5em;
@@ -73,7 +80,6 @@ const Login:React.FunctionComponent = () => {
 				}
 
 				button {
-					-webkit-appearance: none;
 					font-family: inherit;
 					box-shadow: none;
 					border: 1px solid var(--dark);

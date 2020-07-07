@@ -18,13 +18,15 @@ const Layout: React.FunctionComponent = ({ children }) => (
 			}
 
 			header {
-				padding: calc(var(--spacing) * 3) calc(var(--spacing) * 4) calc(var(--spacing) * 2);
+				padding: calc(var(--spacing) * 3) calc(var(--spacing) * 4) calc(var(--spacing) * 2.5);
 				background: var(--dark);
+				display: flex;
 			}
 
 			header img {
-				max-height: 3rem;
+				width: 5rem;
 				cursor: pointer;
+				margin: 0 auto;
 			}
 		`}
 		</style>
