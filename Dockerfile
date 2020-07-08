@@ -1,9 +1,12 @@
 FROM node:14
 
-RUN npm ci --production
-
-COPY . /srv
+COPY ./package*.json /srv/
+COPY ./.next /srv/.next/
+COPY ./public /srv/public/
+COPY ./next.config.js /srv/
 
 WORKDIR /srv
+
+RUN npm ci --production
 
 CMD ["npm", "start"]
