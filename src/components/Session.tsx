@@ -1,5 +1,5 @@
 import moment from 'utils/moment'
-import { Session as SessionType } from 'ts/graphql'
+import { Session as SessionType } from 'generated/schema'
 import { sierotki } from 'utils/typografia'
 
 const Session: React.FunctionComponent<SessionType> = ({

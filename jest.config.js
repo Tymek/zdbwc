@@ -22,7 +22,7 @@ module.exports = {
 		'!**/config/**',
 		'!**/*.config.js',
 		'!<rootDir>/src/utils/test/**/*',
-		'!<rootDir>/src/ts/graphql.tsx', // codegen
+		'!<rootDir>/src/generated/**/*', // codegen
 	],
 	setupFilesAfterEnv: [
 		'<rootDir>/jest.setup.ts',

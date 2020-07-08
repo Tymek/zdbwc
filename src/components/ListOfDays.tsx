@@ -3,7 +3,7 @@ import moment from 'utils/moment'
 import TimeRange from 'utils/moment/Range'
 import Error from 'pages/_error'
 
-import { Session } from 'ts/graphql'
+import { Session } from 'generated/schema'
 import Link from 'next/link'
 
 export const QUERY = gql`

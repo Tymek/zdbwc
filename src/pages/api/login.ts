@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 import connect, { ActionError, RequestHandler } from 'utils/api/connect'
 import input from 'utils/api/helpers/input'
-import { UserInfo, Mutation_RootLoginArgs, User } from 'ts/graphql'
+import { UserInfo, Mutation_RootLoginArgs, User } from 'generated/schema'
 import db, { sql } from 'utils/api/database'
 import moment from 'utils/moment'
 

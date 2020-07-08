@@ -1,4 +1,4 @@
-import { Mutation_RootLoginArgs, User } from 'ts/graphql'
+import { Mutation_RootLoginArgs, User } from 'generated/schema'
 import db, { sql } from 'utils/api/database'
 import connect, { RequestHandler } from 'utils/api/connect'
 import { compare } from 'bcrypt'

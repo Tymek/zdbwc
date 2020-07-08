@@ -5,6 +5,7 @@ module.exports = {
 		project: './tsconfig.json',
 		tsconfigRootDir: __dirname,
 	},
+	'ignorePatterns': ['src/generated/**/*'],
 	rules: {
 		'import/no-extraneous-dependencies': ['warn', {
 			'devDependencies': [

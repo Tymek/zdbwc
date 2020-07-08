@@ -2,7 +2,7 @@ import { useQuery, gql, useMutation, MutationUpdaterFn } from '@apollo/client'
 import moment from 'utils/moment'
 import TrashIcon from 'assets/icons/trash.svg'
 
-import { Session } from 'ts/graphql'
+import { Session } from 'generated/schema'
 
 export const QUERY = gql`
   {
@@ -41,10 +41,14 @@ const updateCache: MutationUpdaterFn<{delete_session: { returning: Session[] } }
 
 const ListOfDays: React.FunctionComponent = () => {
 	const { loading, error, data } = useQuery(QUERY)
-	const [remove, { loading: removing, error: deleteError }] = useMutation(
+	const [remove, { loading: removing }] = useMutation(
 		DELETE,
 		{ errorPolicy: 'all', update: updateCache }
 	)
+
+	const onRemove = (id: string, name: string) => () =>
+		window.confirm(`Czy na pewno chcesz usunąć sesję? \n"${name}"`) // eslint-disable-line no-alert
+		&& remove({ variables: { id } })
 
 	if (loading) return <div>Wczytywanie&hellip; {/* TODO: loading state container */}</div>
 	if (error) return <div>TODO: error empty state</div>
@@ -70,7 +74,7 @@ const ListOfDays: React.FunctionComponent = () => {
 							<button
 								className="delete"
 								type="button"
-								onClick={() => remove({ variables: { id } })}
+								onClick={onRemove(id, name)}
 								disabled={removing}
 							>
 								<span className="icon">

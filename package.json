@@ -14,14 +14,13 @@
 		"console": "hasura console",
 		"test:eslint": "eslint . --ext .js,.jsx,.ts,.tsx,.json --ignore-path .gitignore",
 		"test:jest": "cross-env NODE_ENV=test BABEL_ENV=test jest . --ci --collectCoverage",
-		"test:depcheck": "depcheck . --ignore-dirs=tmp,coverage --ignores=eslint*,@typescript-eslint/*,generated,utils,components,@graphql-codegen/*,@babel/runtime,@scrlk/eslint-config,babel-eslint,styled-jsx",
+		"test:depcheck": "depcheck . --ignore-dirs=tmp,coverage --ignores=eslint*,@typescript-eslint/*,@graphql-codegen/*,@babel/runtime,@scrlk/eslint-config,babel-eslint,styled-jsx,assets,components,generated,gql,pages,ts,utils",
 		"test": "run-s test:*"
 	},
 	"dependencies": {
 		"@apollo/client": "^3.0.0-rc.10",
 		"bcrypt": "^5.0.0",
 		"cookie": "^0.4.1",
-		"cors": "^2.8.5",
 		"graphql": "^14.6.0",
 		"graphql-tag": "^2.10.3",
 		"helmet": "^3.23.3",
@@ -70,16 +69,14 @@
 		"eslint-plugin-react-hooks": "^4.0.5",
 		"eslint-plugin-security": "^1.4.0",
 		"eslint-plugin-unicorn": "^20.1.0",
-		"file-loader": "^6.0.0",
-		"hasura-cli": "1.3.0-beta.2",
+		"hasura-cli": "1.3.0-beta.4",
 		"jest": "^26.1.0",
 		"msw": "^0.19.5",
 		"npm-run-all": "^4.1.5",
 		"styled-jsx": "^3.3.0",
 		"test-listen": "^1.1.0",
 		"ts-jest": "^26.1.1",
-		"typescript": "^3.9.6",
-		"url-loader": "^4.1.0"
+		"typescript": "^3.9.6"
 	},
 	"optionalDependencies": {
 		"@types/bcrypt": "^3.0.0",

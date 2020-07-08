@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useMutation, gql } from '@apollo/client'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
-import { Mutation_RootLoginArgs, Mutation_Root } from 'ts/graphql'
+import { Mutation_RootLoginArgs, Mutation_Root } from 'generated/schema'
 
 const LOGIN = gql`
 	mutation Login($username: String!, $password: String!) {
