@@ -7,7 +7,7 @@ import { Session } from 'generated/schema'
 import { useRouter } from 'next/router'
 
 export const QUERY = gql`
-  {
+  query GetSessions {
     session(order_by: {start: asc, end: asc, created_at: asc}) {
 			id
 			name

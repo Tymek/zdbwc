@@ -18,6 +18,7 @@ module.exports = {
 		'<rootDir>/src/**/*.{js,jsx,ts,tsx}',
 		'!**/*.d.ts',
 		'!**/node_modules/**',
+		'!**/tmp/**',
 		'!**/coverage/**',
 		'!**/config/**',
 		'!**/*.config.js',

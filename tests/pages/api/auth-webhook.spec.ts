@@ -1,6 +1,3 @@
-// const route:Handler = async (req, res) =>
-// 	Promise.resolve(handleResponse(res, { 'X-Hasura-Role': 'anonymous' }))
-
 import { setup, request, teardown, Server } from 'utils/test/server'
 import handler from 'pages/api/auth-webhook'
 

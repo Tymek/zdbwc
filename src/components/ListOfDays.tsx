@@ -7,7 +7,7 @@ import { Session } from 'generated/schema'
 import Link from 'next/link'
 
 export const QUERY = gql`
-  {
+  query GetSessionsTime {
     session {
       start
       end

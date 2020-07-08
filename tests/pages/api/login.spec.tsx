@@ -4,7 +4,6 @@ import database from 'utils/test/database'
 
 import route from 'pages/api/login'
 
-// jest.mock('utils/api/middleware')
 jest.mock('bcrypt', () => ({
 	default: jest.fn(),
 	compare: jest.fn(),
