@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     ports:
       - "3000:3000"
+      - "9229:9229"
     volumes:
       - ./:/srv
     working_dir: /srv
@@ -19,7 +20,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - /var/lib/postgresql/data
+      - ./tmp/data:/var/lib/postgresql/data
     tty: true
     environment:
       TERM: xterm-256color

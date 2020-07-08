@@ -13,6 +13,8 @@ services:
     labels:
       - traefik.enable=true
       - traefik.frontend.rule=Host:${DOMAIN},www.${DOMAIN}
+      - traefik.port=3000
+      - traefik.docker.network=wan
       - traefik.frontend.headers.SSLRedirect=true
       - traefik.frontend.headers.SSLHost=${DOMAIN}
       - traefik.frontend.headers.SSLForceHost=true
@@ -47,8 +49,10 @@ services:
     labels:
       - traefik.enable=true
       - traefik.frontend.rule=Host:api.${DOMAIN}
+      - traefik.port=8080
+      - traefik.docker.network=wan
       - traefik.frontend.headers.SSLRedirect=true
-      - traefik.frontend.headers.SSLHost=${DOMAIN}
+      - traefik.frontend.headers.SSLHost=api.${DOMAIN}
       - traefik.frontend.headers.SSLForceHost=true
 
 networks:

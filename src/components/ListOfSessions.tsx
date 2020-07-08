@@ -1,8 +1,10 @@
 import { useQuery, gql, useMutation, MutationUpdaterFn } from '@apollo/client'
 import moment from 'utils/moment'
+import AddIcon from 'assets/icons/add.svg'
 import TrashIcon from 'assets/icons/trash.svg'
 
 import { Session } from 'generated/schema'
+import { useRouter } from 'next/router'
 
 export const QUERY = gql`
   {
@@ -39,12 +41,13 @@ const updateCache: MutationUpdaterFn<{delete_session: { returning: Session[] } }
 	}
 }
 
-const ListOfDays: React.FunctionComponent = () => {
+const ListOfSessions: React.FunctionComponent = () => {
 	const { loading, error, data } = useQuery(QUERY)
-	const [remove, { loading: removing }] = useMutation(
+	const [remove, { loading: removing, error: mutationError }] = useMutation(
 		DELETE,
 		{ errorPolicy: 'all', update: updateCache }
 	)
+	const router = useRouter()
 
 	const onRemove = (id: string, name: string) => () =>
 		window.confirm(`Czy na pewno chcesz usunąć sesję? \n"${name}"`) // eslint-disable-line no-alert
@@ -52,6 +55,9 @@ const ListOfDays: React.FunctionComponent = () => {
 
 	if (loading) return <div>Wczytywanie&hellip; {/* TODO: loading state container */}</div>
 	if (error) return <div>TODO: error empty state</div>
+	if (mutationError) {
+		router.push('/login') // eslint-disable-line @typescript-eslint/no-floating-promises
+	}
 	const { session }: { session: Session[] } = data
 
 	return (
@@ -85,20 +91,33 @@ const ListOfDays: React.FunctionComponent = () => {
 					</div>
 				))}
 			</div>
+			<button
+				className="add"
+				type="button"
+				onClick={() => router.push('/panel/dodaj')}
+			>
+				<span className="icon">
+					<AddIcon width="1em" height="1em" className="icon" />
+				</span> Dodaj sesję
+			</button>
 			<style jsx>{`
 				.container {
 					flex-grow: 1;
 					padding: calc(var(--spacing) * 1) calc(var(--spacing) * 2);
 					background: var(--light);
 					color: var(--dark);
-				}
-
-				.list {
-					display: flex;
-					flex-direction: column;
 					width: 100%;
 					margin: 0 auto;
 					max-width: 1366px;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+				}
+
+				.list {
+					width: 100%;
+					display: flex;
+					flex-direction: column;
 				}
 
 				.session {
@@ -142,13 +161,15 @@ const ListOfDays: React.FunctionComponent = () => {
 					align-items: stretch;
 				}
 
+				.add {
+					font-size: 1.333333333em;
+					padding: var(--spacing) calc(var(--spacing) * 2);
+					margin-top: calc(var(--spacing) * 2);
+				}
+
 				.delete {
-					border: 1px solid var(--black);
-					border-radius: 0 var(--border-radius) var(--border-radius) 0;
-					background: var(--dark);
-					color: var(--light);
-					font-size: inherit;
 					padding: calc(var(--spacing) / 3) calc(var(--spacing) * 2);
+					border-radius: 0 var(--border-radius) var(--border-radius) 0;
 				}
 
 				.icon {
@@ -162,10 +183,10 @@ const ListOfDays: React.FunctionComponent = () => {
 
 					.delete {
 						position: absolute;
-						right: var(--spacing);
-						top: var(--spacing);
+						right: calc(var(--spacing) / 3 * 2);
+						top: calc(var(--spacing) / 3 * 2);
 						border-radius: var(--border-radius);
-						padding: calc(var(--spacing) / 2) calc(var(--spacing));
+						padding: calc(var(--spacing) / 3) calc(var(--spacing));
 					}
 				}
 			`}
@@ -174,4 +195,4 @@ const ListOfDays: React.FunctionComponent = () => {
 	)
 }
 
-export default ListOfDays
+export default ListOfSessions

@@ -1,0 +1,38 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+			// "type": "chrome",
+			"type": "pwa-chrome",
+      "request": "launch",
+      "name": "Launch Chrome",
+      "url": "http://localhost:3000",
+      "runtimeExecutable": "/usr/bin/chromium", // TODO: support Windows
+      "runtimeArgs": [
+        "--new-window",
+        "--user-data-dir=${workspaceFolder}/tmp/profile",
+        "--remote-debugging-port=9222",
+        "--allow-insecure-localhost",
+        "--unsafely-treat-insecure-origin-as-secure=http://localhost:3000",
+        "--disable-background-networking"
+			],
+			// "sourceMaps": true,
+      "webRoot": "${workspaceFolder}",
+      "trace": true,
+    },
+    { // TODO: not working with TS. maybe https://github.com/jasonwilliams/nextjs9-typescript-server-vscode-example
+      "type": "node",
+      "request": "attach",
+      "name": "Attach Next.js",
+			"skipFiles": ["<node_internals>/**"],
+			// "sourceMaps": true,
+      "port": 9229,
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug Next.js + Chrome",
+      "configurations": ["Attach Next.js", "Launch Chrome"],
+    }
+  ]
+}

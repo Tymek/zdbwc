@@ -10,6 +10,7 @@
 		"ms-azuretools.vscode-docker",
 		"pflannery.vscode-versionlens",
 		"redhat.vscode-yaml",
-		"tabnine.tabnine-vscode"
+		"tabnine.tabnine-vscode",
+		"ms-vscode.js-debug-nightly",
 	]
 }

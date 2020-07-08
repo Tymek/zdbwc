@@ -4,6 +4,11 @@ module.exports = {
 		hasuraActionSecret: process.env.HASURA_ACTION_SECRET,
 	},
 	webpack(config) {
+		// config.output = config.output || {}
+		// config.devtool = 'eval-source-map'
+		// config.output.devtoolModuleFilenameTemplate = function(info){
+		// 	return 'file:///'+encodeURI(info.absoluteResourcePath)
+		// }
 		config.module.rules.push({
 			test: /\.svg$/,
 			issuer: {

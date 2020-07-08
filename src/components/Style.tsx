@@ -87,6 +87,41 @@ const Style: React.FunctionComponent = () => (
 			flex-grow: 1;
 		}
 
+
+		input {
+			border-radius: var(--border-radius);
+			border: 1px solid var(--dark);
+			line-height: 1.5em;
+			font-size: 1em;
+			padding: 0.25em 0.5em;
+			box-shadow: none;
+			font-family: inherit;
+		}
+	
+		textarea {
+			border-radius: var(--border-radius);
+			border: 1px solid var(--dark);
+			/* line-height: 1.5em; */
+			font-size: 1em;
+			padding: 0.25em 0.5em;
+			box-shadow: none;
+			font-family: inherit;
+		}
+
+		button, input[type="submit"], input[type="reset"] {
+			font-family: inherit;
+			box-shadow: none;
+			border: 1px solid var(--dark);
+			border-radius: var(--border-radius);
+			background: var(--dark);
+			color: var(--white);
+			box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
+			line-height: 1.5em;
+			font-size: 1em;
+			padding: 0.25em 0.5em;
+			cursor: pointer;
+		}
+
 	`}
 	</style>
 )
