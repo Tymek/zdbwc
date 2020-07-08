@@ -10,6 +10,13 @@ services:
     networks:
       - wan
       - lan
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:${DOMAIN},www.${DOMAIN}
+      - traefik.frontend.headers.SSLRedirect=true
+      - traefik.frontend.headers.SSLHost=${DOMAIN}
+      - traefik.frontend.headers.SSLForceHost=true
+      - com.ouroboros.enable=true
 
   postgres:
     image: postgres:12
@@ -37,6 +44,12 @@ services:
     networks:
       - wan
       - lan
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:api.${DOMAIN}
+      - traefik.frontend.headers.SSLRedirect=true
+      - traefik.frontend.headers.SSLHost=${DOMAIN}
+      - traefik.frontend.headers.SSLForceHost=true
 
 networks:
   lan:

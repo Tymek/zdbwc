@@ -2,10 +2,25 @@ image: node:14
 before_script:
   - npm ci
 
+stages:
+  - test
+  - build
+  - deploy
+
 test:
+  stage: test
   script:
     - npm run test
 
 build:
+  stage: build
   script:
     - npm run build
+  needs: []
+  artifacts:
+    paths:
+      - .next
+
+include:
+  - project: 'Tymek/CI'
+    file: '/.dockerize.yml'
