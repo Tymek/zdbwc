@@ -1,3 +1,9 @@
-import { pathOr } from 'ramda'
+import { ActionBody } from 'ts/api'
+import { NextApiRequest } from 'next'
 
-export default pathOr({}, ['body', 'input'])
+const input = <Input>(req: NextApiRequest): Input => {
+	const body = req.body as ActionBody<Input>
+	return body?.input
+}
+
+export default input

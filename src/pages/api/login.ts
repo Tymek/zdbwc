@@ -15,8 +15,7 @@ const serializeCookie = (data: Mutation_RootLoginArgs): string => serialize('TOK
 })
 
 export const handler: RequestHandler<NextApiRequest, NextApiResponse> = async (req, res) => {
-	const args = input(req)
-	const { username, password } = args as Mutation_RootLoginArgs
+	const { username, password } = input<Mutation_RootLoginArgs>(req)
 
 	const data: User | null = await db.maybeOne(sql`
 		SELECT *

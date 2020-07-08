@@ -86,6 +86,17 @@ actions:
   permissions:
   - role: anonymous
   - role: manager
+- name: me
+  definition:
+    handler: http://next:3000/api/me
+    output_type: UserInfo
+    forward_client_headers: true
+    headers:
+    - name: x-hasura-action-secret
+      value_from_env: HASURA_ACTION_SECRET
+    type: query
+  permissions:
+  - role: manager
 custom_types:
   objects:
   - name: UserInfo
@@ -94,3 +105,12 @@ custom_types:
       type: uuid!
     - name: username
       type: String!
+    relationships:
+    - remote_table:
+        schema: public
+        name: user
+      name: user
+      type: object
+      field_mapping:
+        username: username
+        id: id

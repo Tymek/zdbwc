@@ -1,0 +1,7 @@
+- args:
+    action: me
+    definition:
+      select:
+        filter: {}
+    role: manager
+  type: create_action_permission

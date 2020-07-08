@@ -23,7 +23,7 @@ const user: RequestHandler<NextApiRequest, NextApiResponse> = async (req, res, n
 	}
 
 	const data: User | null = await db.maybeOne(sql`
-		SELECT *
+		SELECT id, password
 		FROM public.user
 		WHERE username = ${username}
 	`)
@@ -40,6 +40,7 @@ const user: RequestHandler<NextApiRequest, NextApiResponse> = async (req, res, n
 	return res.json({
 		'x-hasura-role': 'manager',
 		'x-hasura-user-id': `${data.id}`,
+		'x-hasura-user-username': `${username}`,
 	})
 }
 

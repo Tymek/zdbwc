@@ -8,24 +8,11 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  timestamptz: string;
   uuid: string;
+  timestamptz: string;
   json: any;
 };
 
-
-/** expression to compare columns of type json. All fields are combined with logical 'AND'. */
-export type Json_Comparison_Exp = {
-  _eq?: Maybe<Scalars['json']>;
-  _gt?: Maybe<Scalars['json']>;
-  _gte?: Maybe<Scalars['json']>;
-  _in?: Maybe<Array<Scalars['json']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['json']>;
-  _lte?: Maybe<Scalars['json']>;
-  _neq?: Maybe<Scalars['json']>;
-  _nin?: Maybe<Array<Scalars['json']>>;
-};
 
 /** mutation root */
 export type Mutation_Root = {
@@ -164,6 +151,8 @@ export enum Order_By {
 /** query root */
 export type Query_Root = {
   __typename?: 'query_root';
+  /** perform the action: "me" */
+  me?: Maybe<UserInfo>;
   /** fetch data from the table: "session" */
   session: Array<Session>;
   /** fetch aggregated fields from the table: "session" */
@@ -487,6 +476,8 @@ export type String_Comparison_Exp = {
 /** subscription root */
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** perform the action: "me" */
+  me?: Maybe<UserInfo>;
   /** fetch data from the table: "session" */
   session: Array<Session>;
   /** fetch aggregated fields from the table: "session" */
@@ -753,6 +744,7 @@ export enum User_Update_Column {
 export type UserInfo = {
   __typename?: 'UserInfo';
   id: Scalars['uuid'];
+  user?: Maybe<User>;
   username: Scalars['String'];
 };
 

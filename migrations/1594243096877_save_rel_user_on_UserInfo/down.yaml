@@ -1,0 +1,18 @@
+- args:
+    enums: []
+    input_objects: []
+    objects:
+    - description: null
+      fields:
+      - arguments: null
+        description: null
+        name: id
+        type: uuid!
+      - arguments: null
+        description: null
+        name: username
+        type: String!
+      name: UserInfo
+      relationships: null
+    scalars: []
+  type: set_custom_types
