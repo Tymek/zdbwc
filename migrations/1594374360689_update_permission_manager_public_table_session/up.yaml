@@ -1,0 +1,26 @@
+- args:
+    role: manager
+    table:
+      name: session
+      schema: public
+  type: drop_select_permission
+- args:
+    permission:
+      allow_aggregations: true
+      columns:
+      - description
+      - location
+      - name
+      - speaker
+      - created_at
+      - end
+      - start
+      - updated_at
+      - id
+      computed_fields: []
+      filter: {}
+    role: manager
+    table:
+      name: session
+      schema: public
+  type: create_select_permission

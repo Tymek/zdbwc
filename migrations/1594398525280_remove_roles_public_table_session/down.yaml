@@ -1,0 +1,65 @@
+- args:
+    permission:
+      filter: {}
+    role: manager
+    table:
+      name: session
+      schema: public
+  type: create_delete_permission
+- args:
+    permission:
+      backend_only: false
+      check: {}
+      columns:
+      - description
+      - location
+      - name
+      - speaker
+      - created_at
+      - end
+      - start
+      - updated_at
+      - id
+    role: manager
+    table:
+      name: session
+      schema: public
+  type: create_insert_permission
+- args:
+    permission:
+      allow_aggregations: true
+      columns:
+      - description
+      - location
+      - name
+      - speaker
+      - created_at
+      - end
+      - start
+      - updated_at
+      - id
+      computed_fields: []
+      filter: {}
+    role: manager
+    table:
+      name: session
+      schema: public
+  type: create_select_permission
+- args:
+    permission:
+      columns:
+      - description
+      - location
+      - name
+      - speaker
+      - created_at
+      - end
+      - start
+      - updated_at
+      - id
+      filter: {}
+    role: manager
+    table:
+      name: session
+      schema: public
+  type: create_update_permission

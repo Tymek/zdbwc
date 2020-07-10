@@ -1,0 +1,5 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE "public"."session" DROP COLUMN "description" CASCADE;
+  type: run_sql

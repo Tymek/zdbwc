@@ -1,0 +1,18 @@
+- args:
+    permission:
+      allow_aggregations: false
+      backend_only: false
+      columns:
+      - end
+      - id
+      - name
+      - speaker
+      - start
+      computed_fields: []
+      filter: {}
+      limit: null
+    role: anonymous
+    table:
+      name: session
+      schema: public
+  type: create_select_permission

@@ -1,0 +1,5 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: alter table "public"."session" rename column "begins_at" to "start";
+  type: run_sql

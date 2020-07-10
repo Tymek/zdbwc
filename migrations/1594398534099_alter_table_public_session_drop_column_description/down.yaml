@@ -1,0 +1,10 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE "public"."session" ADD COLUMN "description" text;
+  type: run_sql
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE "public"."session" ALTER COLUMN "description" DROP NOT NULL;
+  type: run_sql

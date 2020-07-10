@@ -1,0 +1,29 @@
+- args:
+    name: logout
+  type: drop_action
+- args:
+    enums: []
+    input_objects: []
+    objects:
+    - description: null
+      fields:
+      - arguments: null
+        description: null
+        name: id
+        type: uuid!
+      - arguments: null
+        description: null
+        name: username
+        type: String!
+      name: UserInfo
+      relationships:
+      - field_mapping:
+          id: id
+          username: username
+        name: user
+        remote_table:
+          name: user
+          schema: public
+        type: object
+    scalars: []
+  type: set_custom_types

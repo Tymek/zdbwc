@@ -1,0 +1,16 @@
+- args:
+    permission:
+      backend_only: false
+      columns:
+      - description
+      - location
+      - name
+      - session_id
+      - speaker
+      filter: {}
+      set: {}
+    role: manager
+    table:
+      name: topic
+      schema: public
+  type: create_update_permission

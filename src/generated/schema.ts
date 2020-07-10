@@ -10,6 +10,7 @@ export type Scalars = {
   Float: number;
   uuid: string;
   timestamptz: string;
+  timestamp: any;
   json: any;
 };
 
@@ -21,6 +22,10 @@ export type Mutation_Root = {
   delete_session?: Maybe<Session_Mutation_Response>;
   /** delete single row from the table: "session" */
   delete_session_by_pk?: Maybe<Session>;
+  /** delete data from the table: "topic" */
+  delete_topic?: Maybe<Topic_Mutation_Response>;
+  /** delete single row from the table: "topic" */
+  delete_topic_by_pk?: Maybe<Topic>;
   /** delete data from the table: "user" */
   delete_user?: Maybe<User_Mutation_Response>;
   /** delete single row from the table: "user" */
@@ -29,16 +34,26 @@ export type Mutation_Root = {
   insert_session?: Maybe<Session_Mutation_Response>;
   /** insert a single row into the table: "session" */
   insert_session_one?: Maybe<Session>;
+  /** insert data into the table: "topic" */
+  insert_topic?: Maybe<Topic_Mutation_Response>;
+  /** insert a single row into the table: "topic" */
+  insert_topic_one?: Maybe<Topic>;
   /** insert data into the table: "user" */
   insert_user?: Maybe<User_Mutation_Response>;
   /** insert a single row into the table: "user" */
   insert_user_one?: Maybe<User>;
   /** perform the action: "login" */
   login?: Maybe<UserInfo>;
+  /** perform the action: "logout" */
+  logout?: Maybe<UserInfo>;
   /** update data of the table: "session" */
   update_session?: Maybe<Session_Mutation_Response>;
   /** update single row of the table: "session" */
   update_session_by_pk?: Maybe<Session>;
+  /** update data of the table: "topic" */
+  update_topic?: Maybe<Topic_Mutation_Response>;
+  /** update single row of the table: "topic" */
+  update_topic_by_pk?: Maybe<Topic>;
   /** update data of the table: "user" */
   update_user?: Maybe<User_Mutation_Response>;
   /** update single row of the table: "user" */
@@ -54,6 +69,18 @@ export type Mutation_RootDelete_SessionArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Session_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_TopicArgs = {
+  where: Topic_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Topic_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -81,6 +108,20 @@ export type Mutation_RootInsert_SessionArgs = {
 export type Mutation_RootInsert_Session_OneArgs = {
   object: Session_Insert_Input;
   on_conflict?: Maybe<Session_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_TopicArgs = {
+  objects: Array<Topic_Insert_Input>;
+  on_conflict?: Maybe<Topic_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Topic_OneArgs = {
+  object: Topic_Insert_Input;
+  on_conflict?: Maybe<Topic_On_Conflict>;
 };
 
 
@@ -116,6 +157,20 @@ export type Mutation_RootUpdate_SessionArgs = {
 export type Mutation_RootUpdate_Session_By_PkArgs = {
   _set?: Maybe<Session_Set_Input>;
   pk_columns: Session_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_TopicArgs = {
+  _set?: Maybe<Topic_Set_Input>;
+  where: Topic_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Topic_By_PkArgs = {
+  _set?: Maybe<Topic_Set_Input>;
+  pk_columns: Topic_Pk_Columns_Input;
 };
 
 
@@ -159,6 +214,12 @@ export type Query_Root = {
   session_aggregate: Session_Aggregate;
   /** fetch data from the table: "session" using primary key columns */
   session_by_pk?: Maybe<Session>;
+  /** fetch data from the table: "topic" */
+  topic: Array<Topic>;
+  /** fetch aggregated fields from the table: "topic" */
+  topic_aggregate: Topic_Aggregate;
+  /** fetch data from the table: "topic" using primary key columns */
+  topic_by_pk?: Maybe<Topic>;
   /** fetch data from the table: "user" */
   user: Array<User>;
   /** fetch aggregated fields from the table: "user" */
@@ -195,6 +256,32 @@ export type Query_RootSession_By_PkArgs = {
 
 
 /** query root */
+export type Query_RootTopicArgs = {
+  distinct_on?: Maybe<Array<Topic_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Topic_Order_By>>;
+  where?: Maybe<Topic_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootTopic_AggregateArgs = {
+  distinct_on?: Maybe<Array<Topic_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Topic_Order_By>>;
+  where?: Maybe<Topic_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootTopic_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** query root */
 export type Query_RootUserArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -222,15 +309,37 @@ export type Query_RootUser_By_PkArgs = {
 /** columns and relationships of "session" */
 export type Session = {
   __typename?: 'session';
+  begins_at: Scalars['timestamp'];
   created_at: Scalars['timestamptz'];
-  description?: Maybe<Scalars['String']>;
-  end: Scalars['timestamptz'];
+  ends_at?: Maybe<Scalars['timestamp']>;
   id: Scalars['uuid'];
-  location?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   speaker?: Maybe<Scalars['String']>;
-  start: Scalars['timestamptz'];
+  /** An array relationship */
+  topics: Array<Topic>;
+  /** An aggregated array relationship */
+  topics_aggregate: Topic_Aggregate;
   updated_at: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "session" */
+export type SessionTopicsArgs = {
+  distinct_on?: Maybe<Array<Topic_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Topic_Order_By>>;
+  where?: Maybe<Topic_Bool_Exp>;
+};
+
+
+/** columns and relationships of "session" */
+export type SessionTopics_AggregateArgs = {
+  distinct_on?: Maybe<Array<Topic_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Topic_Order_By>>;
+  where?: Maybe<Topic_Bool_Exp>;
 };
 
 /** aggregated selection of "session" */
@@ -273,14 +382,13 @@ export type Session_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Session_Bool_Exp>>>;
   _not?: Maybe<Session_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Session_Bool_Exp>>>;
+  begins_at?: Maybe<Timestamp_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  description?: Maybe<String_Comparison_Exp>;
-  end?: Maybe<Timestamptz_Comparison_Exp>;
+  ends_at?: Maybe<Timestamp_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
-  location?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   speaker?: Maybe<String_Comparison_Exp>;
-  start?: Maybe<Timestamptz_Comparison_Exp>;
+  topics?: Maybe<Topic_Bool_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -292,68 +400,59 @@ export enum Session_Constraint {
 
 /** input type for inserting data into table "session" */
 export type Session_Insert_Input = {
+  begins_at?: Maybe<Scalars['timestamp']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  end?: Maybe<Scalars['timestamptz']>;
+  ends_at?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['uuid']>;
-  location?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   speaker?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['timestamptz']>;
+  topics?: Maybe<Topic_Arr_Rel_Insert_Input>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** aggregate max on columns */
 export type Session_Max_Fields = {
   __typename?: 'session_max_fields';
+  begins_at?: Maybe<Scalars['timestamp']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  end?: Maybe<Scalars['timestamptz']>;
+  ends_at?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['uuid']>;
-  location?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   speaker?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['timestamptz']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** order by max() on columns of table "session" */
 export type Session_Max_Order_By = {
+  begins_at?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  end?: Maybe<Order_By>;
+  ends_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  location?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   speaker?: Maybe<Order_By>;
-  start?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type Session_Min_Fields = {
   __typename?: 'session_min_fields';
+  begins_at?: Maybe<Scalars['timestamp']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  end?: Maybe<Scalars['timestamptz']>;
+  ends_at?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['uuid']>;
-  location?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   speaker?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['timestamptz']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** order by min() on columns of table "session" */
 export type Session_Min_Order_By = {
+  begins_at?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  end?: Maybe<Order_By>;
+  ends_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  location?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   speaker?: Maybe<Order_By>;
-  start?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -381,14 +480,13 @@ export type Session_On_Conflict = {
 
 /** ordering options when selecting data from "session" */
 export type Session_Order_By = {
+  begins_at?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  end?: Maybe<Order_By>;
+  ends_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  location?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   speaker?: Maybe<Order_By>;
-  start?: Maybe<Order_By>;
+  topics_aggregate?: Maybe<Topic_Aggregate_Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -400,56 +498,46 @@ export type Session_Pk_Columns_Input = {
 /** select columns of table "session" */
 export enum Session_Select_Column {
   /** column name */
+  BeginsAt = 'begins_at',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
-  Description = 'description',
-  /** column name */
-  End = 'end',
+  EndsAt = 'ends_at',
   /** column name */
   Id = 'id',
-  /** column name */
-  Location = 'location',
   /** column name */
   Name = 'name',
   /** column name */
   Speaker = 'speaker',
-  /** column name */
-  Start = 'start',
   /** column name */
   UpdatedAt = 'updated_at'
 }
 
 /** input type for updating data in table "session" */
 export type Session_Set_Input = {
+  begins_at?: Maybe<Scalars['timestamp']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  end?: Maybe<Scalars['timestamptz']>;
+  ends_at?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['uuid']>;
-  location?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   speaker?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['timestamptz']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** update columns of table "session" */
 export enum Session_Update_Column {
   /** column name */
+  BeginsAt = 'begins_at',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
-  Description = 'description',
-  /** column name */
-  End = 'end',
+  EndsAt = 'ends_at',
   /** column name */
   Id = 'id',
-  /** column name */
-  Location = 'location',
   /** column name */
   Name = 'name',
   /** column name */
   Speaker = 'speaker',
-  /** column name */
-  Start = 'start',
   /** column name */
   UpdatedAt = 'updated_at'
 }
@@ -484,6 +572,12 @@ export type Subscription_Root = {
   session_aggregate: Session_Aggregate;
   /** fetch data from the table: "session" using primary key columns */
   session_by_pk?: Maybe<Session>;
+  /** fetch data from the table: "topic" */
+  topic: Array<Topic>;
+  /** fetch aggregated fields from the table: "topic" */
+  topic_aggregate: Topic_Aggregate;
+  /** fetch data from the table: "topic" using primary key columns */
+  topic_by_pk?: Maybe<Topic>;
   /** fetch data from the table: "user" */
   user: Array<User>;
   /** fetch aggregated fields from the table: "user" */
@@ -520,6 +614,32 @@ export type Subscription_RootSession_By_PkArgs = {
 
 
 /** subscription root */
+export type Subscription_RootTopicArgs = {
+  distinct_on?: Maybe<Array<Topic_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Topic_Order_By>>;
+  where?: Maybe<Topic_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootTopic_AggregateArgs = {
+  distinct_on?: Maybe<Array<Topic_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Topic_Order_By>>;
+  where?: Maybe<Topic_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootTopic_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** subscription root */
 export type Subscription_RootUserArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -545,6 +665,20 @@ export type Subscription_RootUser_By_PkArgs = {
 };
 
 
+/** expression to compare columns of type timestamp. All fields are combined with logical 'AND'. */
+export type Timestamp_Comparison_Exp = {
+  _eq?: Maybe<Scalars['timestamp']>;
+  _gt?: Maybe<Scalars['timestamp']>;
+  _gte?: Maybe<Scalars['timestamp']>;
+  _in?: Maybe<Array<Scalars['timestamp']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['timestamp']>;
+  _lte?: Maybe<Scalars['timestamp']>;
+  _neq?: Maybe<Scalars['timestamp']>;
+  _nin?: Maybe<Array<Scalars['timestamp']>>;
+};
+
+
 /** expression to compare columns of type timestamptz. All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
   _eq?: Maybe<Scalars['timestamptz']>;
@@ -557,6 +691,233 @@ export type Timestamptz_Comparison_Exp = {
   _neq?: Maybe<Scalars['timestamptz']>;
   _nin?: Maybe<Array<Scalars['timestamptz']>>;
 };
+
+/** columns and relationships of "topic" */
+export type Topic = {
+  __typename?: 'topic';
+  created_at: Scalars['timestamptz'];
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['uuid'];
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  session: Session;
+  session_id: Scalars['uuid'];
+  speaker?: Maybe<Scalars['String']>;
+  updated_at: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "topic" */
+export type Topic_Aggregate = {
+  __typename?: 'topic_aggregate';
+  aggregate?: Maybe<Topic_Aggregate_Fields>;
+  nodes: Array<Topic>;
+};
+
+/** aggregate fields of "topic" */
+export type Topic_Aggregate_Fields = {
+  __typename?: 'topic_aggregate_fields';
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Topic_Max_Fields>;
+  min?: Maybe<Topic_Min_Fields>;
+};
+
+
+/** aggregate fields of "topic" */
+export type Topic_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Topic_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "topic" */
+export type Topic_Aggregate_Order_By = {
+  count?: Maybe<Order_By>;
+  max?: Maybe<Topic_Max_Order_By>;
+  min?: Maybe<Topic_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "topic" */
+export type Topic_Arr_Rel_Insert_Input = {
+  data: Array<Topic_Insert_Input>;
+  on_conflict?: Maybe<Topic_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "topic". All fields are combined with a logical 'AND'. */
+export type Topic_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Topic_Bool_Exp>>>;
+  _not?: Maybe<Topic_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Topic_Bool_Exp>>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  description?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  location?: Maybe<String_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  session?: Maybe<Session_Bool_Exp>;
+  session_id?: Maybe<Uuid_Comparison_Exp>;
+  speaker?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "topic" */
+export enum Topic_Constraint {
+  /** unique or primary key constraint */
+  TopicPkey = 'topic_pkey'
+}
+
+/** input type for inserting data into table "topic" */
+export type Topic_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  session?: Maybe<Session_Obj_Rel_Insert_Input>;
+  session_id?: Maybe<Scalars['uuid']>;
+  speaker?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Topic_Max_Fields = {
+  __typename?: 'topic_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  session_id?: Maybe<Scalars['uuid']>;
+  speaker?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "topic" */
+export type Topic_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  description?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  location?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  session_id?: Maybe<Order_By>;
+  speaker?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Topic_Min_Fields = {
+  __typename?: 'topic_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  session_id?: Maybe<Scalars['uuid']>;
+  speaker?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "topic" */
+export type Topic_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  description?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  location?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  session_id?: Maybe<Order_By>;
+  speaker?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "topic" */
+export type Topic_Mutation_Response = {
+  __typename?: 'topic_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Topic>;
+};
+
+/** input type for inserting object relation for remote table "topic" */
+export type Topic_Obj_Rel_Insert_Input = {
+  data: Topic_Insert_Input;
+  on_conflict?: Maybe<Topic_On_Conflict>;
+};
+
+/** on conflict condition type for table "topic" */
+export type Topic_On_Conflict = {
+  constraint: Topic_Constraint;
+  update_columns: Array<Topic_Update_Column>;
+  where?: Maybe<Topic_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "topic" */
+export type Topic_Order_By = {
+  created_at?: Maybe<Order_By>;
+  description?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  location?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  session?: Maybe<Session_Order_By>;
+  session_id?: Maybe<Order_By>;
+  speaker?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "topic" */
+export type Topic_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "topic" */
+export enum Topic_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Location = 'location',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  SessionId = 'session_id',
+  /** column name */
+  Speaker = 'speaker',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "topic" */
+export type Topic_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  session_id?: Maybe<Scalars['uuid']>;
+  speaker?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** update columns of table "topic" */
+export enum Topic_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Location = 'location',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  SessionId = 'session_id',
+  /** column name */
+  Speaker = 'speaker',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
 
 /** columns and relationships of "user" */
 export type User = {

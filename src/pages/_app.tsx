@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { Provider as GraphQLProvider } from 'utils/GraphQL'
 import Layout from 'components/Layout'
 import Style from 'components/Style'
+import { pathOr } from 'ramda'
 
 const MyApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }) => (
 	<GraphQLProvider pageProps={pageProps}>
@@ -15,10 +16,16 @@ const MyApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }) => (
 			/>
 			{/* TODO: local font */}
 		</Head>
-		<Layout>
-			<Style />
-			<Component {...pageProps} />
-		</Layout>
+		{
+			pathOr(true, ['defaultLayout'], pageProps) ? (
+				<Layout>
+					<Style />
+					<Component {...pageProps} />
+				</Layout>
+			) : (
+				<Component {...pageProps} />
+			)
+		}
 	</GraphQLProvider>
 )
 

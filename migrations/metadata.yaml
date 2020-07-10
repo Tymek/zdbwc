@@ -3,6 +3,67 @@ tables:
 - table:
     schema: public
     name: session
+  array_relationships:
+  - name: topics
+    using:
+      foreign_key_constraint_on:
+        column: session_id
+        table:
+          schema: public
+          name: topic
+  insert_permissions:
+  - role: manager
+    permission:
+      check: {}
+      columns:
+      - ends_at
+      - name
+      - speaker
+      - begins_at
+      backend_only: false
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - ends_at
+      - id
+      - name
+      - speaker
+      - begins_at
+      filter: {}
+  - role: manager
+    permission:
+      columns:
+      - name
+      - speaker
+      - created_at
+      - ends_at
+      - begins_at
+      - updated_at
+      - id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: manager
+    permission:
+      columns:
+      - ends_at
+      - name
+      - speaker
+      - begins_at
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: manager
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: topic
+  object_relationships:
+  - name: session
+    using:
+      foreign_key_constraint_on: session_id
   insert_permissions:
   - role: manager
     permission:
@@ -11,26 +72,19 @@ tables:
       - description
       - location
       - name
+      - session_id
       - speaker
-      - created_at
-      - end
-      - start
-      - updated_at
-      - id
       backend_only: false
   select_permissions:
   - role: anonymous
     permission:
       columns:
-      - created_at
       - description
-      - end
       - id
       - location
       - name
+      - session_id
       - speaker
-      - start
-      - updated_at
       filter: {}
   - role: manager
     permission:
@@ -40,11 +94,11 @@ tables:
       - name
       - speaker
       - created_at
-      - end
-      - start
       - updated_at
       - id
+      - session_id
       filter: {}
+      allow_aggregations: true
   update_permissions:
   - role: manager
     permission:
@@ -52,12 +106,8 @@ tables:
       - description
       - location
       - name
+      - session_id
       - speaker
-      - created_at
-      - end
-      - start
-      - updated_at
-      - id
       filter: {}
       check: null
   delete_permissions:
@@ -85,6 +135,18 @@ actions:
     kind: synchronous
   permissions:
   - role: anonymous
+  - role: manager
+- name: logout
+  definition:
+    handler: http://next:3000/api/logout
+    output_type: UserInfo
+    forward_client_headers: true
+    headers:
+    - name: x-hasura-action-secret
+      value_from_env: HASURA_ACTION_SECRET
+    type: mutation
+    kind: synchronous
+  permissions:
   - role: manager
 - name: me
   definition:

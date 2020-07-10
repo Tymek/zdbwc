@@ -1,0 +1,21 @@
+- args:
+    permission:
+      allow_aggregations: true
+      backend_only: false
+      columns:
+      - description
+      - location
+      - name
+      - speaker
+      - created_at
+      - updated_at
+      - id
+      - session_id
+      computed_fields: []
+      filter: {}
+      limit: null
+    role: manager
+    table:
+      name: topic
+      schema: public
+  type: create_select_permission

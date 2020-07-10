@@ -1,0 +1,17 @@
+- args:
+    permission:
+      allow_upsert: true
+      backend_only: false
+      check: {}
+      columns:
+      - description
+      - location
+      - name
+      - session_id
+      - speaker
+      set: {}
+    role: manager
+    table:
+      name: topic
+      schema: public
+  type: create_insert_permission
