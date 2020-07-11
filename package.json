@@ -19,8 +19,10 @@
 	},
 	"dependencies": {
 		"@apollo/client": "^3.0.0-rc.10",
+		"@date-io/moment": "^1.x",
 		"@material-ui/core": "^4.11.0",
 		"@material-ui/icons": "^4.9.1",
+		"@material-ui/pickers": "^3.2.10",
 		"@material-ui/styles": "^4.10.0",
 		"bcrypt": "^5.0.0",
 		"cookie": "^0.4.1",
@@ -39,6 +41,7 @@
 		"ra-data-hasura-graphql": "^0.1.12",
 		"ra-i18n-polyglot": "^3.7.0",
 		"ra-language-polish": "^1.2.0",
+		"ra-ui-materialui": "^3.7.1",
 		"ramda": "^0.27.0",
 		"react": "^16.13.1",
 		"react-admin": "^3.7.0",

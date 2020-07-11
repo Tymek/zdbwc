@@ -16,6 +16,7 @@ const messages = {
 				...polishMessages.ra.action,
 				unselect: 'Odznacz',
 				create: 'Dodaj',
+				cancel: 'Anuluj',
 			},
 		},
 		resources: {

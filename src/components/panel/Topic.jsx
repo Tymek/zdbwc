@@ -23,6 +23,10 @@ const formatSession = record => `${
 	record['ends_at']
 		? `-${moment(record['ends_at']).format('HH:mm')}`
 		: ''
+}${
+	record['name']
+		? ` – ${record['name']}`
+		: ''
 }`
 
 export const TopicList = props => (

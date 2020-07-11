@@ -2,7 +2,7 @@ import { useQuery, gql } from '@apollo/client'
 import moment from 'utils/moment'
 import Error from 'pages/_error'
 import { Session as SessionType } from 'generated/schema'
-import TimeRange from 'utils/moment/Range'
+import TimeRange from 'utils/moment/TimeRange'
 import { useMedia } from 'utils/hooks'
 import SessionItem from './Session'
 

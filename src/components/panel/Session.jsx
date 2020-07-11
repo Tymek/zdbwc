@@ -5,7 +5,6 @@ import {
 	Edit,
 	SimpleForm,
 	TextInput,
-	DateTimeInput,
 	Create,
 	Show,
 	TabbedShowLayout,
@@ -21,7 +20,7 @@ import { Link } from 'react-router-dom'
 import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes'
 import { withStyles } from '@material-ui/core/styles'
 import moment from 'utils/moment'
-import { RelativeTimeField, DateTimeField, TimeField } from './fields'
+import { RelativeTimeField, DateTimeField, TimeField, DateTimeInput } from './fields'
 
 const styles = {
 	button: {
@@ -69,8 +68,8 @@ export const SessionCreate = props => (
 	<Create {...props} title="Dodaj sesję">
 		<SimpleForm>
 			<TextInput source="name" />
-			<DateTimeInput type="datetime-local" source="begins_at" required />
-			<DateTimeInput type="datetime-local" source="ends_at" />
+			<DateTimeInput source="begins_at" required />
+			<DateTimeInput source="ends_at" />
 			<TextInput source="speaker" />
 		</SimpleForm>
 	</Create>

@@ -1,6 +1,6 @@
 import { useQuery, gql } from '@apollo/client'
 import moment from 'utils/moment'
-import TimeRange from 'utils/moment/Range'
+import TimeRange from 'utils/moment/TimeRange'
 import Error from 'pages/_error'
 
 import { Session } from 'generated/schema'
@@ -9,8 +9,8 @@ import Link from 'next/link'
 export const QUERY = gql`
   query GetSessionsTime {
     session {
-      start
-      end
+      begins_at
+      ends_at
     }
   }
 `
@@ -42,7 +42,7 @@ const ListOfDays: React.FunctionComponent = () => {
 	const days = [...(
 		new Set<string>(
 			session.flatMap(
-				({ start, end }) => (new TimeRange(start, end)).getDays()
+				({ begins_at, ends_at }) => (new TimeRange(begins_at, ends_at)).getDays()
 			).sort()
 		)
 	)]
