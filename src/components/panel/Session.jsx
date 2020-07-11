@@ -14,6 +14,7 @@ import {
 	EditButton,
 	TopToolbar,
 	Button,
+	required,
 	// Link,
 } from 'react-admin'
 import { Link } from 'react-router-dom'
@@ -57,7 +58,7 @@ export const SessionEdit = props => (
 	<Edit {...props} title="Edytuj sesję">
 		<SimpleForm>
 			<TextInput source="name" />
-			<DateTimeInput source="begins_at" required />
+			<DateTimeInput source="begins_at" validate={[required()]} />
 			<DateTimeInput source="ends_at" />
 			<TextInput source="speaker" />
 		</SimpleForm>
@@ -68,7 +69,7 @@ export const SessionCreate = props => (
 	<Create {...props} title="Dodaj sesję">
 		<SimpleForm>
 			<TextInput source="name" />
-			<DateTimeInput source="begins_at" required />
+			<DateTimeInput source="begins_at" validate={[required()]} />
 			<DateTimeInput source="ends_at" />
 			<TextInput source="speaker" />
 		</SimpleForm>

@@ -8,11 +8,11 @@ import {
 	RichTextField,
 	Edit,
 	SimpleForm,
-	// DateInput,
 	TextInput,
 	ReferenceInput,
 	SelectInput,
 	Create,
+	required,
 } from 'react-admin'
 import moment from 'utils/moment'
 import { RelativeTimeField } from './fields'
@@ -61,7 +61,7 @@ export const TopicList = props => (
 	</List>
 )
 
-export const TopicEdit = props => (
+export const TopicEdit = props => ( // TODO: redirect to session?
 	<Edit {...props}>
 		<SimpleForm>
 			<ReferenceInput
@@ -98,6 +98,7 @@ export const TopicCreate = props => {
 					label="sesja"
 					source="session_id"
 					reference="session"
+					validate={[required()]}
 					required
 					disabled={!!sessionId}
 					sort={{

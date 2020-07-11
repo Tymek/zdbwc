@@ -27,22 +27,21 @@ export const TimeField = ({ record, source, emptyText = '' }) => (
 	}</span>
 )
 
-export const DateTimeInput = ({
-	label,
-	resource,
-	source,
-	helperText,
-}) => {
+export const DateTimeInput = ({ ...props }) => {
+	const {
+		label,
+		resource,
+		source,
+		helperText,
+	} = props
+
 	const translate = useTranslate()
 	const {
 		id,
 		input,
 		isRequired,
 		meta: {error, touched},
-	} = useInput({
-		resource,
-		source,
-	})
+	} = useInput(props)
 	const onChange = value => {
 		if (Date.parse(value)) {
 			const parsed = moment(value).format('YYYY-MM-DDTHH:mm:ss')
@@ -68,6 +67,7 @@ export const DateTimeInput = ({
 				resource={resource}
 				isRequired={isRequired}
 			/>}
+			error={!!(touched && error)}
 			helperText={
 				<InputHelperText
 					touched={touched}
@@ -77,6 +77,7 @@ export const DateTimeInput = ({
 			}
 			clearLabel={translate('ra.action.clear_input_value')}
 			cancelLabel={translate('ra.action.cancel')}
+			// required={isRequired}
 		/>
 	)
 }
