@@ -14,9 +14,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
 				href={`${
 					'https://fonts.googleapis.com/css2?'
 				}${
-					'family=Roboto:wght@300;700&amp;'
+					'family=Roboto:wght@300;700&'
 				}${
-					'family=Roboto+Mono:wght@300&amp;'
+					'family=Roboto+Mono:wght@300&'
 				}${
 					'display=swap'
 				}`}

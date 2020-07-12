@@ -5,9 +5,9 @@ query Schedule {
 		begins_at
 		ends_at
 		speaker
-		topics(order_by: {name: asc}) {
+		topics(order_by: {subject: asc}) {
 			id
-			name
+			subject
 			description
 			speaker
 			location

@@ -18,7 +18,8 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 
 	const { data } = useQuery<{ opened_day_id?: OpenedDayId }>(OPENED_DAY_ID)
 	const [openDay] = useMutation<{ opened_day_id?: OpenedDayId }>(OPEN_DAY)
-	const openedDayId = data?.opened_day_id
+	const isOpen = data?.opened_day_id === id
+	const hasSession = sessions && sessions.length > 0
 	const onHeaderClick = async () => {
 		await openDay({
 			variables: { id },
@@ -30,21 +31,41 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 		<div>
 			<header>
 				<button type="button" onClick={onHeaderClick}>
-					{label}
+					<h2><time dateTime={moment(id).format('YYYY-MM-DD')}>{label}</time></h2>
 				</button>
 			</header>
-			{ openedDayId === id && sessions.map(props => (
-				<SessionComponent key={props.id} {...props} />
-			))}
-
+			{
+				(hasSession && isOpen) ? (
+					<main>
+						{ sessions.map(props => (
+							<SessionComponent key={props.id} {...props} />
+						))}
+					</main>
+				) : null
+			}
 			<style jsx>{`
 				header {
 					background: var(--dark);
 					color: var(--light);
 					font-weight: var(--font-weight-bold);
-					padding: var(--spacing);
-					border: 1px solid var(--white);
-					margin-bottom: -1px;
+					border: var(--border-weight) solid var(--white);
+					border-bottom: 0;
+				}
+
+				h2 {
+					font-size: inherit;
+					font-weight: var(--font-weight-bold);
+					color: var(--light);
+					text-align: center;
+					margin: 0;
+				}
+
+				header button {
+					all: inherit;
+					cursor: pointer;
+					border: none;
+					width: 100%;
+					padding: calc(var(--spacing) * 1.5);
 				}
 			`}
 			</style>

@@ -16,14 +16,12 @@ const Layout: React.FC = ({ children }) => (
 				flex-grow: 1;
 				flex-direction: column;
 				margin: 0 auto;
-				max-width: 1020px;
+				max-width: 60rem;
 				width: 100%;
-				padding: 0 calc(var(--spacing) * 2);
 			}
 
 			header {
-				padding: calc(var(--spacing) * 3) 0 calc(var(--spacing) * 2.5);
-				/* background: var(--dark); */
+				padding: calc(var(--spacing) * 3) calc(var(--spacing) * 3) calc(var(--spacing) * 2.5);
 				display: flex;
 			}
 

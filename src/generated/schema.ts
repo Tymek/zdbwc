@@ -699,11 +699,11 @@ export type Topic = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   location?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
   /** An object relationship */
   session: Session;
   session_id: Scalars['uuid'];
   speaker?: Maybe<Scalars['String']>;
+  subject?: Maybe<Scalars['String']>;
   updated_at: Scalars['timestamptz'];
 };
 
@@ -751,10 +751,10 @@ export type Topic_Bool_Exp = {
   description?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   location?: Maybe<String_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
   session?: Maybe<Session_Bool_Exp>;
   session_id?: Maybe<Uuid_Comparison_Exp>;
   speaker?: Maybe<String_Comparison_Exp>;
+  subject?: Maybe<String_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -770,10 +770,10 @@ export type Topic_Insert_Input = {
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   location?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
   session?: Maybe<Session_Obj_Rel_Insert_Input>;
   session_id?: Maybe<Scalars['uuid']>;
   speaker?: Maybe<Scalars['String']>;
+  subject?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -784,9 +784,9 @@ export type Topic_Max_Fields = {
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   location?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
   session_id?: Maybe<Scalars['uuid']>;
   speaker?: Maybe<Scalars['String']>;
+  subject?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -796,9 +796,9 @@ export type Topic_Max_Order_By = {
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   location?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
   session_id?: Maybe<Order_By>;
   speaker?: Maybe<Order_By>;
+  subject?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -809,9 +809,9 @@ export type Topic_Min_Fields = {
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   location?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
   session_id?: Maybe<Scalars['uuid']>;
   speaker?: Maybe<Scalars['String']>;
+  subject?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -821,9 +821,9 @@ export type Topic_Min_Order_By = {
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   location?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
   session_id?: Maybe<Order_By>;
   speaker?: Maybe<Order_By>;
+  subject?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -855,10 +855,10 @@ export type Topic_Order_By = {
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   location?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
   session?: Maybe<Session_Order_By>;
   session_id?: Maybe<Order_By>;
   speaker?: Maybe<Order_By>;
+  subject?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -878,11 +878,11 @@ export enum Topic_Select_Column {
   /** column name */
   Location = 'location',
   /** column name */
-  Name = 'name',
-  /** column name */
   SessionId = 'session_id',
   /** column name */
   Speaker = 'speaker',
+  /** column name */
+  Subject = 'subject',
   /** column name */
   UpdatedAt = 'updated_at'
 }
@@ -893,9 +893,9 @@ export type Topic_Set_Input = {
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   location?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
   session_id?: Maybe<Scalars['uuid']>;
   speaker?: Maybe<Scalars['String']>;
+  subject?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -910,11 +910,11 @@ export enum Topic_Update_Column {
   /** column name */
   Location = 'location',
   /** column name */
-  Name = 'name',
-  /** column name */
   SessionId = 'session_id',
   /** column name */
   Speaker = 'speaker',
+  /** column name */
+  Subject = 'subject',
   /** column name */
   UpdatedAt = 'updated_at'
 }

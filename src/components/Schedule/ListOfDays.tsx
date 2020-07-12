@@ -53,7 +53,7 @@ const filterSessionsByDay = (day: string) => ({ begins_at, ends_at }: Session) =
 const ListOfDays: React.FC = () => {
 	const { loading, error, data } = useQuery(SCHEDULE)
 
-	if (loading) return <div>Wczytywanie&hellip;</div>
+	if (loading) return <div style={{ textAlign: 'center' }}>Wczytywanie&hellip;</div>
 	if (error) return <Error statusCode={503} title="Nie dodano agendy 😶" />
 	if (!data) return null
 	const { session }: { session: Session[] } = data
@@ -70,6 +70,9 @@ const ListOfDays: React.FC = () => {
 				))}
 			</div>
 			<style jsx>{`
+				.grid {
+					border-bottom: var(--border-weight) solid var(--white);
+				}
 			`}
 			</style>
 		</div>

@@ -1,44 +1,37 @@
-import { useState } from 'react'
 import { Session } from 'ts/schema'
+import Topic from './components/Topic'
+import Header from './components/Header'
+import Speaker from './components/Speaker'
 
-const SessionComponent: React.FC<Session> = ({ id, name, topics }) => {
-	const [isOpen, setIsOpen] = useState(false)
-	const hasTopics = topics && topics.length > 0
-	const onOpen = () => {
-		setIsOpen(hasTopics && !isOpen)
-	}
+const SessionComponent: React.FC<Session> = ({ name, topics, speaker, begins_at, ends_at }) => {
+	const isWorkshop = !!name && /warsztaty?/i.test(name)
 
 	return (
-		<div>
-			<h2>
-				{
-					hasTopics
-						? <button className="toggle" type="button" onClick={onOpen}>{name}</button>
-						: name
-				}
-			</h2>
-			{ isOpen ? (
-				<pre>{JSON.stringify(topics, null, 2)}</pre>
-			) : null}
-			<hr />
+		<section>
+			<header>
+				<Header
+					name={name}
+					begins_at={begins_at}
+					ends_at={ends_at}
+					speaker={speaker}
+				/>
+			</header>
+			{/* <main>
+				{ topics.map(props => <Topic {...props} isWorkshop={isWorkshop} />) }
+				{ speaker && <div className="spacing"><Speaker>{speaker}</Speaker></div>}
+			</main> */}
 			<style jsx>{`
-				h2 {
-					font-size: inherit;
-					font-weight: var(--font-weight-bold);
-					background: var(--primary);
-				}
+					.name {
+						display: block;
+						padding: var(--spacing);
+					}
 
-				.toggle {
-					all: inherit;
-					cursor: pointer;
-				}
-
-				.toggle::after {
-					content: '>';
-				}
-			`}
+					.spacing {
+						padding-bottom: calc(var(--spacing) * 4);
+					}
+				`}
 			</style>
-		</div>
+		</section>
 	)
 }
 

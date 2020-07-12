@@ -8,13 +8,17 @@ const Style: React.FC = () => (
 			--primary: #009ed1;
 			--secondary: #f29146;
 			--tertiary: #8bc751;
+			--muted: hsla(0, 0%, 90%, 1);
+			--gray: hsl(0, 0%, 50%, 1);
 			--primary-darken: hsl(195, 100%, 31%);
 			--primary-lighten: hsl(195, 100%, 61%);
 			--spacing: 0.5rem;
+			--border-weight: 1px;
 
 			--font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, "Fira Sans",
 				"Droid Sans", "Helvetica Neue", Helvetica, sans-serif;
 			--font-family-mono: "Roboto Mono", Consolas, monospace;
+			--font-weight-thin: 200;
 			--font-weight-light: 300;
 			--font-weight-bold: 600;
 

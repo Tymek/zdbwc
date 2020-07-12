@@ -71,7 +71,7 @@ tables:
       columns:
       - description
       - location
-      - name
+      - subject
       - session_id
       - speaker
       backend_only: false
@@ -82,7 +82,7 @@ tables:
       - description
       - id
       - location
-      - name
+      - subject
       - session_id
       - speaker
       filter: {}
@@ -91,7 +91,7 @@ tables:
       columns:
       - description
       - location
-      - name
+      - subject
       - speaker
       - created_at
       - updated_at
@@ -105,7 +105,7 @@ tables:
       columns:
       - description
       - location
-      - name
+      - subject
       - session_id
       - speaker
       filter: {}
