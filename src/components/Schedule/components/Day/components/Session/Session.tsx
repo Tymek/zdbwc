@@ -16,10 +16,10 @@ const SessionComponent: React.FC<Session> = ({ name, topics, speaker, begins_at,
 					speaker={speaker}
 				/>
 			</header>
-			{/* <main>
+			<main>
 				{ topics.map(props => <Topic {...props} isWorkshop={isWorkshop} />) }
 				{ speaker && <div className="spacing"><Speaker>{speaker}</Speaker></div>}
-			</main> */}
+			</main>
 			<style jsx>{`
 					.name {
 						display: block;
