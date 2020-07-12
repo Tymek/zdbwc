@@ -1,12 +1,13 @@
 import { MockedProvider } from '@apollo/client/testing'
 import { render } from 'utils/test'
 
-import ListOfDays, { QUERY } from 'components/Schedule/ListOfDays'
+import ListOfDays from 'components/Schedule/ListOfDays'
+import SCHEDULE from 'components/Schedule/gql/schedule.gql'
 
 const mocks = [
 	{
 		request: {
-			query: QUERY,
+			query: SCHEDULE,
 			variables: {
 				name: 'Buck',
 			},

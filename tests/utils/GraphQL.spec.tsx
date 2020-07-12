@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { graphql } from 'msw'
