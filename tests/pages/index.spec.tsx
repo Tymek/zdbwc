@@ -2,8 +2,8 @@ import { render } from 'utils/test'
 
 import Index from 'pages'
 
-jest.mock('utils/GraphQL')
-jest.mock('components/ListOfDays', () => () => <></>)
+jest.mock('utils/graphql')
+jest.mock('components/Schedule/ListOfDays', () => () => <></>)
 
 it('loads and displays greeting', () => {
 	const result = render(<Index />)
