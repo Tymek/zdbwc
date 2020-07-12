@@ -5,7 +5,7 @@ import { graphql } from 'msw'
 import server from 'utils/test/mockServer'
 
 import { render, waitFor, screen } from 'utils/test'
-import { Provider as GraphQLProvider } from 'utils/GraphQL'
+import { Provider as GraphQLProvider } from 'utils/graphql'
 
 type ItemType = {
 	id: string | number
@@ -44,7 +44,7 @@ it("renders on it's own", () => {
 })
 
 it('loads queries', async () => {
-	const MockQueryComponent: React.FunctionComponent = () => {
+	const MockQueryComponent: React.FC = () => {
 		const { error, data } = useQuery<ItemsData>(GET_ITEMS)
 
 		if (error) {

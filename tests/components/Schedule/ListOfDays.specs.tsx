@@ -1,7 +1,7 @@
 import { MockedProvider } from '@apollo/client/testing'
 import { render } from 'utils/test'
 
-import ListOfDays, { QUERY } from 'components/ListOfDays'
+import ListOfDays, { QUERY } from 'components/Schedule/ListOfDays'
 
 const mocks = [
 	{

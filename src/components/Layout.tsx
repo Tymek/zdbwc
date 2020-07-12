@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-const Layout: React.FunctionComponent = ({ children }) => (
+const Layout: React.FC = ({ children }) => (
 	<div className="container">
 		<header>
 			<Link href="/">
@@ -15,18 +15,21 @@ const Layout: React.FunctionComponent = ({ children }) => (
 				display: flex;
 				flex-grow: 1;
 				flex-direction: column;
+				margin: 0 auto;
+				max-width: 1020px;
+				width: 100%;
+				padding: 0 calc(var(--spacing) * 2);
 			}
 
 			header {
-				padding: calc(var(--spacing) * 3) calc(var(--spacing) * 4) calc(var(--spacing) * 2.5);
-				background: var(--dark);
+				padding: calc(var(--spacing) * 3) 0 calc(var(--spacing) * 2.5);
+				/* background: var(--dark); */
 				display: flex;
 			}
 
 			header img {
 				width: 5rem;
 				cursor: pointer;
-				margin: 0 auto;
 			}
 		`}
 		</style>

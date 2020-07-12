@@ -1,0 +1,3 @@
+query OpenedDayId {
+	opened_day_id @client
+}

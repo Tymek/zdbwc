@@ -18,7 +18,7 @@ import i18nProvider from 'utils/panel/i18nProvider'
 import { SessionList, SessionEdit, SessionCreate, SessionShow } from 'components/panel/Session'
 import { TopicList, TopicEdit, TopicCreate } from 'components/panel/Topic'
 
-const ReactAdmin = Admin as React.FunctionComponent<AdminProps>
+const ReactAdmin = Admin as React.FC<AdminProps>
 
 const App = (): JSX.Element => {
 	const client = useApolloClient()

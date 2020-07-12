@@ -2,11 +2,11 @@
 import { AuthProvider } from 'ra-core'
 import { ApolloClient } from '@apollo/client'
 
-import { Mutation_RootLoginArgs } from 'generated/schema'
+import { Mutation_RootLoginArgs } from 'ts/schema'
 
-import LOGIN from 'graphql/login.gql'
-import ME from 'graphql/me.gql'
-import LOGOUT from 'graphql/logout.gql'
+import LOGIN from 'gql/login.gql'
+import ME from 'gql/me.gql'
+import LOGOUT from 'gql/logout.gql'
 
 const authProvider = ({ client }: { client: ApolloClient<any> }): AuthProvider => {
 	let permissions: boolean | undefined

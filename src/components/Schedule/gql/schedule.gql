@@ -1,0 +1,16 @@
+query Schedule {
+  session(order_by: {begins_at: asc, ends_at: asc}) {
+		id
+		name
+		begins_at
+		ends_at
+		speaker
+		topics(order_by: {name: asc}) {
+			id
+			name
+			description
+			speaker
+			location
+		}
+	}
+}

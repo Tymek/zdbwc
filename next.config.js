@@ -4,11 +4,13 @@ module.exports = {
 		hasuraActionSecret: process.env.HASURA_ACTION_SECRET,
 	},
 	webpack(config) {
+		// TODO: debugger;
 		// config.output = config.output || {}
 		// config.devtool = 'eval-source-map'
 		// config.output.devtoolModuleFilenameTemplate = function(info){
 		// 	return 'file:///'+encodeURI(info.absoluteResourcePath)
 		// }
+		config.devtool = 'eval-source-map'
 
 		config.module.rules.push({
 			test: /\.(graphql|gql)$/,

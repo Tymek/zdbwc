@@ -36,6 +36,7 @@ module.exports = {
 		scalars: {
 			uuid: 'string',
 			timestamptz: 'string',
+			timestamp: 'string',
 		},
 	},
 }

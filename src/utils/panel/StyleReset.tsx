@@ -1,4 +1,4 @@
-const Style: React.FunctionComponent = () => (
+const Style: React.FC = () => (
 	<style global jsx>{`
 		/* Reset */
 

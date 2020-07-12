@@ -1,6 +1,6 @@
 import connect, { ActionError } from 'utils/api/connect'
 import { NextApiResponse, NextApiRequest } from 'next'
-import { UserInfo } from 'generated/schema'
+import { UserInfo } from 'ts/schema'
 import { ActionBody } from 'ts/api'
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {

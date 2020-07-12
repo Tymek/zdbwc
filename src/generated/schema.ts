@@ -10,7 +10,7 @@ export type Scalars = {
   Float: number;
   uuid: string;
   timestamptz: string;
-  timestamp: any;
+  timestamp: string;
   json: any;
 };
 

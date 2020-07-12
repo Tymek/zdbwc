@@ -1,17 +1,22 @@
-const Style: React.FunctionComponent = () => (
+const Style: React.FC = () => (
 	<style global jsx>{`
 		:root {
 			--white: #ffffff;
-			--light: hsla(0, 0%, 90%, 1);
-			--black: hsla(0, 0%, 10%, 0.9);
-			--accent: #009ed1;
-			--dark: #041A33;
-			--accent-darken: hsl(195, 100%, 31%);
-			--accent-lighten: hsl(195, 100%, 61%);
+			--light: hsla(0, 0%, 95%, 1);
+			--black: #000000;
+			--dark: hsla(0, 0%, 10%, 1);
+			--primary: #009ed1;
+			--secondary: #f29146;
+			--tertiary: #8bc751;
+			--primary-darken: hsl(195, 100%, 31%);
+			--primary-lighten: hsl(195, 100%, 61%);
 			--spacing: 0.5rem;
 
-			--font: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-				Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+			--font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, "Fira Sans",
+				"Droid Sans", "Helvetica Neue", Helvetica, sans-serif;
+			--font-family-mono: "Roboto Mono", Consolas, monospace;
+			--font-weight-light: 300;
+			--font-weight-bold: 600;
 
 			--border-radius: 0.1875rem;
 
@@ -32,8 +37,8 @@ const Style: React.FunctionComponent = () => (
 			min-height: 100%;
 			background: var(--light);
 			color: var(--black);
-			font-family: var(--font);
-			font-weight: 300;
+			font-family: var(--font-family);
+			font-weight: var(--font-weight-light);
 		}
 
 		html,
@@ -57,25 +62,25 @@ const Style: React.FunctionComponent = () => (
 
 		*::-moz-selection {
 			color: var(--light);
-			background: var(--accent);
+			background: var(--primary);
 		}
 		*::selection {
 			color: var(--light);
-			background: var(--accent);
+			background: var(--primary);
 		}
 
 		a {
-			color: var(--accent);
+			color: var(--primary);
 			transition: all 150ms ease-out;
 		}
 
 		a:hover,
 		a:focus {
-			color: var(--accent-lighten);
+			color: var(--primary-lighten);
 		}
 
 		a:visited {
-			color: var(--accent-darken);
+			color: var(--primary-darken);
 		}
 
 
@@ -87,7 +92,7 @@ const Style: React.FunctionComponent = () => (
 			flex-grow: 1;
 		}
 
-
+/* 
 		input {
 			border-radius: var(--border-radius);
 			border: 1px solid var(--dark);
@@ -101,7 +106,6 @@ const Style: React.FunctionComponent = () => (
 		textarea {
 			border-radius: var(--border-radius);
 			border: 1px solid var(--dark);
-			/* line-height: 1.5em; */
 			font-size: 1em;
 			padding: 0.25em 0.5em;
 			box-shadow: none;
@@ -120,7 +124,7 @@ const Style: React.FunctionComponent = () => (
 			font-size: 1em;
 			padding: 0.25em 0.5em;
 			cursor: pointer;
-		}
+		} */
 
 	`}
 	</style>

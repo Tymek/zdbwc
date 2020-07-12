@@ -1,5 +1,5 @@
 import { serialize, CookieSerializeOptions } from 'cookie'
-import { Mutation_RootLoginArgs } from 'generated/schema'
+import { Mutation_RootLoginArgs } from 'ts/schema'
 import moment from 'utils/moment'
 
 const createLoginCookie = (data?: Mutation_RootLoginArgs, overrides?: CookieSerializeOptions): string => serialize(

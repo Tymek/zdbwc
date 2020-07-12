@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { UserInfo } from 'generated/schema'
+import { UserInfo } from 'ts/schema'
 import { ActionBody } from 'ts/api'
 import connect, { RequestHandler, ActionError } from 'utils/api/connect'
 import createLoginCookie from 'utils/api/helpers/createLoginCookie'
