@@ -2,16 +2,16 @@ const Style: React.FC = () => (
 	<style global jsx>{`
 		:root {
 			--white: #ffffff;
-			--light: hsla(0, 0%, 95%, 1);
+			--light: #f2f2f2;
 			--black: #000000;
-			--dark: hsla(0, 0%, 10%, 1);
+			--dark: #1a1a1a;
 			--primary: #009ed1;
 			--secondary: #f29146;
 			--tertiary: #8bc751;
-			--muted: hsla(0, 0%, 90%, 1);
-			--gray: hsl(0, 0%, 50%, 1);
-			--primary-darken: hsl(195, 100%, 31%);
-			--primary-lighten: hsl(195, 100%, 61%);
+			--muted: #e6e6e6;
+			--gray: #808080;
+			--primary-darken: #00779e;
+			--primary-lighten: #38cdff;
 			--spacing: 0.5rem;
 			--border-weight: 1px;
 

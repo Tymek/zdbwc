@@ -1,20 +1,22 @@
 import Chevron from 'assets/icons/chevron.svg'
+import { motion } from 'framer-motion'
 
 const Toggle: React.FC<{
 	isOpen?: boolean;
 }> = ({ isOpen }) => (
-	<div className="toggle" style={{ transform: `rotate(${isOpen ? -90 : -270}deg)` }}>
+	<motion.div
+		style={{
+			width: 'calc(var(--spacing) * 2)',
+			height: 'calc(var(--spacing) * 2)',
+		}}
+		animate={isOpen ? 'open' : 'collapsed'}
+		variants={{
+			open: { transform: 'rotate(-90deg)' },
+			collapsed: { transform: 'rotate(-270deg)' },
+		}}
+	>
 		<Chevron width="1em" height="1em" />
-		<style jsx>{`
-			.toggle {
-				width: calc(var(--spacing) * 2 + 1em);
-				height: calc(var(--spacing) * 2 + 1em);
-				padding: var(--spacing);
-				transition: transform 120ms ease-out;
-			}
-		`}
-		</style>
-	</div>
+	</motion.div>
 )
 
 export default Toggle

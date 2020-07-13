@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+
 import { Topic } from 'ts/schema'
 import { sierotki } from 'utils/typografia'
 import Toggle from 'components/Toggle'
@@ -28,20 +30,36 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 					{
 						hasDetails ? (
 							<button className="dropdown" type="button" onClick={toggleCollapse}>
-								<h4>{subject}</h4>
-								<Toggle isOpen={isOpen} />
+								<div className="dropdown-unfocus" tabIndex={-1}>
+									<h4>{subject}</h4>
+									<Toggle isOpen={isOpen} />
+								</div>
 							</button>
 						) : <h4>{subject}</h4>
 					}
 				</header>
-				{
-					isOpen ? (
-						<main>
-							{speaker && <Speaker>{speaker}</Speaker>}
-							{description && <p className="description">{sierotki(description)}</p>}
-						</main>
-					) : null
-				}
+				<AnimatePresence initial={false}>
+					{
+						isOpen ? (
+							<motion.main
+								key="content"
+								initial="collapsed"
+								animate="open"
+								exit="collapsed"
+								variants={{
+									open: { height: 'auto' },
+									collapsed: { height: 0 },
+								}}
+								style={{ width: '100%', overflow: 'hidden' }}
+								// transition={{ type: 'spring', staggerChildren: 0.05 }}
+							>
+								{speaker && <Speaker>{speaker}</Speaker>}
+								{description && <p className="description">{sierotki(description)}</p>}
+								{!!(speaker || description) && <div className="main-padding" />}
+							</motion.main>
+						) : null
+					}
+				</AnimatePresence>
 			</div>
 			<style jsx>{`
 				article {
@@ -70,27 +88,36 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 
 				.dropdown {
 					all: inherit;
+					cursor: pointer;
+					width: 100%;
+					padding: var(--spacing);
+				}
+
+				.dropdown:focus {
+					outline-style: auto;
+					outline-width: 0.125rem;
+					outline-color: var(--dark);
+				}
+
+				.dropdown-unfocus {
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
-					cursor: pointer;
-					width: 100%;
+					outline: none;
 				}
 
 				h4 {
 					margin: 0;
-					padding: var(--spacing);
-				}
-
-				main {
-					width: 100%;
-					padding-bottom: calc(var(--spacing) * 2);
 				}
 
 				.description {
 					margin: 0;
 					padding: var(--spacing);
 					padding-top: 0;
+				}
+
+				.main-padding {
+					height: 'calc(var(--spacing) * 2)' 
 				}
 			`}
 			</style>

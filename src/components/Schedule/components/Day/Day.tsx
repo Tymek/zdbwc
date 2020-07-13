@@ -36,9 +36,10 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 				animate={{ backgroundColor: isOpen ? 'var(--gray)' : 'var(--dark)' }}
 				style={{ border: 'var(--border-weight) solid var(--white)', borderBottom: 'none' }}
 			>
-				{/* <header className={isOpen ? 'open' : ''}> */}
-				<button type="button" onClick={onHeaderClick}>
-					<h2><time dateTime={moment(id).format('YYYY-MM-DD')}>{label}</time></h2>
+				<button type="button" className={isOpen ? 'open' : ''} onClick={onHeaderClick}>
+					<div className="button-unfocus" tabIndex={-1}>
+						<h2><time dateTime={moment(id).format('YYYY-MM-DD')}>{label}</time></h2>
+					</div>
 				</button>
 			</motion.header>
 			<AnimatePresence initial={false}>
@@ -54,10 +55,17 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 								collapsed: { height: 0 },
 							}}
 							style={{ overflow: 'hidden' }}
-							transition={{ type: 'spring', mass: 2, damping: 50, stiffness: 150 }}
+							transition={{ type: 'spring', mass: 2, damping: 50, stiffness: 150, staggerChildren: 0.05 }}
 						>
 							{ sessions.map(props => (
-								<SessionComponent key={props.id} {...props} />
+								<motion.div
+									variants={{
+										open: { opacity: 1 },
+										collapsed: { opacity: 0 },
+									}}
+								>
+									<SessionComponent key={props.id} {...props} />
+								</motion.div>
 							))}
 						</motion.main>
 					)
@@ -67,8 +75,8 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 				h2 {
 					font-size: inherit;
 					font-weight: var(--font-weight-bold);
-					color: var(--light);
 					text-align: center;
+					color: inherit;
 					margin: 0;
 				}
 
@@ -77,7 +85,20 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 					cursor: pointer;
 					border: none;
 					width: 100%;
+					outline: 0;
+					color: var(--light);
+				}
+
+				.button-unfocus {
 					padding: calc(var(--spacing) * 1.5);
+					outline: 0;
+				}
+
+				button:focus .button-unfocus {
+					outline-style: auto;
+					outline-color: var(--primary);
+					outline-width: 0.125em;
+					color: var(--primary);
 				}
 			`}
 			</style>
