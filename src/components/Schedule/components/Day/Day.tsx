@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { useApolloClient, useQuery, useMutation } from '@apollo/client'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import moment from 'utils/moment'
 import { Session } from 'ts/schema'
@@ -29,29 +30,40 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 
 	return (
 		<div>
-			<header>
+			<motion.header
+				className="header"
+				initial={false}
+				animate={{ backgroundColor: isOpen ? 'var(--gray)' : 'var(--dark)' }}
+				style={{ border: 'var(--border-weight) solid var(--white)', borderBottom: 'none' }}
+			>
+				{/* <header className={isOpen ? 'open' : ''}> */}
 				<button type="button" onClick={onHeaderClick}>
 					<h2><time dateTime={moment(id).format('YYYY-MM-DD')}>{label}</time></h2>
 				</button>
-			</header>
-			{
-				(hasSession && isOpen) ? (
-					<main>
-						{ sessions.map(props => (
-							<SessionComponent key={props.id} {...props} />
-						))}
-					</main>
-				) : null
-			}
-			<style jsx>{`
-				header {
-					background: var(--dark);
-					color: var(--light);
-					font-weight: var(--font-weight-bold);
-					border: var(--border-weight) solid var(--white);
-					border-bottom: 0;
+			</motion.header>
+			<AnimatePresence initial={false}>
+				{
+					(hasSession && isOpen) && (
+						<motion.main
+							key="content"
+							initial="collapsed"
+							animate="open"
+							exit="collapsed"
+							variants={{
+								open: { height: 'auto' },
+								collapsed: { height: 0 },
+							}}
+							style={{ overflow: 'hidden' }}
+							transition={{ type: 'spring', mass: 2, damping: 50, stiffness: 150 }}
+						>
+							{ sessions.map(props => (
+								<SessionComponent key={props.id} {...props} />
+							))}
+						</motion.main>
+					)
 				}
-
+			</AnimatePresence>
+			<style jsx>{`
 				h2 {
 					font-size: inherit;
 					font-weight: var(--font-weight-bold);
@@ -60,7 +72,7 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 					margin: 0;
 				}
 
-				header button {
+				button {
 					all: inherit;
 					cursor: pointer;
 					border: none;

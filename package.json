@@ -27,6 +27,7 @@
 		"bcrypt": "^5.0.0",
 		"cookie": "^0.4.1",
 		"cross-env": "^7.0.2",
+		"framer-motion": "^1.11.1",
 		"graphql": "^14.7.0",
 		"graphql-tag": "^2.10.3",
 		"helmet": "^3.23.3",
