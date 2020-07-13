@@ -1,7 +1,6 @@
 import polishMessages from 'ra-language-polish'
 import polyglotI18nProvider from 'ra-i18n-polyglot'
 
-const name = 'nazwa'
 const speaker = 'mówca'
 const updated_at = 'zaktualizowano'
 const created_at = 'utworzono'
@@ -23,7 +22,8 @@ const messages = {
 			session: {
 				name: 'Sesja |||| Sesje',
 				fields: {
-					name,
+					name: 'nazwa',
+					subject: 'temat',
 					speaker,
 					begins_at: 'od',
 					ends_at: 'do',
@@ -35,7 +35,7 @@ const messages = {
 			topic: {
 				name: 'Temat |||| Tematy',
 				fields: {
-					name,
+					subject: 'temat',
 					speaker,
 					session: 'sesja',
 					description: 'opis',

@@ -136,7 +136,7 @@ export const SessionShow = props => (
 			<Tab label="tematy" path="topics">
 				<ReferenceManyField reference="topic" target="session_id" addLabel={false}>
 					<Datagrid>
-						<TextField source="name" emptyText="&mdash;" />
+						<TextField source="subject" emptyText="&mdash;" />
 						<TextField source="speaker" emptyText="&mdash;" />
 						<TextField source="location" emptyText="&mdash;" />
 						<EditButton />

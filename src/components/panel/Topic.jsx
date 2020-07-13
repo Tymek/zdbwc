@@ -45,7 +45,7 @@ export const TopicList = props => (
 				</SimpleShowLayout>
 			}
 		>
-			<TextField source="name" />
+			<TextField source="subject" />
 			<ReferenceField
 				label="sesja"
 				source="session_id"
@@ -75,7 +75,7 @@ export const TopicEdit = props => ( // TODO: redirect to session?
 			>
 				<SelectInput optionText={formatSession} />
 			</ReferenceInput>
-			<TextInput source="name" />
+			<TextInput source="subject" />
 			<TextInput source="speaker" />
 			<TextInput source="location" />
 			<TextInput source="description" multiline />
@@ -108,7 +108,7 @@ export const TopicCreate = props => {
 				>
 					<SelectInput optionText={formatSession} />
 				</ReferenceInput>
-				<TextInput source="name" />
+				<TextInput source="subject" />
 				<TextInput source="speaker" />
 				<TextInput source="location" />
 				<TextInput source="description" multiline />
