@@ -1,16 +1,27 @@
-module.exports = {
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
+const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin')
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+	enabled: process.env.ANALYZE === 'true',
+})
+
+const options = {
 	poweredByHeader: false,
 	serverRuntimeConfig: {
 		hasuraActionSecret: process.env.HASURA_ACTION_SECRET,
 	},
 	webpack(config) {
-		// TODO: debugger;
-		// config.output = config.output || {}
-		// config.devtool = 'eval-source-map'
-		// config.output.devtoolModuleFilenameTemplate = function(info){
-		// 	return 'file:///'+encodeURI(info.absoluteResourcePath)
-		// }
 		config.devtool = 'eval-source-map'
+
+		config.plugins = config.plugins || []
+		config.plugins.push(
+			new MomentLocalesPlugin({
+				localesToKeep: ['en', 'pl'],
+			}),
+			new MomentTimezoneDataPlugin({
+				startYear: 2020,
+				matchCountries: ['PL'],
+			})
+		)
 
 		config.module.rules.push({
 			test: /\.(graphql|gql)$/,
@@ -38,3 +49,5 @@ module.exports = {
 		return config
 	},
 }
+
+module.exports = withBundleAnalyzer(options)

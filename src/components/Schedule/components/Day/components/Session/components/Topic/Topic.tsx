@@ -51,7 +51,6 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 									collapsed: { height: 0 },
 								}}
 								style={{ width: '100%', overflow: 'hidden' }}
-								// transition={{ type: 'spring', staggerChildren: 0.05 }}
 							>
 								{speaker && <Speaker>{speaker}</Speaker>}
 								{description && <p className="description">{sierotki(description)}</p>}
@@ -90,7 +89,6 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 					all: inherit;
 					cursor: pointer;
 					width: 100%;
-					padding: var(--spacing);
 				}
 
 				.dropdown:focus {
@@ -104,6 +102,7 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 					justify-content: space-between;
 					align-items: center;
 					outline: none;
+					padding: var(--spacing);
 				}
 
 				h4 {

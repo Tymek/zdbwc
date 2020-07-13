@@ -17,7 +17,7 @@ const SessionComponent: React.FC<Session> = ({ name, topics, speaker, begins_at,
 				/>
 			</header>
 			<main>
-				{ topics.map(props => <Topic {...props} isWorkshop={isWorkshop} />) }
+				{ topics.map(props => <Topic key={props.id} {...props} isWorkshop={isWorkshop} />) }
 				{ speaker && <div className="spacing"><Speaker>{speaker}</Speaker></div>}
 			</main>
 			<style jsx>{`

@@ -1,11 +1,13 @@
 import { useQuery } from '@apollo/client'
 import moment from 'utils/moment'
+import dynamic from 'next/dynamic'
 import TimeRange from 'utils/moment/TimeRange'
 import Error from 'pages/_error'
 
 import { Session } from 'ts/schema'
-import Day from './components/Day'
 import SCHEDULE from './gql/schedule.gql'
+
+const Day = dynamic(() => import('./components/Day'))
 
 const getDays = (session: Session[]): string[] => [...(
 	new Set<string>(
