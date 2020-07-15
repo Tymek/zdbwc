@@ -1,5 +1,5 @@
 import { setup, request, teardown, Server } from 'utils/test/server'
-import handler from 'pages/api'
+import handler from 'pages/api/healthcheck'
 
 let server: Server
 let url: Promise<string>

@@ -59,6 +59,7 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 						>
 							{ sessions.map(props => (
 								<motion.div
+									key={props.id}
 									variants={{
 										open: { opacity: 1 },
 										collapsed: { opacity: 0 },
