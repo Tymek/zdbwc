@@ -16,6 +16,7 @@ module.exports = {
 				'./src/utils/test/**/*',
 			],
 		}],
+		'no-void': ['off'],
 		'react/static-property-placement': ['off'],
 		'@typescript-eslint/no-unsafe-assignment': ['off'],
 		'jsx-a11y/anchor-is-valid': ['off'], // next/link

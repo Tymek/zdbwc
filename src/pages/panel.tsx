@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { GetStaticProps } from 'next'
 
-const AdminPanel = dynamic(() => import('components/panel'), { ssr: false })
+const AdminPanel = dynamic(() => import(/* webpackChunkName: "admin-panel" */ 'components/panel'), { ssr: false })
 
 const App: React.FC = () => (
 	<AdminPanel />

@@ -38,4 +38,6 @@ yarn-error.log*
 
 # Codegen
 /graphql.schema.json
-/src/ts/graphql.tsx
+
+# Service worker
+/public/generated/**/*

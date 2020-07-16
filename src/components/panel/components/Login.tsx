@@ -19,7 +19,7 @@ const theme = createMuiTheme({
 })
 
 const MyLoginPage = (): JSX.Element => (
-	<Login backgroundImage="/most.jpg" theme={theme} />
+	<Login backgroundImage="/static/panel/most.jpg" theme={theme} />
 )
 
 export default MyLoginPage

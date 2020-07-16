@@ -1,5 +1,8 @@
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin')
+const { InjectManifest } = require('workbox-webpack-plugin')
+const { DefinePlugin } = require('webpack')
+const { version } = require('./package.json')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: process.env.ANALYZE === 'true',
 })
@@ -9,8 +12,8 @@ const options = {
 	serverRuntimeConfig: {
 		hasuraActionSecret: process.env.HASURA_ACTION_SECRET,
 	},
-	webpack(config) {
-		config.devtool = 'eval-source-map'
+	webpack(config, { isServer }) {
+		config.devtool = process.env.NODE_ENV !== 'production' ? 'eval-source-map' : false
 
 		config.plugins = config.plugins || []
 		config.plugins.push(
@@ -20,8 +23,31 @@ const options = {
 			new MomentTimezoneDataPlugin({
 				startYear: 2020,
 				matchCountries: ['PL'],
+			}),
+			new DefinePlugin({
+				'process.env.BUILD': Date.now(),
+				'process.env.VERSION': version,
 			})
 		)
+
+		if (!isServer) {
+			config.plugins.push(
+				new InjectManifest({
+					swSrc: './src/service/sw.ts',
+					swDest: '../public/generated/sw.js',
+					modifyURLPrefix: {
+						'/static/': '/_next/static/',
+					},
+					include: [
+						/^static\//,
+					],
+					exclude: [
+						/admin-panel/,
+						new RegExp('^static/pages/panel(?:/|-)'),
+					],
+				})
+			)
+		}
 
 		config.module.rules.push({
 			test: /\.(graphql|gql)$/,

@@ -4,7 +4,7 @@ const Layout: React.FC = ({ children }) => (
 	<div className="container">
 		<header>
 			<Link href="/">
-				<img src="/logo.svg" alt="logo" />
+				<img src="/static/logo.svg" alt="logo" />
 			</Link>
 		</header>
 
