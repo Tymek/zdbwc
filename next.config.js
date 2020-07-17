@@ -1,10 +1,3 @@
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
-const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin')
-const { InjectManifest } = require('workbox-webpack-plugin')
-const { DefinePlugin } = require('webpack')
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-	enabled: process.env.ANALYZE === 'true',
-})
 const { version } = require('./package.json')
 
 const options = {
@@ -13,6 +6,11 @@ const options = {
 		hasuraActionSecret: process.env.HASURA_ACTION_SECRET,
 	},
 	webpack(config, { isServer }) {
+		const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
+		const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin')
+		const { InjectManifest } = require('workbox-webpack-plugin')
+		const { DefinePlugin } = require('webpack')
+
 		config.devtool = process.env.NODE_ENV !== 'production' ? 'eval-source-map' : false
 
 		config.plugins = config.plugins || []
@@ -76,4 +74,7 @@ const options = {
 	},
 }
 
-module.exports = withBundleAnalyzer(options)
+module.exports = process.env.ANALYZE === 'true' ? (() => {
+	const withBundleAnalyzer = require('@next/bundle-analyzer')({})
+	return withBundleAnalyzer(options)
+})() : options
