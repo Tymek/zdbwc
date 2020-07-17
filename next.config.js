@@ -2,10 +2,10 @@ const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin')
 const { InjectManifest } = require('workbox-webpack-plugin')
 const { DefinePlugin } = require('webpack')
-const { version } = require('./package.json')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: process.env.ANALYZE === 'true',
 })
+const { version } = require('./package.json')
 
 const options = {
 	poweredByHeader: false,
@@ -25,12 +25,12 @@ const options = {
 				matchCountries: ['PL'],
 			}),
 			new DefinePlugin({
-				'process.env.BUILD': Date.now(),
-				'process.env.VERSION': version,
+				'process.env.BUILD': JSON.stringify(Date.now()),
+				'process.env.VERSION': JSON.stringify(version),
 			})
 		)
 
-		if (!isServer) {
+		if (!isServer && process.env.NODE_ENV === 'production') {
 			config.plugins.push(
 				new InjectManifest({
 					swSrc: './src/service/sw.ts',

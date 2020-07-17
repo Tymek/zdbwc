@@ -8,6 +8,8 @@ import { pathOr } from 'ramda'
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
 	<GraphQLProvider pageProps={pageProps}>
 		<Head>
+			<title key="title">zdbwc</title>
+			<link rel="icon" href="/favicon.ico" />
 			<link
 				href={`${
 					'https://fonts.googleapis.com/css2?'

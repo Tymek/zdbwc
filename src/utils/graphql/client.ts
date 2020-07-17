@@ -14,7 +14,7 @@ let uri = ssrMode
 	? 'http://hasura:8080/v1/graphql'
 	: `https://api.${window.location.hostname}/v1/graphql`
 
-if (process.env.NODE_ENV === 'development' && !ssrMode) {
+if (!ssrMode && (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost')) {
 	uri = `http://${window.location.hostname}:8080/v1/graphql`
 }
 

@@ -1,5 +1,7 @@
 import { Login } from 'react-admin'
 import { createMuiTheme } from '@material-ui/core'
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/extensions
+import background from 'url-loader!../assets/most.jpg'
 
 const theme = createMuiTheme({
 	palette: {
@@ -19,7 +21,7 @@ const theme = createMuiTheme({
 })
 
 const MyLoginPage = (): JSX.Element => (
-	<Login backgroundImage="/static/panel/most.jpg" theme={theme} />
+	<Login backgroundImage={background} theme={theme} />
 )
 
 export default MyLoginPage

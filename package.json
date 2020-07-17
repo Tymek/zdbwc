@@ -17,7 +17,7 @@
 		"console": "hasura console",
 		"test:eslint": "eslint . --ext .js,.jsx,.ts,.tsx,.json --ignore-path .gitignore",
 		"test:jest": "cross-env NODE_ENV=test BABEL_ENV=test jest . --ci --collectCoverage",
-		"test:depcheck": "depcheck . --ignore-dirs=tmp,coverage --ignores=eslint*,@typescript-eslint/*,@graphql-codegen/*,@babel/runtime,@scrlk/eslint-config,babel-eslint,styled-jsx,assets,components,generated,gql,pages,ts,utils",
+		"test:depcheck": "depcheck . --ignore-dirs=tmp,coverage --ignores=eslint*,@typescript-eslint/*,@graphql-codegen/*,@babel/runtime,@scrlk/eslint-config,babel-eslint,styled-jsx,url-loader,assets,components,generated,gql,pages,ts,utils",
 		"test": "run-s test:*"
 	},
 	"dependencies": {
@@ -102,6 +102,7 @@
 		"test-listen": "^1.1.0",
 		"ts-jest": "^26.1.2",
 		"typescript": "^3.9.6",
+		"url-loader": "^4.1.0",
 		"webpack": "^4.43.0",
 		"workbox-webpack-plugin": "^5.1.3"
 	},

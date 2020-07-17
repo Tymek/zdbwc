@@ -31,7 +31,7 @@ const App = (): JSX.Element => {
 		(async () => {
 			try {
 				const createProvider = (
-					await import(/* webpackChunkName: "admin-panel-provider" */ 'ra-data-hasura-graphql') as unknown
+					(await import(/* webpackChunkName: "admin-panel-provider" */ 'ra-data-hasura-graphql')).default as unknown
 				) as RaDataHasuraGraphql
 				const provider = await createProvider({ client })
 				setDataProvider(() => provider)
