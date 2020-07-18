@@ -21,6 +21,7 @@ module.exports = {
 		'@typescript-eslint/no-unsafe-assignment': ['off'],
 		'jsx-a11y/anchor-is-valid': ['off'], // next/link
 		'react/jsx-indent-props': ['warn', 'tab'],
+		'no-multiple-empty-lines': ['warn', { max: 2 }],
 		// 'react/jsx-closing-tag-location': ['off'], // for <style> tag
 	},
 }

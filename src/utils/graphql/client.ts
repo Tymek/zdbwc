@@ -6,17 +6,15 @@ import {
 	InMemoryCache,
 	NormalizedCacheObject,
 } from '@apollo/client'
+import { persistCache } from 'apollo-cache-persist'
+import getEndpoint from './getEndpoint'
 // import { resolvers, typeDefs } from './resolvers'
 
 const ssrMode = typeof window === 'undefined'
 
 let uri = ssrMode
 	? 'http://hasura:8080/v1/graphql'
-	: `https://api.${window.location.hostname}/v1/graphql`
-
-if (!ssrMode && (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost')) {
-	uri = `http://${window.location.hostname}:8080/v1/graphql`
-}
+	: getEndpoint(window)
 
 if (process.env.NODE_ENV === 'test') {
 	uri = 'http://localhost:3000/graphql'
@@ -25,7 +23,15 @@ if (process.env.NODE_ENV === 'test') {
 let apolloClient: ApolloClient<NormalizedCacheObject>
 const cache = new InMemoryCache()
 
-export default function gqlClient(initialState?: NormalizedCacheObject): ApolloClient<NormalizedCacheObject> {
+const gqlClient = (initialState?: NormalizedCacheObject): ApolloClient<NormalizedCacheObject> => {
+	if (!ssrMode) {
+		void persistCache({
+			cache,
+			storage: window.localStorage,
+			debug: process.env.DEBUG === 'true',
+		} as unknown as Parameters<typeof persistCache>[0])
+	}
+
 	const client = apolloClient ?? new ApolloClient({
 		ssrMode,
 		link: ApolloLink.from([
@@ -37,6 +43,11 @@ export default function gqlClient(initialState?: NormalizedCacheObject): ApolloC
 			// NOTE: error link?
 		]),
 		cache,
+		defaultOptions: {
+			watchQuery: {
+				fetchPolicy: 'cache-and-network',
+			},
+		},
 		// typeDefs,
 		// resolvers,
 	})
@@ -51,3 +62,5 @@ export default function gqlClient(initialState?: NormalizedCacheObject): ApolloC
 
 	return client
 }
+
+export default gqlClient

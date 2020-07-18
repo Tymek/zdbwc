@@ -3,6 +3,9 @@
 		{
 			"name": "{ zdbwc }",
 			"path": ".."
+		},
+		{
+			"path": "../src"
 		}
 	],
 	"settings": {
@@ -11,33 +14,34 @@
 			"**/.svn": true,
 			"**/.hg": true,
 			"**/CVS": true,
-			"**/.DS_Store": true,
+			"**/.DS_Store": true
 			// ".*": true,
-			".babelrc": true,
-			".editorconfig": true,
-			".eslintrc.js": true,
-			".gitignore": true,
-			".npmrc": true,
-			".vscode": true,
+			// ".babelrc": true,
+			// ".editorconfig": true,
+			// ".eslintrc.js": true,
+			// ".gitignore": true,
+			// ".npmrc": true,
+			// ".vscode": true,
 			// "*.js": true,
-			"codegen.js": true,
-			"next.config.js": true,
+			// "codegen.js": true,
+			// "next.config.js": true,
 			// "apollo.config.js": true,
-			"jest.config.js": true,
+			// "jest.config.js": true,
 			// "*.md": true,
-			"*.ts": true,
-			"*.yml": true,
-			"*.yaml": true,
-			"tsconfig.*": true,
-			"graphql.schema.json": true,
-			"Dockerfile": true,
-			"package-lock.json": true,
-			"node_modules": true,
-			"coverage": true,
+			// "*.ts": true,
+			// "*.yml": true,
+			// "*.yaml": true,
+			// "tsconfig.*": true,
+			// "graphql.schema.json": true,
+			// "Dockerfile": true,
+			// "package-lock.json": true,
+			// "node_modules": true,
+			// "coverage": true,
+			// "public/sw.js": true,
 		},
 		"debug.javascript.usePreview": true,
 		"debug.chrome.useV3": true,
-		"debug.node.useV3": true,
+		"debug.node.useV3": true
 		// "explorerExclude.backup": null
 	}
 }

@@ -13,7 +13,7 @@ services:
     environment:
       TERM: xterm-256color
       HASURA_ACTION_SECRET: "${HASURA_ACTION_SECRET:-1}"
-    command: npm run dev
+    command: ./node_modules/.bin/cross-env DEBUG=true npm run dev
 
   postgres:
     restart: unless-stopped

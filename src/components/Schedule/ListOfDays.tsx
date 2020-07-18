@@ -53,10 +53,12 @@ const filterSessionsByDay = (day: string) => ({ begins_at, ends_at }: Session) =
 }
 
 const ListOfDays: React.FC = () => {
-	const { loading, error, data } = useQuery(SCHEDULE)
+	const { loading, error, data } = useQuery(SCHEDULE, {
+		pollInterval: 15e3, // 15s
+	})
 
 	if (loading) return <div style={{ textAlign: 'center' }}>Wczytywanie&hellip;</div>
-	if (error) return <Error statusCode={503} title="Nie dodano agendy 😶" />
+	if (error) return <Error statusCode={503} title="Błąd wczytywania agendy 😶" />
 	if (!data) return null
 	const { session }: { session: Session[] } = data
 

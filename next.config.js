@@ -25,16 +25,18 @@ const options = {
 			new DefinePlugin({
 				'process.env.BUILD': JSON.stringify(Date.now()),
 				'process.env.VERSION': JSON.stringify(version),
+				'process.env.DEBUG': JSON.stringify(process.env.DEBUG), // verbose
 			})
 		)
 
 		if (!isServer && process.env.NODE_ENV === 'production') {
 			config.plugins.push(
 				new InjectManifest({
-					swSrc: './src/service/sw.ts',
-					swDest: '../public/generated/sw.js',
+					mode: process.env.DEBUG === 'true' ? 'development' : 'production',
+					swSrc: './src/service/worker.ts',
+					swDest: '../public/sw.js',
 					modifyURLPrefix: {
-						'/static/': '/_next/static/',
+						'static/': '/_next/static/',
 					},
 					include: [
 						/^static\//,

@@ -40,4 +40,4 @@ yarn-error.log*
 /graphql.schema.json
 
 # Service worker
-/public/generated/**/*
+/public/sw.js

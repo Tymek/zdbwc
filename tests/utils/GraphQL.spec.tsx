@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/consistent-function-scoping */
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'

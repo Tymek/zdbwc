@@ -24,9 +24,9 @@ export default Provider
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 // export const precacheQuery = (query: QueryOptions<Record<string, any>>) => async (): Promise<any> => {
 // 	const client = gqlClient()
-
+//
 // 	await client.query(query)
-
+//
 // 	return {
 // 		props: {
 // 			[pagePropsKey]: client.cache.extract(),

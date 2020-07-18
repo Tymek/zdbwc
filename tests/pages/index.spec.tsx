@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/consistent-function-scoping */
 import { render } from 'utils/test'
 
 import Index from 'pages'
