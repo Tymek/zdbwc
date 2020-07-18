@@ -24,6 +24,7 @@ build:
 
 prepare-fonts:
   stage: build
+  before_script: []
   image: scrlk/woff2
   needs: []
   script:
