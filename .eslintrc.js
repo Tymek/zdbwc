@@ -5,7 +5,12 @@ module.exports = {
 		project: './tsconfig.json',
 		tsconfigRootDir: __dirname,
 	},
-	'ignorePatterns': ['src/generated/**/*'],
+	ignorePatterns: [
+		'src/generated/**/*',
+		'public/**/*.js',
+		'coverage/**/*',
+		'tmp/**/*',
+	],
 	rules: {
 		'import/no-extraneous-dependencies': ['warn', {
 			'devDependencies': [
