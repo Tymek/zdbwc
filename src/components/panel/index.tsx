@@ -6,6 +6,8 @@ import ScheduleIcon from '@material-ui/icons/Schedule'
 import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
+import Fonts from 'components/styles/Fonts'
+import StyleVariables from 'components/styles/Variables'
 
 import moment from 'utils/moment'
 import createAuthProvider from './utils/authProvider'
@@ -66,7 +68,9 @@ const App = (): JSX.Element => {
 					create={TopicCreate}
 				/>
 			</ReactAdmin>
+			<StyleVariables />
 			<StyleReset />
+			<Fonts />
 		</MuiPickersUtilsProvider>
 	) : <></>
 }

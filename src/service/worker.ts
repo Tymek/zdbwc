@@ -1,12 +1,14 @@
 /* eslint-disable no-restricted-globals */// NOTE: self is allowed in service worker
-import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching'
-import { NavigationRoute, registerRoute } from 'workbox-routing'
+import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching'
+import { registerRoute, NavigationRoute } from 'workbox-routing'
 import { NetworkOnly, CacheFirst } from 'workbox-strategies'
 import { PrecacheEntry } from 'workbox-precaching/_types'
 import getGraphqlEndpoint from 'utils/graphql/getEndpoint'
 
 const scope = self as unknown as ServiceWorkerGlobalScope
-const graphqlEndpoint = getGraphqlEndpoint(scope)
+const { location } = scope
+const graphqlEndpoint = getGraphqlEndpoint(location.hostname)
+const escapeSlashRegExp = (input: string) => new RegExp(input.replace(/\//g, '\\/'))
 
 /**
  * Cache
@@ -16,33 +18,42 @@ const graphqlEndpoint = getGraphqlEndpoint(scope)
 // @ts-ignore because `self.__WB_MANIFEST` is substituted during webpack build
 const manifest = self.__WB_MANIFEST as Array<PrecacheEntry> || [] // eslint-disable-line no-underscore-dangle
 
-// manifest.push({
-// 	revision: process.env.BUILD as string,
-// 	url: '/',
-// })
+manifest.push({
+	revision: process.env.BUILD as string,
+	url: '/',
+},
+{
+	revision: process.env.BUILD as string,
+	url: '/not-found',
+})
 
 precacheAndRoute(manifest, {
 	directoryIndex: '/',
 })
 
-registerRoute(/\/api\/healthcheck$/, new NetworkOnly(), 'GET')
-registerRoute(/\/_next\/static\//, new CacheFirst(), 'GET')
-registerRoute(/\/static\//, new CacheFirst(), 'GET')
+registerRoute(escapeSlashRegExp(`^${location.origin}/api(?:$|/)`), new NetworkOnly())
+registerRoute(escapeSlashRegExp(`^${location.origin}/static/`), new CacheFirst(), 'GET')
+registerRoute('/pwa.webmanifest', new CacheFirst(), 'GET')
 registerRoute('/favicon.ico', new CacheFirst(), 'GET')
 
-// const handler = createHandlerBoundToURL('/') // TODO: 404 fallback
-// const navigationRoute = new NavigationRoute(handler, {
-// 	allowlist: [
-// 		/^\/$/,
-// 	],
-// })
-// registerRoute(navigationRoute)
+const handler = createHandlerBoundToURL('/not-found')
+const navigationRoute = new NavigationRoute(handler, {
+	denylist: [
+		/^\/panel(?:$|\/)/,
+		/^\/login(?:$|\/)/,
+	],
+})
+registerRoute(navigationRoute)
 
-registerRoute(graphqlEndpoint, new NetworkOnly({
+const apiStrategy = new NetworkOnly({
 	fetchOptions: {
 		credentials: 'include',
 	},
-}))
+})
+
+registerRoute(graphqlEndpoint, apiStrategy)
+registerRoute(escapeSlashRegExp('^https?://api.'), apiStrategy)
+registerRoute(escapeSlashRegExp('/graphql/?$'), apiStrategy)
 
 
 /**

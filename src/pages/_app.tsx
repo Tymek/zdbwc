@@ -3,7 +3,9 @@ import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Provider as GraphQLProvider } from 'utils/graphql'
 import Layout from 'components/Layout'
-import Style from 'components/Style'
+import StyleVariables from 'components/styles/Variables'
+import GlobalStyle from 'components/styles/Global'
+import Fonts from 'components/styles/Fonts'
 import { pathOr } from 'ramda'
 import { register } from 'service/client'
 
@@ -21,25 +23,17 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 		<GraphQLProvider pageProps={pageProps}>
 			<Head>
 				<title key="title">zdbwc</title>
+				<meta name="description" content="Konferencja Zdobywcy" />
+				<meta name="theme-color" content="#009ed1" />
 				<link rel="icon" href="/favicon.ico" />
-				<link
-					href={`${
-						'https://fonts.googleapis.com/css2?'
-					}${
-						'family=Roboto:wght@300;700&'
-					}${
-						'family=Roboto+Mono:wght@300&'
-					}${
-						'display=swap'
-					}`}
-					rel="stylesheet"
-				/>
-				{/* TODO: local font */}
+				<link rel="manifest" href="/pwa.webmanifest" />
 			</Head>
 			{
 				pathOr(true, ['defaultLayout'], pageProps) ? (
 					<Layout>
-						<Style />
+						<StyleVariables />
+						<GlobalStyle />
+						<Fonts />
 						<Component {...pageProps} />
 					</Layout>
 				) : (

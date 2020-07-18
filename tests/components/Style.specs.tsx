@@ -1,9 +1,9 @@
 import { render } from 'utils/test'
 
-import Style from 'components/Style'
+import GlobalStyle from 'components/styles/Global'
 
 it('renders', () => {
-	const result = render(<Style />)
+	const result = render(<GlobalStyle />)
 
 	expect(result).toBeTruthy()
 })

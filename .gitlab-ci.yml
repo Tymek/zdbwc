@@ -20,6 +20,17 @@ build:
   artifacts:
     paths:
       - .next
+      - public/sw.js
+
+prepare-fonts:
+  stage: build
+  image: scrlk/woff2
+  needs: []
+  script:
+    - ./generateFonts.sh
+  artifacts:
+    paths:
+      - public/static/fonts
 
 include:
   - project: 'Tymek/CI'

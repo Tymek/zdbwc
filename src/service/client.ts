@@ -12,23 +12,22 @@ type OnUpdateCallback = (onAccept: () => void, version: string | number, recurri
 
 const registerServiceWorker = async (onUpdate: OnUpdateCallback): Promise<void> => {
 	const wb = new Workbox(swUrl)
-	wb.addEventListener('installed', event => {
-		// if (!event.isUpdate) {
-		// }
-		console.log('installed', 'isUpdate', event.isUpdate)
-	})
-	wb.addEventListener('activated', event => {
-		// if (!event.isUpdate) {
-		// }
-		console.log('activated', event)
-		console.log(() => wb.update())
-	})
+	// wb.addEventListener('installed', event => {
+	// 	// if (!event.isUpdate) {
+	// 	// }
+	// 	console.log('installed', 'isUpdate', event.isUpdate)
+	// })
+	// wb.addEventListener('activated', event => {
+	// 	// if (!event.isUpdate) {
+	// 	// }
+	// 	console.log(() => wb.update())
+	// })
+	// TODO: refresh singnaling
 
 	const update = async (event: WorkboxLifecycleWaitingEvent) => {
 		const version = await wb.messageSW({ type: 'GET_VERSION' })
 
-		wb.addEventListener('controlling', event => {
-			console.log('controlling', event)
+		wb.addEventListener('controlling', () => {
 			window.location.reload()
 		})
 
@@ -46,7 +45,6 @@ const registerServiceWorker = async (onUpdate: OnUpdateCallback): Promise<void> 
 }
 
 export const register = (onUpdate: OnUpdateCallback): void => {
-	console.info('shouldRegister', shouldRegister)
 	if (!shouldRegister) return
 
 	window.addEventListener('load', () => {

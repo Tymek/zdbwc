@@ -42,7 +42,7 @@ export default class Error<P = unknown> extends Component<P & ErrorProps> {
 			<div style={styles.error}>
 				<Head>
 					<title>
-						{statusCode}: {title}
+						{statusCode ? `${statusCode}: ` : ''}{title}
 					</title>
 				</Head>
 				<div>

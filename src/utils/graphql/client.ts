@@ -14,7 +14,7 @@ const ssrMode = typeof window === 'undefined'
 
 let uri = ssrMode
 	? 'http://hasura:8080/v1/graphql'
-	: getEndpoint(window)
+	: getEndpoint(window.location.hostname)
 
 if (process.env.NODE_ENV === 'test') {
 	uri = 'http://localhost:3000/graphql'
@@ -23,9 +23,9 @@ if (process.env.NODE_ENV === 'test') {
 let apolloClient: ApolloClient<NormalizedCacheObject>
 const cache = new InMemoryCache()
 
-const gqlClient = (initialState?: NormalizedCacheObject): ApolloClient<NormalizedCacheObject> => {
+const gqlClient = async (initialState?: NormalizedCacheObject): Promise<ApolloClient<NormalizedCacheObject>> => {
 	if (!ssrMode) {
-		void persistCache({
+		await persistCache({
 			cache,
 			storage: window.localStorage,
 			debug: process.env.DEBUG === 'true',
@@ -43,11 +43,6 @@ const gqlClient = (initialState?: NormalizedCacheObject): ApolloClient<Normalize
 			// NOTE: error link?
 		]),
 		cache,
-		defaultOptions: {
-			watchQuery: {
-				fetchPolicy: 'cache-and-network',
-			},
-		},
 		// typeDefs,
 		// resolvers,
 	})

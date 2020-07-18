@@ -1,5 +1,5 @@
-import React, { FunctionComponent, useMemo } from 'react'
-import { ApolloProvider, NormalizedCacheObject } from '@apollo/client'
+import React, { FunctionComponent, useState, useEffect } from 'react'
+import { ApolloProvider, NormalizedCacheObject, ApolloClient } from '@apollo/client'
 import gqlClient from './client'
 
 export const pagePropsKey = 'initialApolloState'
@@ -10,12 +10,19 @@ type PageProps = {
 
 const Provider:FunctionComponent<{pageProps: PageProps }> = ({ children, pageProps }) => {
 	const initialState: NormalizedCacheObject | undefined = pageProps && pageProps[pagePropsKey]
-	const client = useMemo(() => gqlClient(initialState), [initialState])
+	const [client, setClient] = useState<ApolloClient<NormalizedCacheObject> | null>(null)
+	useEffect(() => {
+		gqlClient(initialState).then(setClient).catch(() => setClient(null))
+	}, [initialState])
 
 	return (
-		<ApolloProvider client={client}>
-			{children}
-		</ApolloProvider>
+		<>
+			{ client && (
+				<ApolloProvider client={client}>
+					{children}
+				</ApolloProvider>
+			)}
+		</>
 	)
 }
 

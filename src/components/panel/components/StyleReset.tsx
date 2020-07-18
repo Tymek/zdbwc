@@ -14,7 +14,7 @@ const Style: React.FC = () => (
 			min-height: 100%;
 			background: var(--light);
 			color: var(--black);
-			font-family: var(--font);
+			font-family: var(--font-family);
 			font-weight: 300;
 		}
 
