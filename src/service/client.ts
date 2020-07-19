@@ -1,4 +1,4 @@
-import { Workbox } from 'workbox-window'
+import { Workbox, messageSW } from 'workbox-window'
 import { WorkboxLifecycleWaitingEvent } from 'workbox-window/utils/WorkboxEvent'
 
 const swUrl = '/sw.js'
@@ -8,51 +8,96 @@ const shouldRegister = (
 	&& 'serviceWorker' in navigator
 )
 
-type OnUpdateCallback = (onAccept: () => void, version: string | number, recurring?: boolean) => void
+type Version = string | number
 
-const registerServiceWorker = async (onUpdate: OnUpdateCallback): Promise<void> => {
+/** Async action triggering skipWaiting.
+ * `onAccept` resolves when new SW is controlling the page
+ */
+export type OnUpdateCallback = (
+	onAccept: () => Promise<string>,
+	version?: Version,
+	oldVersion?: Version,
+	isRecurring?: boolean
+) => void
+
+const registerAfterWindowLoad = async (onUpdate?: OnUpdateCallback): Promise<Workbox> => {
 	const wb = new Workbox(swUrl)
-	// wb.addEventListener('installed', event => {
-	// 	// if (!event.isUpdate) {
-	// 	// }
-	// 	console.log('installed', 'isUpdate', event.isUpdate)
-	// })
-	// wb.addEventListener('activated', event => {
-	// 	// if (!event.isUpdate) {
-	// 	// }
-	// 	console.log(() => wb.update())
-	// })
-	// TODO: refresh singnaling
+	let registration: ServiceWorkerRegistration | undefined
 
-	const update = async (event: WorkboxLifecycleWaitingEvent) => {
-		const version = await wb.messageSW({ type: 'GET_VERSION' })
+	const getVersions = async (): Promise<[Version | undefined, Version | undefined]> => {
+		if (!registration) {
+			registration = await navigator.serviceWorker.ready
+		}
 
+		const waitingVersion = registration?.waiting && await messageSW(registration.waiting, { type: 'GET_VERSION' })
+		const activeVersion = registration?.active && await messageSW(registration.active, { type: 'GET_VERSION' })
+
+		return [waitingVersion, activeVersion]
+	}
+
+	const onAccept = (): Promise<string> => new Promise((resolve, reject) => {
 		wb.addEventListener('controlling', () => {
-			window.location.reload()
+			resolve('controlling')
 		})
 
-		onUpdate(
-			() => { void wb.messageSW({ type: 'SKIP_WAITING' }) },
-			version,
-			event.wasWaitingBeforeRegister
-		)
+		Promise.allSettled([
+			wb.messageSW({ type: 'SKIP_WAITING' }),
+			wb.messageSW({ type: 'CLAIM' }),
+		]).then(async ([skipWaiting, claim]) => {
+			if (!skipWaiting || !claim) {
+				reject(new Error(`skipWaiting: ${skipWaiting ? '1' : '0'}, claim: ${claim ? '1' : '0'}`))
+			}
+
+			const [waitingVersion, activeVersion] = await getVersions()
+
+			if (waitingVersion === undefined || waitingVersion === activeVersion) {
+				resolve('not waiting')
+			}
+
+			return void ''
+		}).catch(reject)
+	})
+
+	const update = async (event: WorkboxLifecycleWaitingEvent) => {
+		const [waitingVersion, activeVersion] = await getVersions()
+
+		if (onUpdate) {
+			onUpdate(onAccept, waitingVersion, activeVersion, event?.wasWaitingBeforeRegister)
+		} else {
+			void onAccept()
+		}
 	}
 
 	wb.addEventListener('waiting', update)
 	wb.addEventListener('externalwaiting', update) // worker in other tab. @see https://cz3.ch/dev-workbox-externalwaiting
+	wb.addEventListener('controlling', ({ isUpdate }) => {
+		if (isUpdate) {
+			setTimeout(() => {
+				window.location.reload()
+			}, 1250)
+		}
+	})
 
-	await wb.register()
+	registration = await wb.register()
+
+	if (process.env.DEBUG === 'true') {
+		console.debug('SW', await wb.messageSW({ type: 'GET_VERSION' })) // eslint-disable-line no-console
+	}
+
+	return wb
 }
 
-export const register = (onUpdate: OnUpdateCallback): void => {
-	if (!shouldRegister) return
+export const register = (onUpdate?: OnUpdateCallback): Promise<Workbox> => {
+	if (!shouldRegister) return Promise.reject()
 
-	window.addEventListener('load', () => {
-		void registerServiceWorker(onUpdate)
+	return new Promise(resolve => {
+		window.addEventListener('load', () => {
+			resolve(registerAfterWindowLoad(onUpdate))
+		})
 	})
 }
 
-export const unregister = async (): Promise<void> => {
+export const unregister = async (): Promise<boolean> => {
 	const registration = await navigator.serviceWorker.ready
-	await registration.unregister()
+	return registration.unregister()
 }

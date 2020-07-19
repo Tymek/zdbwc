@@ -19,11 +19,11 @@ const escapeSlashRegExp = (input: string) => new RegExp(input.replace(/\//g, '\\
 const manifest = self.__WB_MANIFEST as Array<PrecacheEntry> || [] // eslint-disable-line no-underscore-dangle
 
 manifest.push({
-	revision: process.env.BUILD as string,
+	revision: process.env.VERSION as string, // NOTE: cache-bustin only when package.json version has been changed!
 	url: '/',
 },
 {
-	revision: process.env.BUILD as string,
+	revision: process.env.VERSION as string,
 	url: '/not-found',
 })
 
@@ -39,7 +39,7 @@ registerRoute('/favicon.ico', new CacheFirst(), 'GET')
 const handler = createHandlerBoundToURL('/not-found')
 const navigationRoute = new NavigationRoute(handler, {
 	denylist: [
-		/^\/panel(?:$|\/)/,
+		/^\/panel(?:$|\/)/, // NOTE: not precached for non-managers in `next.config.js` InjectManifest
 		/^\/login(?:$|\/)/,
 	],
 })
@@ -72,6 +72,10 @@ scope.addEventListener('message', (event: SWMessageEvent) => {
 	}
 
 	if (event?.data?.type === 'SKIP_WAITING') {
-		scope.skipWaiting() // eslint-disable-line @typescript-eslint/no-floating-promises
+		scope.skipWaiting().then(() => event.ports[0].postMessage(true)).catch(() => event.ports[0].postMessage(false))
+	}
+
+	if (event?.data?.type === 'CLAIM') {
+		scope.clients.claim().then(() => event.ports[0].postMessage(true)).catch(() => event.ports[0].postMessage(false))
 	}
 })
