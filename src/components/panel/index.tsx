@@ -8,6 +8,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
 import Fonts from 'components/styles/Fonts'
 import StyleVariables from 'components/styles/Variables'
+import buildHasuraProvider from 'ra-data-hasura-graphql'
 
 import moment from 'utils/moment'
 import createAuthProvider from './utils/authProvider'
@@ -29,18 +30,11 @@ const App = (): JSX.Element => {
 	const authProvider = useMemo(() => createAuthProvider({ client }), [client])
 
 	useEffect(() => {
-		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		(async () => {
-			try {
-				const createProvider = (
-					(await import(/* webpackChunkName: "admin-panel-provider" */ 'ra-data-hasura-graphql')).default as unknown
-				) as RaDataHasuraGraphql
-				const provider = await createProvider({ client })
-				setDataProvider(() => provider)
-			} catch {
-				setDataProvider(null)
-			}
-		})()
+		buildHasuraProvider({ client })
+			.then(newDataProvider => setDataProvider(
+				() => newDataProvider // eslint-disable-line @typescript-eslint/no-unsafe-return
+			))
+			.catch(() => setDataProvider(null))
 	}, [client, setDataProvider])
 
 	return authProvider && dataProvider ? (
