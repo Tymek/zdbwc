@@ -1,3 +1,6 @@
+const fs = require('fs')
+const path = require('path')
+const crypto = require('crypto')
 const { version } = require('./package.json')
 
 const options = {
@@ -30,6 +33,28 @@ const options = {
 		)
 
 		if (!isServer && process.env.NODE_ENV === 'production') {
+			const additionalManifestEntries = []
+			const revision = file => crypto
+				.createHash('md5')
+				.update(fs.readFileSync(
+					path.resolve('./public' + file),
+					'utf8'
+				))
+				.digest('hex')
+
+			const files = [
+				'/static/config/pwa.webmanifest',
+				'/static/images/logo.svg',
+				...fs.readdirSync('./public/static/fonts', 'utf-8').map(file => '/static/fonts/' + file),
+			]
+
+			files.forEach(url => {
+				additionalManifestEntries.push({
+					url,
+					revision: revision(url),
+				})
+			})
+
 			config.plugins.push(
 				new InjectManifest({
 					mode: process.env.DEBUG === 'true' ? 'development' : 'production',
@@ -45,6 +70,7 @@ const options = {
 						/admin-panel/,
 						new RegExp('^static/pages/panel(?:/|-)'),
 					],
+					additionalManifestEntries,
 				})
 			)
 		}

@@ -33,8 +33,6 @@ precacheAndRoute(manifest, {
 
 registerRoute(escapeSlashRegExp(`^${location.origin}/api(?:$|/)`), new NetworkOnly())
 registerRoute(escapeSlashRegExp(`^${location.origin}/static/`), new CacheFirst(), 'GET')
-registerRoute('/pwa.webmanifest', new CacheFirst(), 'GET')
-registerRoute('/favicon.ico', new CacheFirst(), 'GET')
 
 const handler = createHandlerBoundToURL('/not-found')
 const navigationRoute = new NavigationRoute(handler, {
