@@ -1,7 +1,7 @@
 import { InMemoryCache, Resolver, gql } from '@apollo/client'
 import moment from 'utils/moment'
-import LAST_UPDATE from 'gql/lastUpdate.gql'
 import type { Scalars } from 'ts/schema'
+import LAST_UPDATE from 'gql/lastUpdate.gql'
 
 export type LastUpdate = Scalars['timestamptz']
 

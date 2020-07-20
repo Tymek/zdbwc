@@ -43,6 +43,7 @@ module.exports = {
 	transform: {
 		'^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
 		// '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
+		'^.+\\.(gql|graphql)$': 'jest-transform-graphql',
 	},
 	transformIgnorePatterns: [
 		'/node_modules/',
