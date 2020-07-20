@@ -8,7 +8,7 @@ import {
 } from '@apollo/client'
 import { persistCache } from 'apollo-cache-persist'
 import getEndpoint from './getEndpoint'
-// import { resolvers, typeDefs } from './resolvers'
+import resolvers, { typeDefs } from './resolvers'
 
 const ssrMode = typeof window === 'undefined'
 
@@ -43,8 +43,8 @@ const gqlClient = async (initialState?: NormalizedCacheObject): Promise<ApolloCl
 			// NOTE: error link?
 		]),
 		cache,
-		// typeDefs,
-		// resolvers,
+		typeDefs,
+		resolvers,
 	})
 
 	if (initialState) {

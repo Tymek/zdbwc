@@ -1,30 +1,32 @@
+import theme from 'utils/theme.json' // eslint-disable-line import/extensions
+
 const StyleVariables: React.FC = () => (
 	<style global jsx>{`
 		:root {
-			--white: #ffffff;
-			--light: #f2f2f2;
-			--black: #000000;
-			--dark: #1a1a1a;
-			--primary: #009ed1;
-			--secondary: #f29146;
-			--tertiary: #8bc751;
-			--muted: #e6e6e6;
-			--gray: #808080;
-			--primary-darken: #00779e;
-			--primary-lighten: #38cdff;
-			--spacing: 0.5rem;
-			--border-weight: 1px;
+			--white: ${theme.white};
+			--light: ${theme.light};
+			--black: ${theme.black};
+			--dark: ${theme.dark};
+			--primary: ${theme.primary};
+			--secondary: ${theme.secondary};
+			--tertiary: ${theme.tertiary};
+			--muted: ${theme.muted};
+			--gray: ${theme.gray};
+			--primary-darken: ${theme['primary-darken']};
+			--primary-lighten: ${theme['primary-lighten']};
+			--spacing: ${theme.spacing};
+			--border-weight: ${theme['border-weight']};
 
-			--font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, "Fira Sans",
+			--font-family: ${theme['font-family']};
 				"Droid Sans", "Helvetica Neue", Helvetica, sans-serif;
-			--font-family-mono: "Roboto Mono", Consolas, monospace;
-			--font-weight-thin: 200;
-			--font-weight-light: 300;
-			--font-weight-bold: 600;
+			--font-family-mono: ${theme['font-family-mono']};
+			--font-weight-thin: ${theme['font-weight-thin']};
+			--font-weight-light: ${theme['font-weight-light']};
+			--font-weight-bold: ${theme['font-weight-bold']};
 
-			--border-radius: 0.1875rem;
+			--border-radius: ${theme['border-radius']};
 
-			--box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2), 0px 1px 2px rgba(0, 0, 0, 0.1);
+			--box-shadow: ${theme['box-shadow']};
 		}
 	`}
 	</style>

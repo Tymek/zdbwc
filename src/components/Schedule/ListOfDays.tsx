@@ -1,11 +1,14 @@
-import { useQuery } from '@apollo/client'
+import { useQuery, NetworkStatus } from '@apollo/client'
 import moment from 'utils/moment'
 import dynamic from 'next/dynamic'
 import TimeRange from 'utils/moment/TimeRange'
 import Error from 'pages/_error'
 
 import { Session } from 'ts/schema'
+import useLastUpdate from 'utils/hooks/useLastUpdate'
 import SCHEDULE from './gql/schedule.gql'
+
+const pollInterval = process.env.NODE_ENV !== 'production' || process.env.DEBUG === 'true' ? 6e3 : 15e3 // 15s
 
 const Day = dynamic(() => import('./components/Day'))
 
@@ -53,19 +56,22 @@ const filterSessionsByDay = (day: string) => ({ begins_at, ends_at }: Session) =
 }
 
 const ListOfDays: React.FC = () => {
-	const { loading, error, data } = useQuery(SCHEDULE, {
-		pollInterval: 15e3, // 15s
+	const { loading, error, data, networkStatus } = useQuery(SCHEDULE, {
+		pollInterval,
 		fetchPolicy: 'cache-and-network',
+		notifyOnNetworkStatusChange: true,
 	})
 
-	if (loading) return <div style={{ textAlign: 'center' }}>Wczytywanie&hellip;</div>
+	useLastUpdate(networkStatus === NetworkStatus.ready)
+
+	if (loading && !data) return <div style={{ textAlign: 'center' }}>Wczytywanie&hellip;</div>
 	if (error && !data) return <Error statusCode={503} title="Błąd wczytywania agendy 😶" />
 	if (!data) return null
 	const { session }: { session: Session[] } = data
 
-	const days = getDays(session)
-	// eslint-disable-next-line unicorn/no-fn-reference-in-iterator
 	const getSessions = (day: string) => session.filter(filterSessionsByDay(day)).sort(sortSessions)
+
+	const days = getDays(session)
 
 	return (
 		<div>

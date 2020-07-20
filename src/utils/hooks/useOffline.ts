@@ -39,15 +39,16 @@ type PollingOptions = PingOptions & { interval?: number | false } | boolean
  * If you would like to only check polling on first render, use `{ polling: { interval: false } }`
  */
 const useOffline = (
-	options: { polling?: PollingOptions }
+	options?: { polling?: PollingOptions }
 ): boolean => {
 	const [isOffline, setIsOffline] = useState<boolean>(false)
 	const setOnline = () => setIsOffline(false)
 	const setOffline = () => setIsOffline(true)
 	const poll = useCallback(() => {
-		const url = typeof options?.polling === 'object' ? options.polling.url : undefined
-		const timeout = typeof options?.polling === 'object' ? options.polling.timeout : undefined
-		ping({ url, timeout }).then(setOnline).catch(setOffline)
+		const pingOptions: PingOptions = {}
+		if (typeof options?.polling === 'object' && options?.polling?.url) pingOptions.url = options.polling.url
+		if (typeof options?.polling === 'object' && options?.polling?.timeout) pingOptions.timeout = options.polling.timeout
+		ping(pingOptions).then(setOnline).catch(setOffline)
 	}, [options])
 
 	useEffect(() => {

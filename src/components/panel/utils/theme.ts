@@ -1,15 +1,16 @@
 import { createMuiTheme } from '@material-ui/core/styles'
+import { primary, secondary, tertiary } from 'utils/theme.json' // eslint-disable-line import/extensions
 
 const theme = createMuiTheme({
 	palette: {
 		primary: {
-			main: '#009ed1',
+			main: secondary,
 		},
 		secondary: {
-			main: '#f29146',
+			main: primary,
 		},
 		success: {
-			main: '#8bc751',
+			main: tertiary,
 		},
 	},
 	overrides: {

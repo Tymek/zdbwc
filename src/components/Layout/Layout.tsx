@@ -1,4 +1,7 @@
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const OfflineInfo = dynamic(() => import('./components/OfflineInfo'), { ssr: false })
 
 const Layout: React.FC = ({ children }) => (
 	<div className="container">
@@ -6,6 +9,7 @@ const Layout: React.FC = ({ children }) => (
 			<Link href="/">
 				<img src="/static/images/logo.svg" alt="logo" />
 			</Link>
+			<OfflineInfo />
 		</header>
 
 		{ children }
@@ -21,13 +25,15 @@ const Layout: React.FC = ({ children }) => (
 			}
 
 			header {
-				padding: calc(var(--spacing) * 3) calc(var(--spacing) * 3) calc(var(--spacing) * 2.5);
+				padding: calc(var(--spacing) * 3) calc(var(--spacing) * 3) calc(var(--spacing) * 2.25);
 				display: flex;
+				align-items: flex-end;
 			}
 
 			header img {
 				width: 5rem;
 				cursor: pointer;
+				margin-bottom: calc(var(--spacing) / 4);
 			}
 		`}
 		</style>
