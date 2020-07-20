@@ -3,9 +3,21 @@ before_script:
   - npm ci
 
 stages:
+  - prepare
   - test
   - build
   - deploy
+
+prepare-fonts:
+  stage: prepare
+  before_script: []
+  image: scrlk/woff2
+  needs: []
+  script:
+    - ./generateFonts.sh
+  artifacts:
+    paths:
+      - public/static/fonts
 
 test:
   stage: test
@@ -16,22 +28,12 @@ build:
   stage: build
   script:
     - npm run build
-  needs: []
+  needs:
+    - prepare-fonts
   artifacts:
     paths:
       - .next
       - public/sw.js
-
-prepare-fonts:
-  stage: build
-  before_script: []
-  image: scrlk/woff2
-  needs: []
-  script:
-    - ./generateFonts.sh
-  artifacts:
-    paths:
-      - public/static/fonts
 
 include:
   - project: 'Tymek/CI'
