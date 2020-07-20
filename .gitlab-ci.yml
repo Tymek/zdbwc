@@ -21,6 +21,7 @@ prepare-fonts:
 
 test:
   stage: test
+  needs: []
   script:
     - npm run test
 
