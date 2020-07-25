@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { Topic } from 'ts/schema'
-import { sierotki } from 'utils/typografia'
 import Toggle from 'components/Toggle'
 import Speaker from '../Speaker'
+import Description from './components/Description'
 
 const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 	subject,
@@ -53,7 +53,7 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 								style={{ width: '100%', overflow: 'hidden' }}
 							>
 								{speaker && <Speaker>{speaker}</Speaker>}
-								{description && <p className="description">{sierotki(description)}</p>}
+								{description && <Description>{description}</Description>}
 								{!!(speaker || description) && <div className="main-padding" />}
 							</motion.main>
 						) : null
@@ -115,14 +115,8 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 					margin: 0;
 				}
 
-				.description {
-					margin: 0;
-					padding: var(--spacing);
-					padding-top: 0;
-				}
-
 				.main-padding {
-					height: 'calc(var(--spacing) * 2)' 
+					height: calc(var(--spacing) * 1.5);
 				}
 			`}
 			</style>
