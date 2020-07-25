@@ -8,7 +8,7 @@ const Description: React.FC<{ children?: string }> = ({ children }) => {
 	return (
 		<div>
 			{paragraphs.map(paragraph => (
-				<p>{paragraph}</p>
+				<p key={paragraph}>{paragraph}</p>
 			))}
 			<style jsx>{`
 				p {
