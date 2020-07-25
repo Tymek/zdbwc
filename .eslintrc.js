@@ -29,4 +29,14 @@ module.exports = {
 		'no-multiple-empty-lines': ['warn', { max: 2 }],
 		// 'react/jsx-closing-tag-location': ['off'], // for <style> tag
 	},
+	overrides: [
+		{
+			files: [
+				'**/*.ts?(x)',
+			],
+			rules: {
+				indent: ['off'],
+			},
+		},
+	],
 }

@@ -31,7 +31,7 @@ const Layout: React.FC = ({ children }) => (
 			}
 
 			header img {
-				width: 5rem;
+				height: 3.2rem;
 				cursor: pointer;
 				margin-bottom: calc(var(--spacing) / 4);
 			}

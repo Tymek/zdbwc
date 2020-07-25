@@ -4,15 +4,19 @@ import gqlClient from './client'
 
 export const pagePropsKey = 'initialApolloState'
 
-type PageProps = {
+export type PageProps = {
 	[pagePropsKey]?: NormalizedCacheObject
 }
 
 const Provider:FunctionComponent<{pageProps: PageProps }> = ({ children, pageProps }) => {
 	const initialState: NormalizedCacheObject | undefined = pageProps && pageProps[pagePropsKey]
 	const [client, setClient] = useState<ApolloClient<NormalizedCacheObject> | null>(null)
+	const removeClient = () => setClient(null)
+
 	useEffect(() => {
-		gqlClient(initialState).then(setClient).catch(() => setClient(null))
+		gqlClient(initialState)
+			.then(setClient)
+			.catch(removeClient)
 	}, [initialState])
 
 	return (
@@ -27,17 +31,3 @@ const Provider:FunctionComponent<{pageProps: PageProps }> = ({ children, pagePro
 }
 
 export default Provider
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-// export const precacheQuery = (query: QueryOptions<Record<string, any>>) => async (): Promise<any> => {
-// 	const client = gqlClient()
-//
-// 	await client.query(query)
-//
-// 	return {
-// 		props: {
-// 			[pagePropsKey]: client.cache.extract(),
-// 		},
-// 		unstable_revalidate: 1,
-// 	}
-// }
