@@ -31,7 +31,6 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 	return (
 		<div>
 			<motion.header
-				className="header"
 				initial={false}
 				animate={{ backgroundColor: isOpen ? 'var(--gray)' : 'var(--dark)' }}
 				style={{ border: 'var(--border-weight) solid var(--white)', borderBottom: 'none' }}
@@ -77,7 +76,7 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 					font-size: inherit;
 					font-weight: var(--font-weight-bold);
 					text-align: center;
-					color: inherit;
+					color: var(--light);
 					margin: 0;
 				}
 
@@ -87,7 +86,6 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 					border: none;
 					width: 100%;
 					outline: 0;
-					color: var(--light);
 				}
 
 				.button-unfocus {
