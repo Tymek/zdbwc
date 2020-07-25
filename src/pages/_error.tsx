@@ -39,7 +39,7 @@ export default class Error<P = unknown> extends Component<P & ErrorProps> {
 			|| unknownError
 
 		return (
-			<div style={styles.error}>
+			<div className="error">
 				<Head>
 					<title>
 						{statusCode ? `${statusCode}: ` : ''}{title}
@@ -53,59 +53,58 @@ export default class Error<P = unknown> extends Component<P & ErrorProps> {
 								<strong style={{ color: 'red' }}> czterysta cztery</strong>, nie znaleziono.
 							</blockquote>
 							<p>Przepraszam! Nie potrafimy zlokalizować strony o którą pytasz.</p>
-							<p><span role="img" aria-label="sorry" style={{ fontSize: '3rem' }}>🥺</span></p>
+							<p><span role="img" aria-label="sorry" style={{ fontSize: '2.5rem' }}>🥺</span></p>
 							<Link href="/"><a>Strona główna</a></Link>
 						</>
 					) : (
 						<>
-							{ statusCode ? <h1 style={styles.h1}>{statusCode}</h1> : null }
-							<div style={styles.desc}>
-								<h2 style={styles.h2}>{title}</h2>
+							{ statusCode ? <h1>{statusCode}</h1> : null }
+							<div className="desc">
+								<h2>{title}</h2>
 							</div>
 						</>
 					)}
 				</div>
+				<style jsx>{`
+					.error {
+						background: #fff;
+						padding: calc(var(--spacing) * 3);
+						flex-grow: 1;
+						text-align: center;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+					}
+
+					.desc {
+						display: inline-flex;
+						text-align: left;
+						height: 3.1rem;
+						align-items: center;
+					}
+
+					h1 {
+						display: inline-block;
+						border-right: 1px solid rgba(0, 0, 0,.3);
+						margin: 0;
+						margin-right: 20px;
+						padding: 10px 23px 10px 0;
+						font-size: 24px;
+						font-weight: 500;
+						vertical-align: top;
+					}
+
+					h2 {
+						font-size: 14px;
+						font-weight: normal;
+						line-height: inherit;
+						margin: 0;
+						padding: 0;
+					}
+				`}
+				</style>
 			</div>
 		)
 	}
-}
-
-const styles: { [k: string]: React.CSSProperties } = {
-	error: {
-		background: '#fff',
-		// height: '100vh',
-		flexGrow: 1,
-		textAlign: 'center',
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-
-	desc: {
-		display: 'inline-block',
-		textAlign: 'left',
-		lineHeight: '3.6rem',
-		height: '3.4rem',
-		verticalAlign: 'middle',
-	},
-
-	h1: {
-		display: 'inline-block',
-		borderRight: '1px solid rgba(0, 0, 0,.3)',
-		margin: 0,
-		marginRight: '20px',
-		padding: '10px 23px 10px 0',
-		fontSize: '24px',
-		fontWeight: 500,
-		verticalAlign: 'top',
-	},
-
-	h2: {
-		fontSize: '14px',
-		fontWeight: 'normal',
-		lineHeight: 'inherit',
-		margin: 0,
-		padding: 0,
-	},
 }
