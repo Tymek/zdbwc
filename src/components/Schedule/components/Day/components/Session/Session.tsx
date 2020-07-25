@@ -4,7 +4,11 @@ import Header from './components/Header'
 import Speaker from './components/Speaker'
 
 const SessionComponent: React.FC<Session> = ({ name, topics, speaker, begins_at, ends_at }) => {
-	const isWorkshop = !!name && /warsztaty?/i.test(name)
+	const isWorkshop = !!name && [
+		/warsztaty?/i,
+		/panele?/u,
+		/debat[ay]/u,
+	].some(expr => expr.test(name))
 
 	return (
 		<section>
