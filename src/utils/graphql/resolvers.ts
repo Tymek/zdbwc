@@ -20,7 +20,7 @@ const setLastUpdated: Resolver = (
 	{ last_update },
 	{ cache }: { cache?: InMemoryCache }
 ): LastUpdate | null => {
-	const lastUpdate = last_update as LastUpdate || moment().format('YYYY-MM-DDTHH:mm:ss.SSSSSSZ')
+	const lastUpdate = (last_update as LastUpdate) ?? moment().format('YYYY-MM-DDTHH:mm:ss.SSSSSSZ')
 
 	if (cache) {
 		const data = { last_update: lastUpdate }

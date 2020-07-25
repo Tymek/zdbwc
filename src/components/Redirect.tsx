@@ -36,7 +36,7 @@ const redirect = (
 					<meta httpEquiv="Refresh" content={`${statusCode ? '0' : timeout || '0'}; URL=${newLocation}`} />
 				</Head>
 				{
-					content || <a href={newLocation}>{newLocation}</a>
+					content ?? <a href={newLocation}>{newLocation}</a>
 				}
 			</>
 		)

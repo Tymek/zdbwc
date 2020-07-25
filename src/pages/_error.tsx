@@ -21,7 +21,7 @@ function initialPropsGetter({
 	res,
 	err,
 }: NextPageContext): Promise<ErrorProps> | ErrorProps {
-	const statusCode: number = (res && res.statusCode) || (err && err.statusCode) || 404
+	const statusCode: number = res?.statusCode ?? err?.statusCode ?? 404
 	return { statusCode }
 }
 

@@ -60,7 +60,7 @@ export const DateTimeInput = ({ ...props }) => {
 			ampm={false}
 			openTo={input.value ? 'hours' : 'date'}
 			onChange={onChange}
-			value={input.value || null}
+			value={input.value ?? null}
 			label={<FieldTitle
 				label={label}
 				source={source}
