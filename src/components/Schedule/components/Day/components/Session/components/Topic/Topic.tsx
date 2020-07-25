@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 
 import { Topic } from 'ts/schema'
+import { sierotki } from 'utils/typografia'
 import Toggle from 'components/Toggle'
-import Speaker from '../Speaker'
-import Description from './components/Description'
+import Main from './components/Main'
 
 const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 	subject,
@@ -25,52 +24,37 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 			<aside className={isWorkshop ? 'secondary-location' : 'primary-location'}>
 				{location}
 			</aside>
-			<div>
+			<div className="content">
 				<header className={isWorkshop ? 'workshop' : ''}>
 					{
 						hasDetails ? (
 							<button className="dropdown" type="button" onClick={toggleCollapse}>
 								<div className="dropdown-unfocus" tabIndex={-1}>
-									<h4>{subject}</h4>
+									<h4 className={isOpen ? 'open' : 'closed'}>{subject && sierotki(subject)}</h4>
 									<Toggle isOpen={isOpen} />
 								</div>
 							</button>
-						) : <h4>{subject}</h4>
+						) : <h4>{subject && sierotki(subject)}</h4>
 					}
 				</header>
-				<AnimatePresence initial={false}>
-					{
-						isOpen ? (
-							<motion.main
-								key="content"
-								initial="collapsed"
-								animate="open"
-								exit="collapsed"
-								variants={{
-									open: { height: 'auto' },
-									collapsed: { height: 0 },
-								}}
-								style={{ width: '100%', overflow: 'hidden' }}
-							>
-								{speaker && <Speaker>{speaker}</Speaker>}
-								{description && <Description>{description}</Description>}
-								{!!(speaker || description) && <div className="main-padding" />}
-							</motion.main>
-						) : null
-					}
-				</AnimatePresence>
+				<Main {...{ isOpen, speaker, description }} />
 			</div>
 			<style jsx>{`
 				article {
 					display: grid;
 					margin: var(--border-weight) 0;
-					grid-template-columns: 1fr 5fr;
+					grid-template-columns: minmax(70px, 16.6666667%) minmax(0px, auto);
 				}
 
 				aside {
 					font-family: var(--font-family-mono);
 					font-size: 0.875rem;
 					padding: var(--spacing);
+					height: 0;
+				}
+
+				.content {
+					max-width: 100%;
 				}
 
 				.primary-location {
@@ -86,6 +70,7 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 					background: var(--primary);
 					color: var(--white);
 					flex-grow: 1;
+					max-width: 100%;
 				}
 
 				.workshop {
@@ -105,18 +90,26 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 
 				.dropdown-unfocus {
 					display: flex;
-					justify-content: space-between;
+					/* justify-content: space-between; */
 					align-items: center;
 					outline: none;
 					padding: var(--spacing);
+					width: 100%;
 				}
 
 				h4 {
 					margin: 0;
+					margin-right: auto;
+					padding-right: var(--spacing);
+
+					/* ? */
+					/* display: inline; */
 				}
 
-				.main-padding {
-					height: calc(var(--spacing) * 1.5);
+				h4.closed {
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 			`}
 			</style>

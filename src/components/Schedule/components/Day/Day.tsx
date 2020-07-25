@@ -55,7 +55,7 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 								open: { height: 'auto' },
 								collapsed: { height: 0 },
 							}}
-							style={{ overflow: 'hidden' }}
+							style={{ overflow: 'hidden', borderRight: 'calc(1rem / 16) solid transparent' }}
 							transition={{ type: 'spring', mass: 2, damping: 50, stiffness: 150, staggerChildren: 0.05 }}
 						>
 							{ sessions.map(props => (

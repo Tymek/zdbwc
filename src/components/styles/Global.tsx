@@ -84,6 +84,7 @@ const GlobalStyle: React.FC = () => (
 			border: 0px solid transparent;
 			box-shadow: 0px 0px 0px transparent;
 			text-shadow: 0px 0px 0px transparent;
+			text-align: inherit;
 		}
 /* 
 		input {

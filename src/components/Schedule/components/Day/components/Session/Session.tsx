@@ -25,6 +25,12 @@ const SessionComponent: React.FC<Session> = ({ name, topics, speaker, begins_at,
 				{ speaker && <div className="spacing"><Speaker>{speaker}</Speaker></div>}
 			</main>
 			<style jsx>{`
+					section {
+						display: flex;
+						flex-direction: column;
+						width: 100%;
+					}
+
 					.name {
 						display: block;
 						padding: var(--spacing);
