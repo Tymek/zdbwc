@@ -22,7 +22,7 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 
 	return (
 		<article>
-			<aside>
+			<aside className={isWorkshop ? 'secondary-location' : 'primary-location'}>
 				{location}
 			</aside>
 			<div>
@@ -69,9 +69,16 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 
 				aside {
 					font-family: var(--font-family-mono);
-					color: var(--primary);
 					font-size: 0.875rem;
 					padding: var(--spacing);
+				}
+
+				.primary-location {
+					color: var(--primary);
+				}
+
+				.secondary-location {
+					color: var(--secondary);
 				}
 
 				header {
