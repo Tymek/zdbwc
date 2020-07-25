@@ -6,6 +6,7 @@ import Document, {
 	DocumentContext,
 	DocumentInitialProps,
 } from 'next/document'
+import Analytics from 'components/Analytics'
 
 export const lang = 'pl'
 
@@ -33,6 +34,7 @@ class MyDocument extends Document {
 							{' --data \'{ "query": "{__type(name:\\"session\\"){fields{name}}}" }\''}
 						</code>
 					</noscript>
+					<Analytics />
 				</body>
 			</Html>
 		)
