@@ -37,7 +37,9 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 			>
 				<button type="button" className={isOpen ? 'open' : ''} onClick={onHeaderClick}>
 					<div className="button-unfocus" tabIndex={-1}>
-						<h2><time dateTime={moment(id).format('YYYY-MM-DD')}>{label}</time></h2>
+						<h2>
+							<time dateTime={moment(id).format('YYYY-MM-DD')}>{label}</time>
+						</h2>
 					</div>
 				</button>
 			</motion.header>
@@ -72,6 +74,14 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 				}
 			</AnimatePresence>
 			<style jsx>{`
+				button {
+					all: inherit;
+					cursor: pointer;
+					border: none;
+					width: 100%;
+					outline: 0;
+				}
+
 				h2 {
 					font-size: inherit;
 					font-weight: var(--font-weight-bold);
@@ -80,12 +90,8 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 					margin: 0;
 				}
 
-				button {
-					all: inherit;
-					cursor: pointer;
-					border: none;
-					width: 100%;
-					outline: 0;
+				time {
+					color: inherit;
 				}
 
 				.button-unfocus {
