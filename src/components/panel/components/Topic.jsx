@@ -15,7 +15,7 @@ import {
 	required,
 } from 'react-admin'
 import moment from 'utils/moment'
-import { RelativeTimeField } from './fields'
+// import { RelativeTimeField } from './fields'
 
 const formatSession = record => `${
 	moment(record['begins_at']).format('dddd, HH:mm')
@@ -41,7 +41,8 @@ export const TopicList = props => (
 			expand={
 				<SimpleShowLayout>
 					<RichTextField source="description" emptyText="&mdash;" />
-					<TextField source="location" emptyText="&mdash;" />
+					{/* <RelativeTimeField label="zaktualizowano" source="updated_at" />
+					<RelativeTimeField label="utworzono" source="created_at" /> */}
 				</SimpleShowLayout>
 			}
 		>
@@ -56,7 +57,8 @@ export const TopicList = props => (
 				<FunctionField render={formatSession} />
 			</ReferenceField>
 			<TextField source="speaker" emptyText="&mdash;" />
-			<RelativeTimeField label="zaktualizowano" source="updated_at" />
+			{/* <RelativeTimeField label="zaktualizowano" source="updated_at" /> */}
+			<TextField source="location" emptyText="&mdash;" />
 		</Datagrid>
 	</List>
 )
