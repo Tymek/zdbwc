@@ -75,11 +75,7 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 			</AnimatePresence>
 			<style jsx>{`
 				button {
-					all: inherit;
-					cursor: pointer;
-					border: none;
 					width: 100%;
-					outline: 0;
 				}
 
 				h2 {
@@ -93,7 +89,7 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 				time {
 					color: inherit;
 				}
-
+				
 				.button-unfocus {
 					padding: calc(var(--spacing) * 1.5);
 					outline: 0;

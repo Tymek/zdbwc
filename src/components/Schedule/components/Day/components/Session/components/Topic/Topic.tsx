@@ -93,8 +93,7 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 				}
 
 				.dropdown {
-					all: inherit;
-					cursor: pointer;
+					color: var(--white);
 					width: 100%;
 				}
 

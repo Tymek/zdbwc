@@ -82,7 +82,6 @@ const ListOfDays: React.FC = () => {
 			</div>
 			<style jsx>{`
 				.grid {
-					border-top: var(--border-weight) solid var(--white);
 					margin-bottom: calc(1rem / 16);
 				}
 			`}

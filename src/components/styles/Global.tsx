@@ -70,6 +70,21 @@ const GlobalStyle: React.FC = () => (
 			flex-grow: 1;
 		}
 
+		/* safari bugfix */
+		button {
+			font-size: inherit;
+			font-family: inherit;
+			appearance: none;
+			background: transparent;
+			text-decoration: none;
+			cursor: pointer;
+			outline: 0;
+			margin: 0;
+			padding: 0;
+			border: 0px solid transparent;
+			box-shadow: 0px 0px 0px transparent;
+			text-shadow: 0px 0px 0px transparent;
+		}
 /* 
 		input {
 			border-radius: var(--border-radius);
