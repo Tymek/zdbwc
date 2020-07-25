@@ -69,6 +69,7 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 									<SessionComponent key={props.id} {...props} />
 								</motion.div>
 							))}
+							<div className="spacing" />
 						</motion.main>
 					)
 				}
@@ -100,6 +101,10 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 					outline-color: var(--primary);
 					outline-width: 0.125em;
 					color: var(--primary);
+				}
+
+				.spacing {
+					height: calc(var(--spacing) * 3);
 				}
 			`}
 			</style>
