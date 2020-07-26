@@ -74,6 +74,7 @@ export const TopicEdit = props => ( // TODO: redirect to session?
 					field: 'begins_at',
 					order: 'ASC',
 				}}
+				perPage={Infinity}
 			>
 				<SelectInput optionText={formatSession} />
 			</ReferenceInput>
@@ -100,6 +101,7 @@ export const TopicCreate = props => {
 					label="sesja"
 					source="session_id"
 					reference="session"
+					perPage={Infinity}
 					validate={[required()]}
 					required
 					disabled={!!sessionId}
