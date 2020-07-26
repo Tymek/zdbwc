@@ -13,11 +13,21 @@ const fields = {
 	updated_at: 'zaktualizowano',
 	created_at: 'utworzono',
 	location: 'lokalizacja',
+	title: 'tytuł',
+	content: 'treść',
+	published_at: 'data publikacji',
 }
 
 const messages = {
 	pl: {
 		...polishMessages,
+		ra: {
+			...polishMessages.ra,
+			action: {
+				...polishMessages.ra.action,
+				create: 'Dodaj',
+			},
+		},
 		resources: {
 			session: {
 				name: 'Sesja |||| Sesje',
@@ -26,6 +36,12 @@ const messages = {
 			topic: {
 				name: 'Temat |||| Tematy',
 				fields,
+			},
+			notification: {
+				name: 'Powiadomienie |||| Powiadomienia',
+				fields,
+				empty: 'Brak powiadomień na liście',
+				invite: 'Czy chcesz dodać nową wiadomość?',
 			},
 		},
 	},

@@ -4,6 +4,7 @@ import { Admin, Resource } from 'react-admin'
 import { AdminProps, DataProvider } from 'ra-core'
 import ScheduleIcon from '@material-ui/icons/Schedule'
 import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes'
+import NotificationsIcon from '@material-ui/icons/Notifications'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
 import Fonts from 'components/styles/Fonts'
@@ -17,12 +18,10 @@ import StyleReset from './components/StyleReset'
 import Login from './components/Login'
 import i18nProvider from './utils/i18nProvider'
 import { SessionList, SessionEdit, SessionCreate, SessionShow } from './components/Session'
+import { NotificationList, NotificationCreate, NotificationEdit } from './components/Notification'
 import { TopicList, TopicEdit, TopicCreate } from './components/Topic'
 
 const ReactAdmin = Admin as React.FC<AdminProps>
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type RaDataHasuraGraphql = ({ client }: { client: any }) => Promise<DataProvider>
 
 const App = (): JSX.Element => {
 	const client = useApolloClient()
@@ -46,6 +45,13 @@ const App = (): JSX.Element => {
 				dataProvider={dataProvider}
 				i18nProvider={i18nProvider}
 			>
+				<Resource
+					name="notification"
+					icon={NotificationsIcon}
+					create={NotificationCreate}
+					edit={NotificationEdit}
+					list={NotificationList}
+				/>
 				<Resource
 					name="session"
 					icon={ScheduleIcon}

@@ -1,0 +1,19 @@
+- args:
+    permission:
+      allow_aggregations: true
+      backend_only: false
+      columns:
+      - content
+      - title
+      - published_at
+      - created_at
+      - updated_at
+      - id
+      computed_fields: []
+      filter: {}
+      limit: null
+    role: manager
+    table:
+      name: notification
+      schema: public
+  type: create_select_permission

@@ -2,6 +2,51 @@ version: 2
 tables:
 - table:
     schema: public
+    name: notification
+  insert_permissions:
+  - role: manager
+    permission:
+      check: {}
+      columns:
+      - content
+      - published_at
+      - title
+      backend_only: false
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - content
+      - id
+      - published_at
+      - title
+      filter: {}
+  - role: manager
+    permission:
+      columns:
+      - content
+      - title
+      - published_at
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: manager
+    permission:
+      columns:
+      - content
+      - published_at
+      - title
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: manager
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: session
   array_relationships:
   - name: topics
@@ -57,6 +102,9 @@ tables:
   - role: manager
     permission:
       filter: {}
+- table:
+    schema: public
+    name: test
 - table:
     schema: public
     name: topic

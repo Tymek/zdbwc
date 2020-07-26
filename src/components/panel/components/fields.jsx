@@ -11,13 +11,21 @@ export const RelativeTimeField = ({ record, source, emptyText = '' }) => (
 	}</span>
 )
 
-export const DateTimeField = ({ record, source, emptyText = '' }) => (
-	<span>{
-		record[source]
-			? moment(record[source]).format('dddd, HH:mm')
-			: emptyText
-	}</span>
-)
+export const DateTimeField = ({ record, source, emptyText = '', format, withRelative }) => {
+	const time = record[source] && moment(record[source]).format(format || 'dddd, HH:mm')
+
+	return (
+		<span>{
+			record[source]
+				? time
+				: emptyText
+		}{
+			record[source] && withRelative
+				?	<> (<RelativeTimeField record={record} source={source} />)</>
+				: null
+		}</span>
+	)
+}
 
 export const TimeField = ({ record, source, emptyText = '' }) => (
 	<span>{
