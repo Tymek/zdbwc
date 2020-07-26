@@ -7,6 +7,10 @@ const options = {
 	poweredByHeader: false,
 	serverRuntimeConfig: {
 		hasuraActionSecret: process.env.HASURA_ACTION_SECRET,
+		analyticsSecret: process.env.ANALYTICS_SECRET,
+	},
+	publicRuntimeConfig: {
+		analyticsPageId: process.env.ANALYTICS_PAGEID,
 	},
 	webpack(config, { isServer }) {
 		const MomentLocalesPlugin = require('moment-locales-webpack-plugin')

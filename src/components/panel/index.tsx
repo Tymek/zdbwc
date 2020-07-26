@@ -15,6 +15,7 @@ import moment from 'utils/moment'
 import createAuthProvider from './utils/authProvider'
 import theme from './utils/theme'
 import StyleReset from './components/StyleReset'
+import Dashboard from './components/Dashboard'
 import Login from './components/Login'
 import i18nProvider from './utils/i18nProvider'
 import { SessionList, SessionEdit, SessionCreate, SessionShow } from './components/Session'
@@ -44,6 +45,7 @@ const App = (): JSX.Element => {
 				authProvider={authProvider}
 				dataProvider={dataProvider}
 				i18nProvider={i18nProvider}
+				dashboard={Dashboard}
 			>
 				<Resource
 					name="notification"

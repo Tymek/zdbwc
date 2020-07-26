@@ -8,6 +8,7 @@ const createLoginCookie = (data?: Mutation_RootLoginArgs, overrides?: CookieSeri
 		httpOnly: true,
 		secure: process.env.NODE_ENV === 'production' && process.env.DEBUG !== 'true',
 		expires: moment().add(7, 'days').toDate(),
+		path: '/',
 		...overrides,
 	}
 )

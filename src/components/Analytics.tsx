@@ -1,5 +1,9 @@
+import getConfig from 'next/config'
+
+const { publicRuntimeConfig } = getConfig()
+
 const setDomains = '*.zdbwc.scrlk.pl'
-const setSiteId = 4
+const setSiteId = (publicRuntimeConfig as Record<string, string | number>)?.analyticsPageId
 
 const html = `
   var _paq = window._paq = window._paq || [];

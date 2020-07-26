@@ -27,6 +27,10 @@ const messages = {
 				...polishMessages.ra.action,
 				create: 'Dodaj',
 			},
+			page: {
+				...polishMessages.ra.page,
+				dashboard: 'Statystyki',
+			},
 		},
 		resources: {
 			session: {

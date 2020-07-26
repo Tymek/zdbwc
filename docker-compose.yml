@@ -7,6 +7,8 @@ services:
       - hasura
     environment:
       HASURA_ACTION_SECRET: "${HASURA_ACTION_SECRET}"
+      ANALYTICS_PAGEID: "${ANALYTICS_PAGEID}"
+      ANALYTICS_SECRET: "${ANALYTICS_SECRET}"
     networks:
       - wan
       - lan

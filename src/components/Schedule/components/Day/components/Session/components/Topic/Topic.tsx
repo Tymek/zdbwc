@@ -101,9 +101,7 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 					margin: 0;
 					margin-right: auto;
 					padding-right: var(--spacing);
-
-					/* ? */
-					/* display: inline; */
+					font-weight: var(--font-weight-bold);
 				}
 
 				h4.closed {

@@ -14,6 +14,7 @@ const Layout: React.FC = ({ children }) => (
 
 		{ children }
 
+		<footer>crafted by <a href="//tymek.cz">Tymek.Cz</a></footer>
 		<style jsx>{`
 			.container {
 				display: flex;
@@ -34,6 +35,13 @@ const Layout: React.FC = ({ children }) => (
 				height: 3.2rem;
 				cursor: pointer;
 				margin-bottom: calc(var(--spacing) / 4);
+			}
+
+			footer {
+				display: none; /* TODO: ask about footer */
+				opacity: 0.25;
+				text-align: center;
+				padding: var(--spacing);
 			}
 		`}
 		</style>
