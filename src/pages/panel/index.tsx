@@ -13,9 +13,13 @@ const App: React.FC = () => (
 	<AdminPanel />
 )
 
-export const getStaticProps: GetStaticProps<{ defaultLayout?: boolean }> = () => Promise.resolve({
+export const getStaticProps: GetStaticProps<{
+	defaultLayout?: boolean,
+	analytics?: boolean,
+}> = () => Promise.resolve({
 	props: {
 		defaultLayout: false,
+		analytics: false,
 	},
 })
 
