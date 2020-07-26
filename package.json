@@ -1,6 +1,6 @@
 {
 	"name": "zdbwc",
-	"version": "0.7.2",
+	"version": "0.7.3",
 	"scripts": {
 		"next": "cross-env NEXT_TELEMETRY_DISABLED=1 next",
 		"build": "npm run next -- build",
