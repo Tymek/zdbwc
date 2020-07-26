@@ -12,9 +12,7 @@ const Description: React.FC<{ children?: string }> = ({ children }) => {
 			))}
 			<style jsx>{`
 				p {
-					margin: 0;
-					padding: var(--spacing);
-					padding-top: 0;
+					margin: 0 0 var(--spacing);
 				}
 			`}
 			</style>

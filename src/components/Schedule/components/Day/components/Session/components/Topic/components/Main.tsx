@@ -1,8 +1,7 @@
-
 import { motion, AnimatePresence } from 'framer-motion'
 
+import Description from 'components/Description'
 import Speaker from '../../Speaker'
-import Description from './Description'
 
 type MainProps = {
 	isOpen?: boolean,
@@ -27,7 +26,11 @@ const Main: React.FC<MainProps> = ({ isOpen, speaker, description }) => (
 						style={{ width: '100%', overflow: 'hidden' }}
 					>
 						{speaker && <Speaker>{speaker}</Speaker>}
-						{description && <Description>{description}</Description>}
+						{description && (
+							<div className="description-wrapper">
+								<Description>{description}</Description>
+							</div>
+						)}
 						{!!(speaker || description) && <div className="main-padding" />}
 					</motion.main>
 				) : null
@@ -36,6 +39,10 @@ const Main: React.FC<MainProps> = ({ isOpen, speaker, description }) => (
 		<style jsx>{`
 			.main-padding {
 				height: calc(var(--spacing) * 1.5);
+			}
+
+			.description-wrapper {
+				padding: 0 var(--spacing);
 			}
 		`}
 		</style>

@@ -14,7 +14,10 @@ const Layout: React.FC = ({ children }) => (
 
 		{ children }
 
-		<footer>crafted by <a href="//tymek.cz">Tymek.Cz</a></footer>
+		<footer>
+			<span>&copy; 2020 <a href="//zdobywcy.org">Projekt Zdobywcy</a></span>
+			<span>crafted by <a href="https://www.tymek.cz">Tymek.Cz</a></span>
+		</footer>
 		<style jsx>{`
 			.container {
 				display: flex;
@@ -38,10 +41,22 @@ const Layout: React.FC = ({ children }) => (
 			}
 
 			footer {
-				display: none; /* TODO: ask about footer */
-				opacity: 0.25;
-				text-align: center;
-				padding: var(--spacing);
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				padding: var(--spacing) calc(var(--spacing) * 2.5);
+				color: var(--gray);
+			}
+
+			footer a {
+				color: inherit;
+			}
+
+			footer a:hover,
+			footer a:focus,
+			footer a:active {
+				color: var(--primary);
 			}
 		`}
 		</style>

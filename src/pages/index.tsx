@@ -1,11 +1,14 @@
-import ListOfDays from 'components/Schedule'
-
-export { staticProps as getStaticProps } from 'components/Schedule'
+import ListOfDays, { queries as scheduleQueries } from 'components/Schedule'
+import Notifications, { queries as notificationQueries } from 'components/Notifications'
+import { GetStaticProps } from 'next'
+import { precacheQueries } from 'utils/graphql'
 
 const Home:React.FC = () => (
 	<>
 		<main role="main">
+			<Notifications head />
 			<ListOfDays />
+			<Notifications />
 		</main>
 
 		<style jsx>{`
@@ -18,5 +21,7 @@ const Home:React.FC = () => (
 		</style>
 	</>
 )
+
+export const getStaticProps: GetStaticProps = precacheQueries([...scheduleQueries, ...notificationQueries])
 
 export default Home
