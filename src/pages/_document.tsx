@@ -1,6 +1,5 @@
 import Document, {
 	Html,
-	Head,
 	Main,
 	NextScript,
 	DocumentContext,
@@ -18,9 +17,6 @@ class MyDocument extends Document {
 	render(): JSX.Element {
 		return (
 			<Html lang={lang}>
-				<Head>
-					{/* TODO: https://github.com/shadowwalker/next-pwa#step-3-add-head-meta-example */}
-				</Head>
 				<body>
 					<Main />
 					<NextScript />

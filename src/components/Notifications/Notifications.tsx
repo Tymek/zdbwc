@@ -1,5 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { tail } from 'ramda'
+import { AnimatePresence } from 'framer-motion'
+
 import { Notification } from 'ts/schema'
 import moment from 'utils/moment'
 import SCHEDULE from './gql/notifications.gql'
@@ -28,11 +30,13 @@ const Notifications: React.FC<NotificationsProps> = ({ head }) => {
 
 	return (
 		<div className={head ? 'head' : 'tail'}>
-			{
-				notifications && notifications.map(notification => (
-					<NotificationComponent key={notification.id} {...notification} />
-				))
-			}
+			<AnimatePresence initial={false}>
+				{
+					notifications && notifications.map(notification => (
+						<NotificationComponent key={notification.id} {...notification} head={head} />
+					))
+				}
+			</AnimatePresence>
 			<style jsx>{`
 				.head {
 					padding-bottom: var(--spacing);

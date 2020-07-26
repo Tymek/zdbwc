@@ -14,7 +14,7 @@ const Style: React.FC = () => (
 
 		@font-face {
 			font-family: Roboto;
-			font-weight: 600;
+			font-weight: 500;
 			font-display: swap;
 			src: ${medium};
 		}

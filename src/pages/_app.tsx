@@ -40,9 +40,17 @@ const Metadata: React.FC = () => (
 		<meta name="msapplication-config" content="/static/config/browserconfig.xml" />
 
 		{/* Fonts */}
-		<link rel="preload" href="/static/fonts/roboto-light.woff2" as="font" type="font/woff2" />
-		<link rel="preload" href="/static/fonts/roboto-bold.woff2" as="font" type="font/woff2" />
-		<link rel="preload" href="/static/fonts/roboto-mono-light.woff2" as="font" type="font/woff2" />
+		<link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/static/fonts/roboto-light.woff2" />
+		<link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/static/fonts/roboto-medium.woff2" />
+		<link
+			rel="preload"
+			as="font"
+			type="font/woff2"
+			crossOrigin="anonymous"
+			href="/static/fonts/roboto-mono-light.woff2"
+		/>
+
+		{/* TODO: https://github.com/shadowwalker/next-pwa#step-3-add-head-meta-example */}
 	</Head>
 )
 

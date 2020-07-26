@@ -16,6 +16,7 @@ const Layout: React.FC = ({ children }) => (
 
 		<footer>
 			<span>&copy; 2020 <a href="//zdobywcy.org">Projekt Zdobywcy</a></span>
+			<span className="version" aria-hidden>v{process.env.VERSION}</span>
 			<span>crafted by <a href="https://www.tymek.cz">Tymek.Cz</a></span>
 		</footer>
 		<style jsx>{`
@@ -57,6 +58,10 @@ const Layout: React.FC = ({ children }) => (
 			footer a:focus,
 			footer a:active {
 				color: var(--primary);
+			}
+
+			.version {
+				color: var(--light);
 			}
 		`}
 		</style>
