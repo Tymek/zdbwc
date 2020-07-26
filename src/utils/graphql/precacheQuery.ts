@@ -16,7 +16,7 @@ const precacheQuery = (
 			props: {
 				[pagePropsKey]: client.cache.extract(),
 			},
-			unstable_revalidate: 1, // @see https://nextjs.org/blog/next-9-4
+			revalidate: 1, // @see https://nextjs.org/blog/next-9-4
 		}
 	} catch (error) {
 		console.error(error) // eslint-disable-line no-console

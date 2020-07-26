@@ -31,7 +31,7 @@ services:
       - lan
 
   hasura:
-    image: "hasura/graphql-engine:${HASURA_VERSION:-v1.3.0-beta.4}.cli-migrations"
+    image: "hasura/graphql-engine:${HASURA_VERSION:-v1.3.0}.cli-migrations"
     depends_on:
       - postgres
     restart: always
