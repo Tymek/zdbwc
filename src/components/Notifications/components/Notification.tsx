@@ -3,12 +3,12 @@ import moment from 'utils/moment'
 import Description from 'components/Description'
 import { motion } from 'framer-motion'
 
-const NotificationComponent: React.FC<Partial<Notification> & { head?: boolean }> = ({
+const NotificationComponent: React.FC<Partial<Notification> & { muted?: boolean }> = ({
 	id,
 	title,
 	content,
 	published_at,
-	head,
+	muted,
 	children,
 }) => {
 	const format = (str: string) => moment(published_at).format(str)
@@ -35,7 +35,7 @@ const NotificationComponent: React.FC<Partial<Notification> & { head?: boolean }
 						<time>{format('HH:mm')}</time>
 					</div>
 				</aside>
-				<main className={head ? '' : 'muted'}>
+				<main className={muted ? 'muted' : ''}>
 					<header>
 						<h3>{title}</h3>
 					</header>

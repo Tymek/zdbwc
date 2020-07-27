@@ -1,4 +1,4 @@
-const Speaker: React.FC<{ children?: string }> = ({ children }) => {
+const Speaker: React.FC<{ children?: string, equal?: boolean }> = ({ children, equal }) => {
 	if (!children) return null
 
 	let prefix = 'mówca'
@@ -9,7 +9,7 @@ const Speaker: React.FC<{ children?: string }> = ({ children }) => {
 	}
 
 	return (
-		<div className="container">
+		<div className={equal ? 'simple-container' : 'container'}>
 			<div className="label">
 				{prefix}
 			</div>
@@ -23,6 +23,11 @@ const Speaker: React.FC<{ children?: string }> = ({ children }) => {
 				.container {
 					display: grid;
 					grid-template-columns: 2fr 3fr;
+				}
+
+				.simple-container {
+					display: grid;
+					grid-template-columns: 1fr 1fr;
 				}
 
 				.container > div {

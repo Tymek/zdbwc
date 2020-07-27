@@ -13,18 +13,45 @@ const InfoAboutUpdate: React.FC = () => {
 	const content = data?.update_info
 
 	return (
-		<AnimatePresence>
-			{
-				content ? (
-					<Notification key="update" id="update" title="Aktualizacja" content={content}>
-						<button type="button" onClick={() => trigger('acceptUpdate')}>
-							<Outdated width="1em" height="1em" />
-							Zaktualizuj
-						</button>
-					</Notification>
-				) : null
-			}
-		</AnimatePresence>
+		<>
+			<AnimatePresence>
+				{
+					content ? (
+						<Notification key="update" id="update" title="Aktualizacja" content={content} muted>
+							<div className="action">
+								<button type="button" onClick={() => trigger('acceptUpdate')}>
+									<span>
+										<Outdated width="1em" height="1em" />
+									</span>
+									Zaktualizuj
+								</button>
+							</div>
+						</Notification>
+					) : null
+				}
+			</AnimatePresence>
+			<style jsx>{`
+				.action {
+					display: flex;
+					padding-right: 19.5%;
+				}
+
+				button {
+					background: var(--secondary);
+					color: var(--white);
+					padding: var(--spacing);
+					display: inline-flex;
+					align-items: center;
+					margin: 0 auto;
+				}
+
+				button span {
+					margin-bottom: calc(var(--spacing) / -3);
+					margin-right: calc(var(--spacing) / 2);
+				}
+			`}
+			</style>
+		</>
 	)
 }
 
