@@ -5,14 +5,33 @@ import { useRouter } from 'next/dist/client/router'
 type ReplaceLocationFunction = (url: string) => string
 type RedirectOptions = {
 	timeout?: number,
-	statusCode?: number,
+	statusCode?: number, // http response, probably 3XX, @see https://cz3.ch/dev-http-statusCode
+	props?: Record<string, unknown>,
 	content?: JSX.Element
 }
 
 const defaults = {
 	timeout: 3,
+	props: {},
 }
 
+/**
+ * NextJS redirect page generator
+ *
+ * @param location can be string, or function returning string, were input is current URL
+ * @param {Object} options - optional
+ * @param {number} options.statusCode - is provided, it generates server-side `location` header
+ * you should probably use 3XX, see https://cz3.ch/dev-http-statusCode
+ * @param {number} options.timeout - browser-side `httpEquiv="Refresh"` delay
+ * @param {Object} options.props - other server-side props to be passed when rendering page
+ * @param {Object} options.content - customized client-side component displayed on redirect page
+ * @example
+ * ``` ts
+ * const [Component, getSSP] = redirect('/url', { ...options })
+ * export const getServerSideProps = getSSP
+ * export default Component
+ * ```
+ */
 const redirect = (
 	location: string | ReplaceLocationFunction,
 	options?: RedirectOptions
@@ -21,6 +40,7 @@ const redirect = (
 		timeout,
 		statusCode,
 		content,
+		props,
 	} = {
 		...defaults,
 		...options,
@@ -50,7 +70,7 @@ const redirect = (
 			context.res.end()
 		}
 
-		return Promise.resolve({ props: {} })
+		return Promise.resolve({ props })
 	}
 
 	return [Component, getServerSideProps]
