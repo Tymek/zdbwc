@@ -37,7 +37,7 @@ const SessionComponent: React.FC<Session> = ({ name, topics, speaker, begins_at,
 					}
 
 					.spacing {
-						margin-top: calc(var(--spacing) * -2.5);
+						margin-top: calc(var(--spacing) * -1);
 						padding-bottom: calc(var(--spacing) * 1.5);
 					}
 				`}
