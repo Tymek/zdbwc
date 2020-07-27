@@ -26,7 +26,7 @@ let apolloClient: ApolloClient<NormalizedCacheObject>
 const cache = new InMemoryCache()
 
 const gqlClient = async (initialState?: NormalizedCacheObject): Promise<ApolloClient<NormalizedCacheObject>> => {
-	if (!ssrMode) {
+	if (!ssrMode && process.env.NODE_ENV !== 'test') {
 		const persistor = new CachePersistor({
 			cache,
 			storage: window.localStorage,
