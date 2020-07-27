@@ -1,5 +1,6 @@
 import { Workbox, messageSW } from 'workbox-window'
 import { WorkboxLifecycleWaitingEvent } from 'workbox-window/utils/WorkboxEvent'
+import { trigger, listenTo } from './updateEvent'
 
 const swUrl = '/sw.js'
 const shouldRegister = (
@@ -9,72 +10,98 @@ const shouldRegister = (
 )
 
 type Version = string | number
+type ServiceWorkerState = 'installing' | 'waiting' | 'active'
 
-/** Async action triggering skipWaiting.
- * `onAccept` resolves when new SW is controlling the page
- */
-export type OnUpdateCallback = (
-	onAccept: () => Promise<string>,
+export type ShowUpdateNotificationCallback = (
 	version?: Version,
 	oldVersion?: Version,
 	isRecurring?: boolean
 ) => void
 
-const registerAfterWindowLoad = async (onUpdate?: OnUpdateCallback): Promise<Workbox> => {
+
+const registerAfterWindowLoad = async (showUpdateNotification?: ShowUpdateNotificationCallback): Promise<Workbox> => {
 	const wb = new Workbox(swUrl)
 	let registration: ServiceWorkerRegistration | undefined
 
-	const getVersions = async (): Promise<[Version | undefined, Version | undefined]> => {
+	const getSW = async (state: ServiceWorkerState): Promise<ServiceWorker | null> => {
 		if (!registration) {
 			registration = await navigator.serviceWorker.ready
 		}
 
-		const waitingVersion = registration?.waiting && await messageSW(registration.waiting, { type: 'GET_VERSION' })
-		const activeVersion = registration?.active && await messageSW(registration.active, { type: 'GET_VERSION' })
-
-		return [waitingVersion, activeVersion]
+		return registration[state]
 	}
 
-	const onAccept = (): Promise<string> => new Promise((resolve, reject) => {
+	const getVersion = async (state: ServiceWorkerState): Promise<Version | undefined> => {
+		const sw = await getSW(state)
+
+		if (!sw) return undefined // eslint-disable-line unicorn/no-useless-undefined
+
+		return (await messageSW(sw, { type: 'GET_VERSION' })) as Version
+	}
+
+	const sendMessage = async (state: ServiceWorkerState, type: string) => {
+		const sw = await getSW(state)
+
+		if (!sw) return undefined // eslint-disable-line unicorn/no-useless-undefined
+
+		return messageSW(sw, { type })
+	}
+
+	listenTo('update', () => {
+		setTimeout(() => {
+			window.location.reload()
+		}, 300)
+	})
+
+	listenTo('acceptUpdate', () => {
 		wb.addEventListener('controlling', () => {
-			resolve('controlling')
+			trigger('update')
 		})
 
 		Promise.allSettled([
-			wb.messageSW({ type: 'SKIP_WAITING' }),
-			wb.messageSW({ type: 'CLAIM' }),
+			sendMessage('waiting', 'SKIP_WAITING'),
+			sendMessage('waiting', 'CLAIM'),
 		]).then(async ([skipWaiting, claim]) => {
 			if (!skipWaiting || !claim) {
-				reject(new Error(`skipWaiting: ${skipWaiting ? '1' : '0'}, claim: ${claim ? '1' : '0'}`))
+				throw new Error(JSON.stringify({ skipWaiting, claim }))
 			}
 
-			const [waitingVersion, activeVersion] = await getVersions()
+			const waitingVersion = await getVersion('waiting')
+			const activeVersion = await getVersion('active')
 
 			if (waitingVersion === undefined || waitingVersion === activeVersion) {
-				resolve('not waiting')
+				return trigger('update')
 			}
 
-			return void ''
-		}).catch(reject)
+			throw new Error(JSON.stringify({
+				message: 'update unsuccessful',
+				waitingVersion,
+				activeVersion,
+			}))
+		}).catch(error => {
+			console.error(error) // eslint-disable-line no-console
+		})
 	})
 
-	const update = async (event: WorkboxLifecycleWaitingEvent) => {
-		const [waitingVersion, activeVersion] = await getVersions()
+	const onUpdateFound = async (event: WorkboxLifecycleWaitingEvent) => {
+		const activeVersion = await getVersion('active')
+		const waitingVersion = await getVersion('waiting')
 
-		if (onUpdate) {
-			onUpdate(onAccept, waitingVersion, activeVersion, event?.wasWaitingBeforeRegister)
+		if (showUpdateNotification) {
+			showUpdateNotification(waitingVersion, activeVersion, event?.wasWaitingBeforeRegister)
 		} else {
-			void onAccept()
+			trigger('update')
 		}
 	}
 
-	wb.addEventListener('waiting', update)
-	wb.addEventListener('externalwaiting', update) // worker in other tab. @see https://cz3.ch/dev-workbox-externalwaiting
+	wb.addEventListener('waiting', onUpdateFound)
+
+	// worker in other tab. @see https://cz3.ch/dev-workbox-externalwaiting
+	wb.addEventListener('externalwaiting', onUpdateFound)
+
 	wb.addEventListener('controlling', ({ isUpdate }) => {
 		if (isUpdate) {
-			setTimeout(() => {
-				window.location.reload()
-			}, 1250)
+			trigger('update')
 		}
 	})
 
@@ -87,12 +114,12 @@ const registerAfterWindowLoad = async (onUpdate?: OnUpdateCallback): Promise<Wor
 	return wb
 }
 
-export const register = (onUpdate?: OnUpdateCallback): Promise<Workbox> => {
+export const register = (showUpdateNotification?: ShowUpdateNotificationCallback): Promise<Workbox> => {
 	if (!shouldRegister) return Promise.reject()
 
 	return new Promise(resolve => {
 		window.addEventListener('load', () => {
-			resolve(registerAfterWindowLoad(onUpdate))
+			resolve(registerAfterWindowLoad(showUpdateNotification))
 		})
 	})
 }

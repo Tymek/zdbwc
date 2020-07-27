@@ -1,0 +1,3 @@
+mutation SetUpdateInfo($value: String!) {
+  set_update_info(value: $value) @client
+}

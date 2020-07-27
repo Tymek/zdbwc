@@ -1,0 +1,3 @@
+query UpdateInfo {
+	update_info @client
+}

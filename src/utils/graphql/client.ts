@@ -6,7 +6,9 @@ import {
 	InMemoryCache,
 	NormalizedCacheObject,
 } from '@apollo/client'
-import { persistCache } from 'apollo-cache-persist'
+import { CachePersistor } from 'apollo-cache-persist'
+import { ApolloPersistOptions } from 'apollo-cache-persist/types'
+import { listenTo } from 'service/updateEvent'
 import getEndpoint from './getEndpoint'
 import resolvers, { typeDefs } from './resolvers'
 
@@ -25,11 +27,18 @@ const cache = new InMemoryCache()
 
 const gqlClient = async (initialState?: NormalizedCacheObject): Promise<ApolloClient<NormalizedCacheObject>> => {
 	if (!ssrMode) {
-		await persistCache({
+		const persistor = new CachePersistor({
 			cache,
 			storage: window.localStorage,
 			debug: process.env.DEBUG === 'true',
-		} as unknown as Parameters<typeof persistCache>[0])
+		} as unknown as ApolloPersistOptions<NormalizedCacheObject>)
+
+		await persistor.restore()
+
+		listenTo('update', () => {
+			persistor.remove()
+			void persistor.purge()
+		})
 	}
 
 	const client = apolloClient ?? new ApolloClient({

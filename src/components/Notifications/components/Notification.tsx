@@ -3,12 +3,13 @@ import moment from 'utils/moment'
 import Description from 'components/Description'
 import { motion } from 'framer-motion'
 
-const NotificationComponent: React.FC<Notification & { head?: boolean }> = ({
+const NotificationComponent: React.FC<Partial<Notification> & { head?: boolean }> = ({
 	id,
 	title,
 	content,
 	published_at,
 	head,
+	children,
 }) => {
 	const format = (str: string) => moment(published_at).format(str)
 
@@ -41,6 +42,7 @@ const NotificationComponent: React.FC<Notification & { head?: boolean }> = ({
 					{
 						content && <Description>{content}</Description>
 					}
+					{children}
 				</main>
 				<style jsx>{`
 					article {

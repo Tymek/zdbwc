@@ -6,6 +6,7 @@ import { Notification } from 'ts/schema'
 import moment from 'utils/moment'
 import SCHEDULE from './gql/notifications.gql'
 import NotificationComponent from './components/Notification'
+import InfoAboutUpdate from './components/Update'
 
 const pollInterval = process.env.NODE_ENV !== 'production' || process.env.DEBUG === 'true' ? 6e3 : 15e3 // 15s
 const filterCurrent = (notifications: Notification[]) => notifications.filter(
@@ -37,6 +38,7 @@ const Notifications: React.FC<NotificationsProps> = ({ head }) => {
 					))
 				}
 			</AnimatePresence>
+			{ head && <InfoAboutUpdate /> }
 			<style jsx>{`
 				.head {
 					padding-bottom: var(--spacing);
