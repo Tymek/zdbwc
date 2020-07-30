@@ -42,7 +42,7 @@ declare -A FONT_STYLES=(
 )
 
 function lowercase() {
-	echo "$1" | sed "s/./\L&/g"
+	echo "$1" | tr [:upper:] [:lower:]
 }
 
 function downloadFont() {
