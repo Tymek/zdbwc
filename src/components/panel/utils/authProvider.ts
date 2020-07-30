@@ -8,6 +8,14 @@ import LOGIN from 'gql/login.gql'
 import ME from 'gql/me.gql'
 import LOGOUT from 'gql/logout.gql'
 
+const authorizeAPI = (input: Mutation_RootLoginArgs) => fetch('/api/login', {
+	method: 'POST',
+	body: JSON.stringify({ input }),
+	headers: {
+		'Content-type': 'application/json; charset=UTF-8',
+	},
+})
+
 const authProvider = ({ client }: { client: ApolloClient<any> }): AuthProvider => {
 	let permissions: boolean | undefined
 
@@ -15,6 +23,8 @@ const authProvider = ({ client }: { client: ApolloClient<any> }): AuthProvider =
 		const { data } = await client.mutate({
 			mutation: LOGIN, variables,
 		})
+
+		void authorizeAPI(variables)
 
 		permissions = data
 	}

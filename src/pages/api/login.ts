@@ -33,4 +33,6 @@ export const handler: RequestHandler<NextApiRequest, NextApiResponse> = async (r
 	res.json(userInfo)
 }
 
-export default connect(handler)
+export default connect(handler, {
+	verify: false,
+})
