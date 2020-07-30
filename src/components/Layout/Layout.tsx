@@ -1,10 +1,14 @@
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import StyleVariables from 'components/styles/Variables'
+import GlobalStyle from './components/GlobalStyle'
 
 const OfflineInfo = dynamic(() => import('./components/OfflineInfo'), { ssr: false })
 
 const Layout: React.FC = ({ children }) => (
 	<div className="container">
+		<StyleVariables />
+		<GlobalStyle />
 		<header>
 			<Link href="/">
 				<img src="/static/images/logo.svg" alt="logo" />
@@ -15,7 +19,7 @@ const Layout: React.FC = ({ children }) => (
 		{ children }
 
 		<footer>
-			<span>&copy; 2020 <a href="//zdobywcy.org">Projekt Zdobywcy</a></span>
+			<span>&copy; 2020 <a href="http://zdobywcy.org/konferencja-zdobywcy/">Konferencja Zdobywcy</a></span>
 			<span className="version" aria-hidden>v{process.env.VERSION}</span>
 			<span>crafted by <a href="https://www.tymek.cz">Tymek.Cz</a></span>
 		</footer>

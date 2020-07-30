@@ -28,7 +28,7 @@ const App: React.FC = () => (
 	<>
 		<Head>
 			{/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
-			<title>Zaplecze 🔧 zdbwc.scrlk.pl</title>
+			<title>Zaplecze 🔧 {'{'} zdbwc {'}'}</title>
 			<meta name="theme-color" content="#111111" />
 		</Head>
 		<AdminPanel />

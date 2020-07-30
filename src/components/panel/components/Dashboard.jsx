@@ -20,7 +20,7 @@ const Dashboard = () => {
 
 	return (
 		<Card>
-			<Title title="Zaplecze" />
+			<Title title="Zaplecze 🔧 { zdbwc }" />
 			<CardContent style={{ marginTop: '-0.4rem' }}>
 				{
 					token ? (

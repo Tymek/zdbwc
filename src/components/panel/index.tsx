@@ -7,7 +7,6 @@ import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
-import Fonts from 'components/styles/Fonts'
 import StyleVariables from 'components/styles/Variables'
 import buildHasuraProvider from 'ra-data-hasura-graphql'
 
@@ -72,7 +71,6 @@ const App = (): JSX.Element => {
 			</ReactAdmin>
 			<StyleVariables />
 			<StyleReset />
-			<Fonts />
 		</MuiPickersUtilsProvider>
 	) : <></>
 }

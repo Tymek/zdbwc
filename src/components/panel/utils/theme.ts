@@ -13,6 +13,10 @@ const theme = createMuiTheme({
 			main: tertiary,
 		},
 	},
+	typography: {
+		fontWeightLight: 100,
+		fontWeightRegular: 300,
+	},
 	overrides: {
 		MuiAppBar: {
 			colorSecondary: {
