@@ -8,6 +8,7 @@ ignores:
   - "@babel/runtime"
   - "@scrlk/eslint-config"
   - "babel-eslint"
+  - "sass"
   - "styled-jsx"
   - "url-loader"
   - "workbox-core"
