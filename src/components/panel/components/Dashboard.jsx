@@ -4,10 +4,6 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import { Title } from 'react-admin'
 import IframeResizer from 'iframe-resizer-react'
-import getConfig from 'next/config'
-
-const { publicRuntimeConfig } = getConfig()
-const { analyticsPageId } = publicRuntimeConfig
 
 const Dashboard = () => {
 	const [token, setToken] = useState('')
@@ -34,7 +30,7 @@ const Dashboard = () => {
 								'action=iframe',
 								'moduleToWidgetize=Dashboard',
 								'actionToWidgetize=index',
-								`idSite=${analyticsPageId}`,
+								`idSite=${process.env.ANALYTICS_PAGEID}`,
 								'period=week',
 								'date=today',
 								`token_auth=${token}`,

@@ -1,9 +1,4 @@
-import getConfig from 'next/config'
-
-const { publicRuntimeConfig } = getConfig()
-
-const setDomains = '*.zdbwc.scrlk.pl'
-const setSiteId = (publicRuntimeConfig as Record<string, string | number>)?.analyticsPageId
+const setDomains = process.env.ANALYTICS_DOMAINS || '*.zdbwc.scrlk.pl'
 
 const html = `
   var _paq = window._paq = window._paq || [];
@@ -14,7 +9,7 @@ const html = `
   (function() {
     var u="//analytics.scrlk.pl/";
     _paq.push(['setTrackerUrl', u+'matomo.php']);
-    _paq.push(['setSiteId', '${setSiteId}']);
+    _paq.push(['setSiteId', '${process.env.ANALYTICS_PAGEID || '4'}']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
   })();
