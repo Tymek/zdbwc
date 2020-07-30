@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 OUTPUT_DIRECTORY="./public/static/fonts"
 

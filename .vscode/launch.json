@@ -7,7 +7,7 @@
       "request": "launch",
       "name": "Launch Chrome",
       "url": "http://localhost:3000",
-      "runtimeExecutable": "/usr/bin/chromium", // TODO: support Windows
+      "runtimeExecutable": "/usr/bin/chromium", // TODO: support Windows?
       "runtimeArgs": [
         "--new-window",
         "--user-data-dir=${workspaceFolder}/tmp/profile",
@@ -20,7 +20,7 @@
       "webRoot": "${workspaceFolder}",
       "trace": true,
     },
-    { // TODO: not working with TS. maybe https://github.com/jasonwilliams/nextjs9-typescript-server-vscode-example
+    {
       "type": "node",
       "request": "attach",
       "name": "Attach Next.js",
