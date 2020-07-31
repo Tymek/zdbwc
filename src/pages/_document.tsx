@@ -67,7 +67,20 @@ class MyDocument extends Document {
 						href="/static/fonts/roboto_mono-300.woff2"
 					/>
 
-					{/* TODO: https://github.com/shadowwalker/next-pwa#step-3-add-head-meta-example */}
+					<meta name="twitter:card" content="summary" />
+					<meta name="twitter:url" content="https://zdbwc.scrlk.pl" />
+					<meta name="twitter:title" content="Konferencja Zdobywcy" />
+					<meta name="twitter:description" content="Aplikacja ze szczegółową agendą i najnowszymi informacjami." />
+					<meta name="twitter:image" content="/static/images/preview-image.jpg" />
+					<meta name="twitter:creator" content="@Tymek" />
+					<meta property="og:type" content="website" />
+					<meta property="og:title" content="Konferencja Zdobywcy" />
+					<meta property="og:description" content="Aplikacja ze szczegółową agendą i najnowszymi informacjami." />
+					<meta property="og:site_name" content="Aplikacja { zdbwc }" />
+					<meta property="og:url" content="https://zdbwc.scrlk.pl" />
+					<meta property="og:image" content="/static/images/preview-image.jpg" />
+					<meta property="og:image:width" content="1200" />
+					<meta property="og:image:height" content="630" />
 				</Head>
 				<body>
 					<Main />
