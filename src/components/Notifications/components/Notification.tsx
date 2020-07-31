@@ -2,6 +2,7 @@ import { Notification } from 'ts/schema'
 import moment from 'utils/moment'
 import Description from 'components/Description'
 import { motion } from 'framer-motion'
+import WarningSignIcon from 'assets/icons/warning-sign.svg'
 
 const NotificationComponent: React.FC<Partial<Notification> & { important?: boolean }> = ({
 	id,
@@ -29,7 +30,16 @@ const NotificationComponent: React.FC<Partial<Notification> & { important?: bool
 			<article className={important ? 'important' : ''}>
 				<main>
 					<header>
-						<h3>{title}</h3>
+						<h3>
+							{
+								important ? (
+									<span className="icon">
+										<WarningSignIcon width="1.25em" height="1.25em" />
+									</span>
+								) : null
+							}
+							{title}
+						</h3>
 					</header>
 					{
 						content && <Description>{content}</Description>
@@ -63,7 +73,6 @@ const NotificationComponent: React.FC<Partial<Notification> & { important?: bool
 					aside strong, main h3 {
 						display: block;
 						font-weight: var(--font-weight-medium);
-						font-family: var(--font-family-medium);
 						font-size: inherit;
 						margin-bottom: var(--spacing);
 						color: var(--dark);
@@ -88,6 +97,20 @@ const NotificationComponent: React.FC<Partial<Notification> & { important?: bool
 					h3 {
 						margin: 0;
 						padding: 0;
+						font-family: var(--font-family-medium);
+					}
+
+					aside strong {
+						font-family: var(--font-family-mono);
+					}
+
+					header .icon {
+						margin-right: calc(var(--spacing) / 3 * 2);
+						display: inline-flex;
+						vertical-align: middle;
+						align-items: flex-end;
+						height: 1em;
+						/* margin-bottom: -3px; */
 					}
 				`}
 				</style>

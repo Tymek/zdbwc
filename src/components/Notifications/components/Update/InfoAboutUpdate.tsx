@@ -38,7 +38,7 @@ const InfoAboutUpdate: React.FC = () => {
 				}
 
 				button {
-					background: var(--secondary);
+					background: var(--primary);
 					color: var(--white);
 					padding: var(--spacing);
 					display: inline-flex;

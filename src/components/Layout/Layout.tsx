@@ -52,7 +52,7 @@ const Layout: React.FC = ({ children }) => (
 				flex-wrap: wrap;
 				align-items: center;
 				justify-content: space-between;
-				padding: 0 calc(var(--spacing) * 2.5) var(--spacing);
+				padding: 0 var(--spacing) var(--spacing);
 				color: var(--gray);
 			}
 
