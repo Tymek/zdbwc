@@ -1,15 +1,13 @@
-const setDomains = process.env.ANALYTICS_DOMAINS || '*.zdbwc.scrlk.pl'
-
 const html = `
   var _paq = window._paq = window._paq || [];
-  _paq.push(["setDomains", ["${setDomains}"]]);
+  _paq.push(["setDomains", ["${process.env.NEXT_PUBLIC_ANALYTICS_DOMAINS || '*.zdbwc.scrlk.pl'}"]]);
   _paq.push(["disableCookies"]);
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
   (function() {
     var u="//analytics.scrlk.pl/";
     _paq.push(['setTrackerUrl', u+'matomo.php']);
-    _paq.push(['setSiteId', '${process.env.ANALYTICS_PAGEID || '4'}']);
+    _paq.push(['setSiteId', '${process.env.NEXT_PUBLIC_ANALYTICS_ID || '4'}']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
   })();

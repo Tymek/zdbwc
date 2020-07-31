@@ -12,7 +12,6 @@ services:
     tty: true
     environment:
       TERM: xterm-256color
-      HASURA_ACTION_SECRET: "${HASURA_ACTION_SECRET:-1}"
     command: npm run dev
 
   postgres:
@@ -47,10 +46,11 @@ services:
     ports:
       - 5050:80
     tty: true
+    volumes:
+      - ./.data:/var/lib/postgresql/data
     environment:
       TERM: xterm-256color
-      PGADMIN_DEFAULT_EMAIL: "admin@localhost"
-      PGADMIN_DEFAULT_PASSWORD: "0"
+      PGADMIN_DEFAULT_PASSWORD: "${POSTGRES_PASSWORD:-postgres}"
     networks:
       - wan
       - lan

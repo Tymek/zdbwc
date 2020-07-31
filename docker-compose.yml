@@ -1,14 +1,15 @@
 version: '3.6'
 services:
   next:
-    image: "${APP_DOCKER_IMAGE}"
+    image: "${APP_DOCKER_IMAGE:-registry.gitlab.com/scrlk/zdbwc}"
     restart: always
     depends_on:
       - hasura
     environment:
       HASURA_ACTION_SECRET: "${HASURA_ACTION_SECRET}"
-      ANALYTICS_PAGEID: "${ANALYTICS_PAGEID}"
       ANALYTICS_SECRET: "${ANALYTICS_SECRET}"
+      NEXT_PUBLIC_ANALYTICS_ID: "${NEXT_PUBLIC_ANALYTICS_ID}"
+      NEXT_PUBLIC_ANALYTICS_DOMAINS: "${NEXT_PUBLIC_ANALYTICS_DOMAINS}"
     networks:
       - wan
       - lan

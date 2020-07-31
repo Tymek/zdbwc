@@ -2,21 +2,12 @@ const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
 const { version } = require('./package.json')
-const dotenv = require('dotenv').config()
-
-const getEnv = key => {
-	if (dotenv?.parsed && dotenv?.parsed[key]) {
-		return dotenv?.parsed[key]
-	}
-
-	return process.env[key]
-}
 
 const options = {
 	poweredByHeader: false,
 	serverRuntimeConfig: {
-		hasuraActionSecret: getEnv('HASURA_ACTION_SECRET'),
-		analyticsSecret: getEnv('ANALYTICS_SECRET'),
+		hasuraActionSecret: process.env.HASURA_ACTION_SECRET,
+		analyticsSecret: process.env.ANALYTICS_SECRET,
 	},
 	webpack(config, { isServer }) {
 		const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
@@ -24,7 +15,7 @@ const options = {
 		const { InjectManifest } = require('workbox-webpack-plugin')
 		const { DefinePlugin } = require('webpack')
 
-		config.devtool = getEnv('NODE_ENV') !== 'production' ? 'eval-source-map' : false
+		config.devtool = process.env.NODE_ENV !== 'production' ? 'eval-source-map' : false
 
 		config.plugins = config.plugins || []
 		config.plugins.push(
@@ -38,13 +29,11 @@ const options = {
 			new DefinePlugin({
 				'process.env.BUILD': JSON.stringify(Date.now()),
 				'process.env.VERSION': JSON.stringify(version),
-				'process.env.DEBUG': JSON.stringify(getEnv('DEBUG')), // verbose
-				'process.env.ANALYTICS_PAGEID': JSON.stringify(getEnv('ANALYTICS_PAGEID')),
-				'process.env.ANALYTICS_DOMAINS': JSON.stringify(getEnv('ANALYTICS_DOMAINS')),
+				'process.env.DEBUG': JSON.stringify(process.env.DEBUG), // verbose
 			})
 		)
 
-		if (!isServer && getEnv('NODE_ENV') === 'production') {
+		if (!isServer && process.env.NODE_ENV === 'production') {
 			const additionalManifestEntries = []
 			const revision = file => crypto
 				.createHash('md5')
@@ -69,7 +58,7 @@ const options = {
 
 			config.plugins.push(
 				new InjectManifest({
-					mode: getEnv('DEBUG') === 'true' ? 'development' : 'production',
+					mode: process.env.DEBUG === 'true' ? 'development' : 'production',
 					swSrc: './src/service/worker.ts',
 					swDest: '../public/sw.js',
 					modifyURLPrefix: {
@@ -114,7 +103,7 @@ const options = {
 	},
 }
 
-module.exports = getEnv('ANALYZE') === 'true' ? (() => {
+module.exports = process.env.ANALYZE === 'true' ? (() => {
 	const withBundleAnalyzer = require('@next/bundle-analyzer')({})
 	return withBundleAnalyzer(options)
 })() : options
