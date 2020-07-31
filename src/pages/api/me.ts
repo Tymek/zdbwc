@@ -12,6 +12,8 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
 		throw new ActionError('Not logged in', 412)
 	}
 
+	// TODO: refresh cookie expiration
+
 	const userInfo = { id, username } as UserInfo
 
 	res.json(userInfo)

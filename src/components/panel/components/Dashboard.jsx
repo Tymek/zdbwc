@@ -17,7 +17,8 @@ const getToken = async () => {
 				credentials: 'include',
 			})
 
-			token = await response.json()?.token
+			const json = await response.json()
+			token = json?.token
 		} catch (error) {
 			console.error(error) // eslint-disable-line no-console
 		}

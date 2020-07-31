@@ -12,6 +12,7 @@ services:
     tty: true
     environment:
       TERM: xterm-256color
+      HASURA_ACTION_SECRET: "${HASURA_ACTION_SECRET:-1}"
     command: npm run dev
 
   postgres:
