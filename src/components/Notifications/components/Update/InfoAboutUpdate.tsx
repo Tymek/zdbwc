@@ -10,7 +10,7 @@ const InfoAboutUpdate: React.FC = () => {
 	client.addResolvers(resolvers)
 
 	const { data } = useQuery<{ update_info: UpdateInfo }>(UPDATE_INFO)
-	const content = data?.update_info || 'Nowa wersja jest dostępna. Zaktualizować?'
+	const content = data?.update_info
 
 	return (
 		<>
