@@ -72,12 +72,13 @@ const ListOfDays: React.FC = () => {
 	const getSessions = (day: string) => session.filter(filterSessionsByDay(day)).sort(sortSessions)
 
 	const days = getDays(session)
+	const last = days[days.length - 1]
 
 	return (
 		<div>
 			<div className="grid">
 				{days.map(day => (
-					<Day key={day} id={day} sessions={getSessions(day)} />
+					<Day key={day} id={day} sessions={getSessions(day)} last={day === last} />
 				))}
 			</div>
 			<style jsx>{`

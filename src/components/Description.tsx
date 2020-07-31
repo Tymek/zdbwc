@@ -13,6 +13,8 @@ const Description: React.FC<{ children?: string }> = ({ children }) => {
 			<style jsx>{`
 				p {
 					margin: 0 0 var(--spacing);
+					font-family: var(--font-family-light);
+					font-weight: var(--font-weight-light);
 				}
 			`}
 			</style>

@@ -53,7 +53,7 @@ const Dashboard = () => {
 								'action=iframe',
 								'moduleToWidgetize=Dashboard',
 								'actionToWidgetize=index',
-								`idSite=${process.env.NEXT_PUBLIC_ANALYTICS_ID}`,
+								`idSite=${process.env.NEXT_PUBLIC_ANALYTICS_ID} || '4'`,
 								'period=week',
 								'date=today',
 								`token_auth=${token}`,

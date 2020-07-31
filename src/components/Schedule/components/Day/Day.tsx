@@ -9,10 +9,11 @@ import SessionComponent from './components/Session'
 
 type DayProps = {
 	id: string,
+	last?: boolean,
 	sessions: Session[],
 }
 
-const Day: React.FC<DayProps> = ({ id, sessions }) => {
+const Day: React.FC<DayProps> = ({ id, sessions, last }) => {
 	const label = useMemo(() => moment(id).format('dddd'), [id])
 	const client = useApolloClient()
 	client.addResolvers(resolvers)
@@ -69,7 +70,18 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 									<SessionComponent key={props.id} {...props} />
 								</motion.div>
 							))}
-							<div className="spacing" />
+							<div className="spacing">
+								<motion.div
+									variants={{
+										open: { maxWidth: '100%' },
+										collapsed: { maxWidth: '0%' },
+									}}
+									transition={{ delay: 1 }}
+									style={{ margin: '0 auto' }}
+								>
+									{ last && <hr /> }
+								</motion.div>
+							</div>
 						</motion.main>
 					)
 				}
@@ -81,7 +93,8 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 
 				h2 {
 					font-size: inherit;
-					font-weight: var(--font-weight-bold);
+					font-weight: var(--font-weight-medium);
+					font-family: var(--font-family-medium);
 					text-align: center;
 					color: var(--light);
 					margin: 0;
@@ -104,7 +117,17 @@ const Day: React.FC<DayProps> = ({ id, sessions }) => {
 				}
 
 				.spacing {
-					height: calc(var(--spacing) * 3);
+					padding-top: calc(var(--spacing) * 3);
+				}
+
+				.spacing hr {
+					margin: 0;
+					border: none;
+					height: calc(3rem / 16);
+					background: var(--white);
+					margin: calc(var(--spacing) * 4) 16.8% calc(var(--spacing) * 2);
+					border-top: calc(1rem / 16) solid var(--dark);
+					border-bottom: calc(1rem / 16) dotted rgba(0, 0, 0, 0.25);
 				}
 			`}
 			</style>

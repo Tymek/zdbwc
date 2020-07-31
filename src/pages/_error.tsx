@@ -97,7 +97,7 @@ export default class Error<P = unknown> extends Component<P & ErrorProps> {
 
 					h2 {
 						font-size: 14px;
-						font-weight: normal;
+						font-weight: 300;
 						line-height: inherit;
 						margin: 0;
 						padding: 0;

@@ -34,7 +34,7 @@ const Notifications: React.FC<NotificationsProps> = ({ head }) => {
 			<AnimatePresence initial={false}>
 				{
 					notifications && notifications.map(notification => (
-						<NotificationComponent key={notification.id} {...notification} muted={!head} />
+						<NotificationComponent key={notification.id} {...notification} important={head} />
 					))
 				}
 			</AnimatePresence>

@@ -66,7 +66,8 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 				}
 
 				header {
-					font-weight: var(--font-weight-bold);
+					font-weight: var(--font-weight-medium);
+					font-family: var(--font-family-medium);
 					background: var(--primary);
 					color: var(--white);
 					flex-grow: 1;
@@ -101,7 +102,9 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 					margin: 0;
 					margin-right: auto;
 					padding-right: var(--spacing);
-					font-weight: var(--font-weight-bold);
+					font-weight: var(--font-weight-medium);
+					font-family: var(--font-family-medium);
+					font-size: inherit;
 				}
 
 				h4.closed {

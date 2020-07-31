@@ -125,6 +125,11 @@ export const register = (showUpdateNotification?: ShowUpdateNotificationCallback
 }
 
 export const unregister = async (): Promise<boolean> => {
-	const registration = await navigator.serviceWorker.ready
-	return registration.unregister()
+	const registration = await navigator?.serviceWorker?.ready
+
+	if (registration) {
+		return registration.unregister()
+	}
+
+	return false
 }

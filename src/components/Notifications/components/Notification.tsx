@@ -3,12 +3,12 @@ import moment from 'utils/moment'
 import Description from 'components/Description'
 import { motion } from 'framer-motion'
 
-const NotificationComponent: React.FC<Partial<Notification> & { muted?: boolean }> = ({
+const NotificationComponent: React.FC<Partial<Notification> & { important?: boolean }> = ({
 	id,
 	title,
 	content,
 	published_at,
-	muted,
+	important,
 	children,
 }) => {
 	const format = (str: string) => moment(published_at).format(str)
@@ -26,16 +26,8 @@ const NotificationComponent: React.FC<Partial<Notification> & { muted?: boolean 
 			style={{ overflow: 'hidden', borderRight: 'calc(1rem / 16) solid transparent' }}
 			transition={{ type: 'spring', mass: 2, damping: 50, stiffness: 150, staggerChildren: 0.05 }}
 		>
-			<article>
-				<aside>
-					<div className="date">
-						<strong>
-							<time dateTime={format('YYYY-MM-DD')}>{format('D.MM')}</time>
-						</strong>
-						<time>{format('HH:mm')}</time>
-					</div>
-				</aside>
-				<main className={muted ? 'muted' : ''}>
+			<article className={important ? 'important' : ''}>
+				<main>
 					<header>
 						<h3>{title}</h3>
 					</header>
@@ -44,11 +36,19 @@ const NotificationComponent: React.FC<Partial<Notification> & { muted?: boolean 
 					}
 					{children}
 				</main>
+				<aside>
+					<div className="date">
+						<strong>
+							<time>{format('HH:mm')}</time>
+						</strong>
+						<time dateTime={format('YYYY-MM-DD')}>{format('D.MM')}</time>
+					</div>
+				</aside>
 				<style jsx>{`
 					article {
 						display: grid;
 						margin: var(--border-weight) 0;
-						grid-template-columns: minmax(70px, 16.6666667%) minmax(0px, auto);
+						grid-template-columns: minmax(0px, auto) minmax(70px, 16.6666667%);
 					}
 
 					aside {
@@ -56,25 +56,33 @@ const NotificationComponent: React.FC<Partial<Notification> & { muted?: boolean 
 						font-family: var(--font-family-mono);
 						display: flex;
 						text-align: center;
+						justify-content: flex-end;
 						color: var(--gray);
 					}
 
 					aside strong, main h3 {
 						display: block;
-						font-weight: var(--font-weight-bold);
-						font-family: var(--font-family);
+						font-weight: var(--font-weight-medium);
+						font-family: var(--font-family-medium);
 						font-size: inherit;
 						margin-bottom: var(--spacing);
 						color: var(--dark);
+						/* font-weight: 700; */
 					}
 
 					main {
 						padding: var(--spacing);
-						padding-left: 0;
+						padding-right: 0;
+						color: var(--gray);
 					}
 
-					main.muted {
-						color: var(--gray);
+					.important main {
+						color: var(--dark);
+					}
+
+					.important main h3,
+					.important aside strong {
+						color: var(--warning);
 					}
 
 					h3 {

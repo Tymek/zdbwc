@@ -12,21 +12,23 @@ const StyleVariables: React.FC = () => (
 			--tertiary: ${theme.tertiary};
 			--muted: ${theme.muted};
 			--gray: ${theme.gray};
-			--primary-darken: ${theme['primary-darken']};
-			--primary-lighten: ${theme['primary-lighten']};
+			--primary-darken: ${theme.primaryDarken};
+			--primary-lighten: ${theme.primaryLighten};
+			--warning: ${theme.warning};
 			--spacing: ${theme.spacing};
-			--border-weight: ${theme['border-weight']};
+			--border-weight: ${theme.borderWeight};
 
-			--font-family: ${theme['font-family']};
-				"Droid Sans", "Helvetica Neue", Helvetica, sans-serif;
-			--font-family-mono: ${theme['font-family-mono']};
-			--font-weight-thin: ${theme['font-weight-thin']};
-			--font-weight-light: ${theme['font-weight-light']};
-			--font-weight-bold: ${theme['font-weight-bold']};
+			--font-family: ${theme.fontFamily};
+			--font-family-light: ${theme.fontFamilyLight};
+			--font-family-medium: ${theme.fontFamilyMedium};
+			--font-family-mono: ${theme.fontFamilyMono};
+			--font-weight-thin: ${theme.fontWeightThin};
+			--font-weight-light: ${theme.fontWeightLight};
+			--font-weight-medium: ${theme.fontWeightBold};
 
-			--border-radius: ${theme['border-radius']};
+			--border-radius: ${theme.borderRadius};
 
-			--box-shadow: ${theme['box-shadow']};
+			--box-shadow: ${theme.boxShadow};
 		}
 	`}
 	</style>

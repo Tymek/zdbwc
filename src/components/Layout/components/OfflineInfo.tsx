@@ -31,7 +31,8 @@ const OfflineInfo: React.FC = () => {
 			<style jsx>{`
 				h2 {
 					font-size: 1.2em;
-					font-weight: var(--font-weight-bold);
+					font-weight: var(--font-weight-medium);
+					font-family: var(--font-family-medium);
 					margin: 0;
 					position: relative;
 					display: flex;

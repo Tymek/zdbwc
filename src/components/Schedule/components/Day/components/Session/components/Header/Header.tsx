@@ -53,9 +53,10 @@ const Header: React.FC<Partial<Session> & { isMuted?: boolean }> = ({
 
 			h3 {
 				align-self: center;
-				font-size: inherit;
 				margin: var(--border-weight);
-				font-weight: var(--font-weight-bold);
+				font-family: var(--font-family-medium);
+				font-weight: var(--font-weight-medium);
+				font-size: inherit;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;

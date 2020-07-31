@@ -3,7 +3,8 @@
  */
 
 const nbsp = String.fromCharCode(160)
-const letter = '[\\wĄĆĘŁŃÓŚŹŻąćęłńóśźżπ]'
+const number = '[\\dπ]'
+const letter = '[\\wĄĆĘŁŃÓŚŹŻąćęłńóśźż]'
 const conjunctive = 'lub|ale|czy|nad|pod|bez|nie|tak|albo|więc|lecz|przez|niech|tylko'
 
 export const sierotki = (input: string): string => {
@@ -11,6 +12,7 @@ export const sierotki = (input: string): string => {
 
 	output = output.replace(new RegExp(` (${letter}) `, 'gi'), ` $1${nbsp}`)
 	output = output.replace(new RegExp(` (${letter}{2}) `, 'gi'), ` $1${nbsp}`)
+	output = output.replace(new RegExp(` (${number}{1,2}) `, 'gi'), ` $1${nbsp}`)
 	output = output.replace(new RegExp(` (${conjunctive}) `, 'gi'), ` $1${nbsp}`)
 
 	output = output.replace(new RegExp(` (${letter})([,.!?]?\r?(?:\n|$))`, 'gi'), `${nbsp}$1$2`)

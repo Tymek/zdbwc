@@ -10,14 +10,14 @@ const InfoAboutUpdate: React.FC = () => {
 	client.addResolvers(resolvers)
 
 	const { data } = useQuery<{ update_info: UpdateInfo }>(UPDATE_INFO)
-	const content = data?.update_info
+	const content = data?.update_info || 'Nowa wersja jest dostępna. Zaktualizować?'
 
 	return (
 		<>
 			<AnimatePresence>
 				{
 					content ? (
-						<Notification key="update" id="update" title="Aktualizacja" content={content} muted>
+						<Notification key="update" id="update" title="Aktualizacja" content={content}>
 							<div className="action">
 								<button type="button" onClick={() => trigger('acceptUpdate')}>
 									<span>
@@ -33,7 +33,8 @@ const InfoAboutUpdate: React.FC = () => {
 			<style jsx>{`
 				.action {
 					display: flex;
-					padding-right: 19.5%;
+					padding-left: 19.5%;
+					padding-bottom: var(--spacing);
 				}
 
 				button {

@@ -19,8 +19,10 @@ const Layout: React.FC = ({ children }) => (
 		{ children }
 
 		<footer>
-			<span>&copy; 2020 <a href="http://zdobywcy.org/konferencja-zdobywcy/">Konferencja Zdobywcy</a></span>
 			<span className="version" aria-hidden>v{process.env.VERSION}</span>
+			<span className="copyright">
+				&copy; 2020 <a href="http://zdobywcy.org/konferencja-zdobywcy/">Konferencja Zdobywcy</a>
+			</span>
 			<span>crafted by <a href="https://www.tymek.cz">Tymek.Cz</a></span>
 		</footer>
 		<style jsx>{`
@@ -50,7 +52,7 @@ const Layout: React.FC = ({ children }) => (
 				flex-wrap: wrap;
 				align-items: center;
 				justify-content: space-between;
-				padding: var(--spacing) calc(var(--spacing) * 2.5);
+				padding: 0 calc(var(--spacing) * 2.5) var(--spacing);
 				color: var(--gray);
 			}
 
@@ -65,7 +67,13 @@ const Layout: React.FC = ({ children }) => (
 			}
 
 			.version {
+				width: 100%;
+				text-align: center;
 				color: var(--light);
+			}
+
+			.copyright {
+				margin-right: var(--spacing);
 			}
 		`}
 		</style>

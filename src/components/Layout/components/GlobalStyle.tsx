@@ -14,7 +14,7 @@ const GlobalStyle: React.FC = () => (
 			min-height: 100%;
 			background: var(--light);
 			color: var(--black);
-			font-family: var(--font-family);
+			font-family: var(--font-family-light);
 			font-weight: var(--font-weight-light);
 			overflow-y: scroll;
 		}
