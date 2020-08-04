@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useQuery, NetworkStatus } from '@apollo/client'
 import moment from 'utils/moment'
 import dynamic from 'next/dynamic'
@@ -56,7 +57,8 @@ const filterSessionsByDay = (day: string) => ({ begins_at, ends_at }: Session) =
 }
 
 const ListOfDays: React.FC = () => {
-	const { loading, error, data, networkStatus } = useQuery(SCHEDULE, {
+	const [session, setSession] = useState<Session[]>()
+	const { loading, data, networkStatus } = useQuery<{ session: Session[] }>(SCHEDULE, {
 		pollInterval,
 		fetchPolicy: 'cache-and-network',
 		notifyOnNetworkStatusChange: true,
@@ -64,10 +66,14 @@ const ListOfDays: React.FC = () => {
 
 	useLastUpdate(networkStatus === NetworkStatus.ready)
 
-	if (loading && !data) return <div style={{ textAlign: 'center' }}>Wczytywanie&hellip;</div>
-	if (error && !data) return <Error statusCode={503} title="Błąd wczytywania agendy 😶" />
-	if (!data) return null
-	const { session }: { session: Session[] } = data
+	useEffect(() => {
+		if (data?.session) {
+			setSession(data.session)
+		}
+	}, [data])
+
+	if (loading && !session) return <div style={{ textAlign: 'center' }}>Wczytywanie&hellip;</div>
+	if (!session) return <Error statusCode={503} title="Błąd wczytywania agendy 😶" />
 
 	const getSessions = (day: string) => session.filter(filterSessionsByDay(day)).sort(sortSessions)
 
