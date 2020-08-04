@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client'
-import { tail } from 'ramda'
 import { AnimatePresence } from 'framer-motion'
 
 import { Notification } from 'ts/schema'
@@ -26,8 +25,9 @@ const Notifications: React.FC<NotificationsProps> = ({ head }) => {
 	if (!data || !data?.notification) return null
 
 	const currentNotifications = filterCurrent(data.notification)
-	const first = currentNotifications.length > 0 ? [currentNotifications[0]] : []
-	const notifications: Notification[] = head ? first : tail(currentNotifications)
+	const notifications: Notification[] = currentNotifications.filter(
+		({ is_pinned }) => (is_pinned && head) || (!is_pinned && !head)
+	)
 
 	return (
 		<div className={head ? 'head' : 'tail'}>

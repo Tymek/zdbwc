@@ -4,5 +4,6 @@ query Notifications {
 		title
 		content
 		published_at
+		is_pinned
 	}
 }

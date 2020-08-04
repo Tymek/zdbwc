@@ -1,0 +1,6 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE "public"."notification" ADD COLUMN "is_pinned" boolean NOT NULL
+      DEFAULT false;
+  type: run_sql

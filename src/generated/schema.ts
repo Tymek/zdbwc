@@ -14,6 +14,19 @@ export type Scalars = {
   uuid: string;
 };
 
+/** expression to compare columns of type Boolean. All fields are combined with logical 'AND'. */
+export type Boolean_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Boolean']>;
+  _gt?: Maybe<Scalars['Boolean']>;
+  _gte?: Maybe<Scalars['Boolean']>;
+  _in?: Maybe<Array<Scalars['Boolean']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Boolean']>;
+  _lte?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Scalars['Boolean']>;
+  _nin?: Maybe<Array<Scalars['Boolean']>>;
+};
+
 /** expression to compare columns of type String. All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq?: Maybe<Scalars['String']>;
@@ -271,6 +284,7 @@ export type Notification = {
   content?: Maybe<Scalars['String']>;
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
+  is_pinned: Scalars['Boolean'];
   published_at: Scalars['timestamp'];
   title?: Maybe<Scalars['String']>;
   updated_at: Scalars['timestamptz'];
@@ -319,6 +333,7 @@ export type Notification_Bool_Exp = {
   content?: Maybe<String_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
+  is_pinned?: Maybe<Boolean_Comparison_Exp>;
   published_at?: Maybe<Timestamp_Comparison_Exp>;
   title?: Maybe<String_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
@@ -335,6 +350,7 @@ export type Notification_Insert_Input = {
   content?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
+  is_pinned?: Maybe<Scalars['Boolean']>;
   published_at?: Maybe<Scalars['timestamp']>;
   title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -409,6 +425,7 @@ export type Notification_Order_By = {
   content?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  is_pinned?: Maybe<Order_By>;
   published_at?: Maybe<Order_By>;
   title?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
@@ -428,6 +445,8 @@ export enum Notification_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  IsPinned = 'is_pinned',
+  /** column name */
   PublishedAt = 'published_at',
   /** column name */
   Title = 'title',
@@ -440,6 +459,7 @@ export type Notification_Set_Input = {
   content?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
+  is_pinned?: Maybe<Scalars['Boolean']>;
   published_at?: Maybe<Scalars['timestamp']>;
   title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -453,6 +473,8 @@ export enum Notification_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
+  /** column name */
+  IsPinned = 'is_pinned',
   /** column name */
   PublishedAt = 'published_at',
   /** column name */

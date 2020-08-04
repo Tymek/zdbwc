@@ -1,0 +1,20 @@
+- args:
+    role: manager
+    table:
+      name: notification
+      schema: public
+  type: drop_update_permission
+- args:
+    permission:
+      columns:
+      - content
+      - is_pinned
+      - published_at
+      - title
+      filter: {}
+      set: {}
+    role: manager
+    table:
+      name: notification
+      schema: public
+  type: create_update_permission

@@ -7,10 +7,11 @@ import {
 	TextInput,
 	Create,
 	DeleteButton,
+	BooleanInput,
 	Edit,
 } from 'react-admin'
 import moment from 'utils/moment'
-import { DateTimeField, DateTimeInput } from './fields'
+import { DateTimeField, DateTimeInput, IsPinnedField } from './fields'
 
 export const NotificationList = props => (
 	<List
@@ -22,6 +23,7 @@ export const NotificationList = props => (
 		sort={{ field: 'published_at', order: 'DESC' }}
 	>
 		<Datagrid rowClick="show">
+			<IsPinnedField label="przypięte" source="is_pinned" />
 			<DateTimeField source="published_at" format="dddd, D MMMM, HH:mm" withRelative />
 			<TextField source="title" emptyText="&mdash;" />
 			{/* <TextField source="content" emptyText="&mdash;" /> */}
@@ -51,6 +53,7 @@ export const NotificationCreate = props => (
 			<TextInput source="title" />
 			<TextInput source="content" multiline />
 			<DateTimeInput source="published_at" defaultValue={moment().format('YYYY-MM-DDTHH:mm')} />
+			<BooleanInput label="przypnij na górze" source="is_pinned" />
 		</SimpleForm>
 	</Create>
 )
@@ -61,6 +64,7 @@ export const NotificationEdit = props => (
 			<TextInput source="title" />
 			<TextInput source="content" multiline />
 			<DateTimeInput source="published_at" defaultValue={moment().format('YYYY-MM-DDTHH:mm')} />
+			<BooleanInput label="przypnij na górze" source="is_pinned" />
 		</SimpleForm>
 	</Edit>
 )

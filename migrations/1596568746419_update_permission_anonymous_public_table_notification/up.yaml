@@ -1,0 +1,22 @@
+- args:
+    role: anonymous
+    table:
+      name: notification
+      schema: public
+  type: drop_select_permission
+- args:
+    permission:
+      allow_aggregations: false
+      columns:
+      - content
+      - id
+      - is_pinned
+      - published_at
+      - title
+      computed_fields: []
+      filter: {}
+    role: anonymous
+    table:
+      name: notification
+      schema: public
+  type: create_select_permission

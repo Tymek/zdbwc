@@ -1,0 +1,20 @@
+- args:
+    role: manager
+    table:
+      name: notification
+      schema: public
+  type: drop_insert_permission
+- args:
+    permission:
+      backend_only: false
+      check: {}
+      columns:
+      - content
+      - published_at
+      - title
+      set: {}
+    role: manager
+    table:
+      name: notification
+      schema: public
+  type: create_insert_permission

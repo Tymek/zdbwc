@@ -2,6 +2,8 @@ import moment from 'utils/moment'
 import { KeyboardDateTimePicker }  from '@material-ui/pickers'
 import { useInput, useTranslate, FieldTitle } from 'ra-core'
 import { InputHelperText } from 'ra-ui-materialui'
+import { Typography, Tooltip } from '@material-ui/core'
+import PinIcon from 'assets/icons/pin.svg'
 
 export const RelativeTimeField = ({ record, source, emptyText = '' }) => (
 	<span>{
@@ -87,5 +89,24 @@ export const DateTimeInput = ({ ...props }) => {
 			cancelLabel={translate('ra.action.cancel')}
 			// required={isRequired}
 		/>
+	)
+}
+
+export const IsPinnedField = ({ record, source }) => {
+	const translate = useTranslate()
+
+	return (
+		<Typography
+			component="span"
+			variant="body2"
+		>
+			{
+				record && record[source] ? (
+					<Tooltip title={translate('ra.boolean.true')}>
+						<PinIcon width="1.25rem" height="1.25rem" style={{ display: 'inline-block', marginBottom: '-3px' }} />
+					</Tooltip>
+				) : null
+			}
+		</Typography>
 	)
 }

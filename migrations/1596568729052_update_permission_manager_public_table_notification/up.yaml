@@ -1,0 +1,24 @@
+- args:
+    role: manager
+    table:
+      name: notification
+      schema: public
+  type: drop_select_permission
+- args:
+    permission:
+      allow_aggregations: true
+      columns:
+      - content
+      - created_at
+      - id
+      - is_pinned
+      - published_at
+      - title
+      - updated_at
+      computed_fields: []
+      filter: {}
+    role: manager
+    table:
+      name: notification
+      schema: public
+  type: create_select_permission
