@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { useQuery, NetworkStatus } from '@apollo/client'
+import { NetworkStatus } from '@apollo/client'
 import moment from 'utils/moment'
 import dynamic from 'next/dynamic'
 import TimeRange from 'utils/moment/TimeRange'
@@ -7,6 +6,7 @@ import Error from 'pages/_error'
 
 import { Session } from 'ts/schema'
 import useLastUpdate from 'utils/hooks/useLastUpdate'
+import useMemorizedQuery from 'utils/hooks/useMemorizedQuery'
 import SCHEDULE from './gql/schedule.gql'
 
 const pollInterval = process.env.NODE_ENV !== 'production' || process.env.DEBUG === 'true' ? 6e3 : 15e3 // 15s
@@ -57,8 +57,7 @@ const filterSessionsByDay = (day: string) => ({ begins_at, ends_at }: Session) =
 }
 
 const ListOfDays: React.FC = () => {
-	const [session, setSession] = useState<Session[]>()
-	const { loading, data, networkStatus } = useQuery<{ session: Session[] }>(SCHEDULE, {
+	const { loading, data, networkStatus } = useMemorizedQuery<{ session: Session[] }>(SCHEDULE, {
 		pollInterval,
 		fetchPolicy: 'cache-and-network',
 		notifyOnNetworkStatusChange: true,
@@ -66,18 +65,12 @@ const ListOfDays: React.FC = () => {
 
 	useLastUpdate(networkStatus === NetworkStatus.ready)
 
-	useEffect(() => {
-		if (data?.session) {
-			setSession(data.session)
-		}
-	}, [data])
+	if (loading && !data) return <div style={{ textAlign: 'center' }}>Wczytywanie&hellip;</div>
+	if (!data) return <Error statusCode={503} title="Błąd wczytywania agendy 😶" />
 
-	if (loading && !session) return <div style={{ textAlign: 'center' }}>Wczytywanie&hellip;</div>
-	if (!session) return <Error statusCode={503} title="Błąd wczytywania agendy 😶" />
+	const getSessions = (day: string) => data.session.filter(filterSessionsByDay(day)).sort(sortSessions)
 
-	const getSessions = (day: string) => session.filter(filterSessionsByDay(day)).sort(sortSessions)
-
-	const days = getDays(session)
+	const days = getDays(data.session)
 	const last = days[days.length - 1]
 
 	return (

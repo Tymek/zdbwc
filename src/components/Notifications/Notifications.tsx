@@ -1,8 +1,8 @@
-import { useQuery } from '@apollo/client'
 import { AnimatePresence } from 'framer-motion'
 
 import { Notification } from 'ts/schema'
 import moment from 'utils/moment'
+import useMemorizedQuery from 'utils/hooks/useMemorizedQuery'
 import SCHEDULE from './gql/notifications.gql'
 import NotificationComponent from './components/Notification'
 import InfoAboutUpdate from './components/Update'
@@ -17,7 +17,7 @@ type NotificationsProps = {
 }
 
 const Notifications: React.FC<NotificationsProps> = ({ head }) => {
-	const { data } = useQuery<{ notification: Notification[] }>(SCHEDULE, {
+	const { data } = useMemorizedQuery<{ notification: Notification[] }>(SCHEDULE, {
 		pollInterval,
 		fetchPolicy: 'cache-and-network',
 	})
