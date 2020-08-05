@@ -36,7 +36,7 @@ const Header: React.FC<Partial<Session> & { isMuted?: boolean }> = ({
 
 			aside {
 				font-family: var(--font-family-mono);
-				font-size: 0.875rem;
+				font-size: var(--font-size-small);
 				padding: var(--spacing);
 				min-width: 4rem;
 				min-height: 3.5rem;

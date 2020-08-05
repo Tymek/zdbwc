@@ -51,7 +51,9 @@ const NotificationComponent: React.FC<Partial<Notification> & { important?: bool
 						<strong>
 							<time>{format('HH:mm')}</time>
 						</strong>
-						<time dateTime={format('YYYY-MM-DD')}>{format('D.MM')}</time>
+						<span className="day">
+							<time dateTime={format('YYYY-MM-DD')}>{format('D.MM')}</time>
+						</span>
 					</div>
 				</aside>
 				<style jsx>{`
@@ -74,7 +76,6 @@ const NotificationComponent: React.FC<Partial<Notification> & { important?: bool
 						display: block;
 						font-weight: var(--font-weight-medium);
 						font-size: inherit;
-						margin-bottom: var(--spacing);
 						color: var(--dark);
 						/* font-weight: 700; */
 					}
@@ -94,14 +95,20 @@ const NotificationComponent: React.FC<Partial<Notification> & { important?: bool
 						color: var(--warning);
 					}
 
-					h3 {
+					main h3 {
 						margin: 0;
 						padding: 0;
 						font-family: var(--font-family-medium);
+						margin-bottom: var(--spacing);
 					}
 
 					aside strong {
 						font-family: var(--font-family-mono);
+						margin-bottom: calc(var(--spacing) * 0.5);
+					}
+
+					.date .day {
+						font-size: var(--font-size-small);
 					}
 
 					header .icon {

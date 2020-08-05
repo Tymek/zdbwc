@@ -48,7 +48,7 @@ const TopicComponent: React.FC<Topic & { isWorkshop?: boolean }> = ({
 
 				aside {
 					font-family: var(--font-family-mono);
-					font-size: 0.875rem;
+					font-size: var(--font-size-small);
 					padding: var(--spacing);
 					height: 0;
 				}

@@ -123,11 +123,9 @@ const Day: React.FC<DayProps> = ({ id, sessions, last }) => {
 				.spacing hr {
 					margin: 0;
 					border: none;
-					height: calc(3rem / 16);
-					background: var(--white);
-					margin: 0 16.8% calc(var(--spacing) * 5);
-					border-top: calc(1rem / 16) solid var(--dark);
-					border-bottom: calc(1rem / 16) dotted rgba(0, 0, 0, 0.25);
+					height: calc(2rem / 16);
+					background: var(--gray);
+					margin: var(--spacing) 16.8% calc(var(--spacing) * 6);
 				}
 			`}
 			</style>

@@ -25,6 +25,7 @@ const StyleVariables: React.FC = () => (
 			--font-weight-thin: ${theme.fontWeightThin};
 			--font-weight-light: ${theme.fontWeightLight};
 			--font-weight-medium: ${theme.fontWeightBold};
+			--font-size-small: ${theme.fontSizeSmall};
 
 			--border-radius: ${theme.borderRadius};
 

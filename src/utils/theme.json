@@ -21,6 +21,7 @@
 	"fontWeightThin": 200,
 	"fontWeightLight": 300,
 	"fontWeightBold": 500,
+	"fontSizeSmall": "0.875rem",
 
 	"borderRadius": "0.1875rem",
 
