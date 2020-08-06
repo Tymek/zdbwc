@@ -3,7 +3,7 @@ const getEndpoint = (hostname: string): string => {
 
 	return isLocalhost
 		? `http://${hostname}:8080/v1/graphql`
-		: `https://api.${hostname}/v1/graphql`
+		: 'https://api.zdbwc.scrlk.pl/v1/graphql'
 }
 
 export default getEndpoint
