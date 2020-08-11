@@ -12,7 +12,7 @@ const ServiceWorker = dynamic(() => import(/* webpackChunk sw-client */ 'compone
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
 	<>
 		<Head>
-			<title key="title">zdbwc</title>
+			<title key="title">Konferencja Zdobywcy</title>
 		</Head>
 		<GraphQLProvider pageProps={pageProps}>
 			{

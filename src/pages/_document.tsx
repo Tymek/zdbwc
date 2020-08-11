@@ -68,7 +68,7 @@ class MyDocument extends Document {
 					/>
 
 					<meta name="twitter:card" content="summary" />
-					<meta name="twitter:url" content="https://zdbwc.scrlk.pl" />
+					<meta name="twitter:url" content="https://konf.zdobywcy.org" />
 					<meta name="twitter:title" content="Konferencja Zdobywcy" />
 					<meta name="twitter:description" content="Aplikacja ze szczegółową agendą i najnowszymi informacjami." />
 					<meta name="twitter:image" content="/static/images/preview-image.jpg" />
@@ -77,7 +77,7 @@ class MyDocument extends Document {
 					<meta property="og:title" content="Konferencja Zdobywcy" />
 					<meta property="og:description" content="Aplikacja ze szczegółową agendą i najnowszymi informacjami." />
 					<meta property="og:site_name" content="Aplikacja { zdbwc }" />
-					<meta property="og:url" content="https://zdbwc.scrlk.pl" />
+					<meta property="og:url" content="https://konf.zdobywcy.org" />
 					<meta property="og:image" content="/static/images/preview-image.jpg" />
 					<meta property="og:image:width" content="1200" />
 					<meta property="og:image:height" content="630" />
