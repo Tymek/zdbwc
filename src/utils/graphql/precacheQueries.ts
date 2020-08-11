@@ -1,13 +1,11 @@
-import { QueryOptions, OperationVariables, NormalizedCacheObject } from '@apollo/client'
+import { NormalizedCacheObject, DocumentNode } from '@apollo/client'
 import { GetStaticPropsResult } from 'next'
 import gqlClient from './client'
 import { pagePropsKey, PageProps } from './Provider'
 
-type Query = QueryOptions<Record<string, OperationVariables>>
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const precacheQueries = (
-	query: Query | Query[],
+	query: DocumentNode | DocumentNode[],
 	otherProps?: Record<string, unknown>,
 	initialState?: NormalizedCacheObject
 ) => async (): Promise<GetStaticPropsResult<PageProps>> => {
@@ -15,9 +13,9 @@ const precacheQueries = (
 
 	try {
 		if (Array.isArray(query)) {
-			await Promise.allSettled(query.map(q => client.query(q)))
+			await Promise.allSettled(query.map(q => client.query({ query: q })))
 		} else {
-			await client.query(query)
+			await client.query({ query })
 		}
 
 		return {

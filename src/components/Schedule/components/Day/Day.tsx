@@ -22,27 +22,44 @@ const Day: React.FC<DayProps> = ({ id, sessions, last }) => {
 	const [openDay] = useMutation<{ opened_day_id?: OpenedDayId }>(OPEN_DAY)
 	const isOpen = data?.opened_day_id === id
 	const hasSession = sessions && sessions.length > 0
-	const onHeaderClick = async () => {
-		await openDay({
-			variables: { id },
+	const onHeaderClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+		event.preventDefault()
+		window.scrollTo(0, 160)
+
+		void openDay({
+			variables: { id: isOpen ? null : id },
 			refetchQueries: [{ query: OPENED_DAY_ID }],
 		})
+
+		// setTimeout(() => { // scroll after animation
+		// 	window.scroll({
+		// 		top: ref?.current?.offsetTop,
+		// 		left: 0,
+		// 		behavior: 'smooth',
+		// 	})
+		// }, 500)
 	}
 
 	return (
-		<div>
+		<div id={id}>
 			<motion.header
 				initial={false}
 				animate={{ backgroundColor: isOpen ? 'var(--gray)' : 'var(--dark)' }}
 				style={{ border: 'var(--border-weight) solid var(--white)', borderBottom: 'none' }}
 			>
-				<button type="button" className={isOpen ? 'open' : ''} onClick={onHeaderClick}>
+				<a
+					href={`#${id}`}
+					className={`link${isOpen ? ' open' : ''}`}
+					onClick={onHeaderClick}
+					role="button"
+					tabIndex={0}
+				>
 					<div className="button-unfocus" tabIndex={-1}>
 						<h2>
 							<time dateTime={moment(id).format('YYYY-MM-DD')}>{label}</time>
 						</h2>
 					</div>
-				</button>
+				</a>
 			</motion.header>
 			<AnimatePresence initial={false}>
 				{
@@ -57,7 +74,7 @@ const Day: React.FC<DayProps> = ({ id, sessions, last }) => {
 								collapsed: { height: 0 },
 							}}
 							style={{ overflow: 'hidden', borderRight: 'calc(1rem / 16) solid transparent' }}
-							transition={{ type: 'spring', mass: 2, damping: 50, stiffness: 150, staggerChildren: 0.05 }}
+							transition={{ type: 'spring', mass: 1.67, damping: 50, stiffness: 150, staggerChildren: 0.05 }}
 						>
 							{ sessions.map(props => (
 								<motion.div
@@ -109,7 +126,11 @@ const Day: React.FC<DayProps> = ({ id, sessions, last }) => {
 					outline: 0;
 				}
 
-				button:focus .button-unfocus {
+				.link {
+					text-decoration: none;
+				}
+
+				a:focus .button-unfocus {
 					outline-style: auto;
 					outline-color: var(--primary);
 					outline-width: 0.125em;

@@ -9,6 +9,8 @@ import Document, {
 import { primary } from 'utils/theme.json' // eslint-disable-line import/extensions
 
 export const lang = 'pl'
+const url = 'https://konf.zdobywcy.org'
+const title = 'Konferencja Zdobywcy'
 
 class MyDocument extends Document {
 	// static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
@@ -20,10 +22,10 @@ class MyDocument extends Document {
 		return (
 			<Html lang={lang}>
 				<Head>
-					<meta name="apple-mobile-web-app-title" content="zdbwc" />
+					<meta name="apple-mobile-web-app-title" content={title} />
 					<meta name="application-name" content="zdbwc" />
 
-					<meta name="description" content="Konferencja Zdobywcy" />
+					<meta name="description" content={title} />
 
 					{/* Colors */}
 					<meta name="theme-color" content={primary} />
@@ -68,16 +70,16 @@ class MyDocument extends Document {
 					/>
 
 					<meta name="twitter:card" content="summary" />
-					<meta name="twitter:url" content="https://konf.zdobywcy.org" />
-					<meta name="twitter:title" content="Konferencja Zdobywcy" />
+					<meta name="twitter:url" content={url} />
+					<meta name="twitter:title" content={title} />
 					<meta name="twitter:description" content="Aplikacja ze szczegółową agendą i najnowszymi informacjami." />
 					<meta name="twitter:image" content="/static/images/preview-image.jpg" />
 					<meta name="twitter:creator" content="@Tymek" />
 					<meta property="og:type" content="website" />
-					<meta property="og:title" content="Konferencja Zdobywcy" />
+					<meta property="og:title" content={title} />
 					<meta property="og:description" content="Aplikacja ze szczegółową agendą i najnowszymi informacjami." />
 					<meta property="og:site_name" content="Aplikacja { zdbwc }" />
-					<meta property="og:url" content="https://konf.zdobywcy.org" />
+					<meta property="og:url" content={url} />
 					<meta property="og:image" content="/static/images/preview-image.jpg" />
 					<meta property="og:image:width" content="1200" />
 					<meta property="og:image:height" content="630" />
