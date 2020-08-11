@@ -6,6 +6,7 @@ import Layout from 'components/Layout'
 import { pathOr } from 'ramda'
 import Analytics from 'components/Analytics'
 import 'components/styles/fonts.scss'
+import 'core-js/features/array/flat-map'
 
 const ServiceWorker = dynamic(() => import(/* webpackChunk sw-client */ 'components/ServiceWorker'), { ssr: false })
 

@@ -7,7 +7,6 @@ import Document, {
 	// DocumentInitialProps,
 } from 'next/document'
 import { primary } from 'utils/theme.json' // eslint-disable-line import/extensions
-import 'core-js/features/array/flat-map'
 
 export const lang = 'pl'
 
