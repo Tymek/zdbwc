@@ -7,7 +7,8 @@ const createLoginCookie = (data?: Mutation_RootLoginArgs, overrides?: CookieSeri
 	JSON.stringify(data || ''), {
 		httpOnly: true,
 		secure: process.env.NODE_ENV === 'production' && process.env.DEBUG !== 'true',
-		expires: moment().add(7, 'days').toDate(),
+		expires: moment().add(14, 'days').toDate(),
+		sameSite: 'none',
 		path: '/',
 		...overrides,
 	}
