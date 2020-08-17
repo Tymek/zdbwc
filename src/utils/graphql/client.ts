@@ -31,6 +31,7 @@ const gqlClient = async (initialState?: NormalizedCacheObject): Promise<ApolloCl
 			cache,
 			storage: window.localStorage,
 			debug: process.env.DEBUG === 'true',
+			trigger: 'write',
 		} as unknown as ApolloPersistOptions<NormalizedCacheObject>)
 
 		await persistor.restore()

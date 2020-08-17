@@ -2,6 +2,7 @@ ignore-dirs:
   - "tmp"
   - "coverage"
 ignores:
+  - "@babel/*"
   - "eslint*"
   - "@typescript-eslint/*"
   - "@graphql-codegen/*"

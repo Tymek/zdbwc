@@ -16,5 +16,27 @@
 				}
 			}
 		]
-	]
+	],
+	"env": {
+		"test": {
+			"presets": [
+				[
+					"next/babel",
+					{
+						"transform-runtime": {},
+						"styled-jsx": {
+							"babel-test": true
+						},
+						"preset-env": {
+							"modules": "auto",
+							"targets": "> 0.025%, not dead",
+							"include": [
+								"@babel/plugin-transform-spread"
+							]
+						}
+					}
+				]
+			],
+		}
+	}
 }
