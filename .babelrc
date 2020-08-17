@@ -3,8 +3,16 @@
 		[
 			"next/babel",
 			{
+				"transform-runtime": {},
 				"styled-jsx": {
 					"babel-test": true
+				},
+				"preset-env": {
+					"modules": false,
+					"targets": "> 0.025%, not dead",
+					"include": [
+						"@babel/plugin-transform-spread"
+					]
 				}
 			}
 		]
