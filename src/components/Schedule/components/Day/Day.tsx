@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { useApolloClient, useQuery, useMutation } from '@apollo/client'
 import { motion, AnimatePresence } from 'framer-motion'
+import { windowScrollTo } from 'seamless-scroll-polyfill'
 
 import moment from 'utils/moment'
 import { Session } from 'ts/schema'
@@ -24,12 +25,13 @@ const Day: React.FC<DayProps> = ({ id, sessions, last }) => {
 	const hasSession = sessions && sessions.length > 0
 	const onHeaderClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 		event.preventDefault()
-		window.scrollTo(0, 160)
 
 		void openDay({
 			variables: { id: isOpen ? null : id },
 			refetchQueries: [{ query: OPENED_DAY_ID }],
 		})
+
+		windowScrollTo({ top: 0, behavior: 'smooth' })
 
 		// setTimeout(() => { // scroll after animation
 		// 	window.scroll({
