@@ -14,6 +14,8 @@ type DayProps = {
 	sessions: Session[],
 }
 
+const isSSR = typeof window === 'undefined'
+
 const Day: React.FC<DayProps> = ({ id, sessions, last }) => {
 	const label = useMemo(() => moment(id).format('dddd'), [id])
 	const client = useApolloClient()
@@ -31,7 +33,9 @@ const Day: React.FC<DayProps> = ({ id, sessions, last }) => {
 			refetchQueries: [{ query: OPENED_DAY_ID }],
 		})
 
-		windowScrollTo({ top: 0, behavior: 'smooth' })
+		if (!isSSR && !(navigator?.userAgent.toLowerCase().indexOf('android') > -1)) {
+			windowScrollTo({ top: 0, behavior: 'smooth' })
+		}
 
 		// setTimeout(() => { // scroll after animation
 		// 	window.scroll({
